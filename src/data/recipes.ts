@@ -285,5 +285,125 @@ export const recipes: Recipe[] = [
     ],
     tips: "Tilsett grillet kylling for å gjøre det til hovedrett!",
     category: "Salat"
+  },
+  {
+    id: 13,
+    title: "Stekt Torsk med Poteter",
+    description: "Klassisk norsk fiskemiddag med stekt torsk",
+    ingredients: ["torsk", "poteter", "smør", "sitron", "persille"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Kok potetene til møre",
+      "Krydre torskefiletene med salt og pepper",
+      "Stek fisken i smør, 3-4 min per side",
+      "Hell over brunet smør med sitron",
+      "Pynt med hakket persille",
+      "Server med potetene"
+    ],
+    tips: "Pass på at fisken ikke blir overstekt - den skal være saftig!",
+    category: "Norsk"
+  },
+  {
+    id: 14,
+    title: "Sei i Ovn med Grønnsaker",
+    description: "Sunn og enkel seifilé med rotgrønnsaker",
+    ingredients: ["sei", "gulrot", "løk", "paprika", "rosmarin"],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Forvarm ovnen til 200°C",
+      "Skjær grønnsakene i biter",
+      "Legg sei og grønnsaker på stekebrett",
+      "Drypp over olivenolje og krydre",
+      "Stek i 20-25 minutter",
+      "Pynt med frisk rosmarin"
+    ],
+    tips: "Bruk timer for perfekt resultat!",
+    category: "Norsk"
+  },
+  {
+    id: 15,
+    title: "Fiskesuppe",
+    description: "Kremet og nærende fiskesuppe med hvitfisk",
+    ingredients: ["hvitfisk", "fiskefond", "fløte", "gulrot", "purre"],
+    cookingTime: "35 min",
+    difficulty: "Middels",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Kutt fisken i biter",
+      "Sautér gulrot og purre i smør",
+      "Hell i fiskefond og la koke",
+      "Tilsett fiskebiter og simmer 10 min",
+      "Rør inn fløte og varm opp",
+      "Krydre med salt, pepper og dill"
+    ],
+    tips: "Ikke la fisken koke for lenge - den blir da tøff!",
+    category: "Norsk"
+  },
+  {
+    id: 16,
+    title: "Kylling Curry",
+    description: "Mild og kremet kyllingcurry med kokosmjølk",
+    ingredients: ["kylling", "kokosmjølk", "curry", "løk", "paprika"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Skjær kyllingen i biter",
+      "Stek løk og paprika i olje",
+      "Tilsett kylling og stek til hvit",
+      "Rør inn curry og kokosmjølk",
+      "La simmer i 15 minutter",
+      "Server med ris eller brød"
+    ],
+    tips: "Tilsett chili for mer hete, eller ananas for sødme!",
+    category: "Indisk"
+  },
+  {
+    id: 17,
+    title: "Biff Stroganoff",
+    description: "Russisk klassiker med mørt kjøtt i sursøt saus",
+    ingredients: ["biff", "champignon", "fløte", "løk", "sennep"],
+    cookingTime: "30 min",
+    difficulty: "Middels",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Skjær biffen i strimler",
+      "Stek kjøttet raskt på høy varme",
+      "Sautér løk og sopp i samme panne",
+      "Tilsett fløte og sennep",
+      "La kjøttet varmes i sausen",
+      "Server med ris eller pasta"
+    ],
+    tips: "Bruk mør biff som indrefilet for best resultat!",
+    category: "Russisk"
+  },
+  {
+    id: 18,
+    title: "Grønnsakssuppe",
+    description: "Sunn og mettende suppe med sesonggrønnsaker",
+    ingredients: ["brokkoli", "gulrot", "selleri", "grønnsaksbuljong", "kremer"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Kutt alle grønnsakene i biter",
+      "Sautér grønnsakene i litt olje",
+      "Tilsett grønnsaksbuljong",
+      "La koke til grønnsakene er møre",
+      "Mikse halvparten av suppen",
+      "Rør inn kremer og krydre"
+    ],
+    tips: "Vari grønnsakene etter sesong for best smak!",
+    category: "Vegetarisk"
   }
 ];
