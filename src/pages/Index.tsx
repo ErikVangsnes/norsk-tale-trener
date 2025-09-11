@@ -51,7 +51,7 @@ const Index = () => {
 
   const matchingRecipes = selectedIngredients.length > 0 
     ? recipesWithMatches.filter(({ match }) => match.matchPercentage > 0)
-    : recipesWithMatches;
+    : recipesWithMatches.filter(({ recipe }) => filteredRecipes.includes(recipe));
 
   // Få favoritt-oppskrifter
   const favoriteRecipes = recipesWithMatches.filter(({ recipe }) => 
@@ -142,7 +142,7 @@ const Index = () => {
         </section>
 
         {/* Recipes Section */}
-        {(selectedIngredients.length > 0 || favoriteIds.length > 0) && (
+        {(selectedIngredients.length > 0 || favoriteIds.length > 0 || filteredRecipes.length < recipes.length) && (
           <section className="mb-12">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-4 mb-4">
@@ -173,7 +173,11 @@ const Index = () => {
               
               <p className="text-muted-foreground text-lg">
                 {activeTab === "all" 
-                  ? "Basert på ingrediensene du har valgt" 
+                  ? (selectedIngredients.length > 0 
+                      ? "Basert på ingrediensene du har valgt" 
+                      : (filteredRecipes.length < recipes.length 
+                          ? "Søkeresultater" 
+                          : "Alle oppskrifter"))
                   : "Dine lagrede favoritt-oppskrifter"
                 }
               </p>
