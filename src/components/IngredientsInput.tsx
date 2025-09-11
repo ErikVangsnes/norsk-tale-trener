@@ -12,9 +12,33 @@ interface IngredientsInputProps {
 }
 
 const commonIngredients = [
-  "Egg", "Melk", "Smør", "Hvitløk", "Løk", "Tomat", "Pasta", "Ris", "Kylling", 
-  "Bacon", "Parmesan", "Basilikum", "Salt", "Pepper", "Olivenolej", "Paprika",
-  "Brokkoli", "Gulrot", "Poteter", "Laks", "Rosmarin", "Timian", "Sitron"
+  // Grunnleggende
+  "Egg", "Melk", "Smør", "Salt", "Pepper", "Olivenolej", "Hvitløk", "Løk", 
+  
+  // Kjøtt og fisk
+  "Kylling", "Bacon", "Kjøttdeig", "Laks", "Reker", "Kalkun", "Pølse", "Skinke",
+  
+  // Ost og meieriprodukter
+  "Parmesan", "Mozzarella", "Cheddar", "Feta", "Ricotta", "Cottage cheese", "Rømme", "Crème fraiche",
+  
+  // Grønnsaker
+  "Tomat", "Paprika", "Champignon", "Brokkoli", "Gulrot", "Squash", "Aubergine", "Agurk",
+  "Spinat", "Salat", "Purreløk", "Sjalottløk", "Rødløk", "Selleri", "Kål", "Blomkål",
+  "Rødbeter", "Søtpotet", "Poteter", "Mais", "Ærter", "Bønner", "Artisokk",
+  
+  // Krydder og urter
+  "Basilikum", "Oregano", "Timian", "Rosmarin", "Persille", "Dill", "Koriander", "Mint",
+  "Paprikapulver", "Karri", "Cumin", "Chili", "Ingefær", "Muskatnøtt", "Kanel",
+  
+  // Pasta og korn
+  "Pasta", "Ris", "Quinoa", "Couscous", "Bulgur", "Havre", "Brød", "Tortilla",
+  
+  // Frukt
+  "Sitron", "Lime", "Avokado", "Tomat", "Eple", "Pære", "Appelsin",
+  
+  // Diverse
+  "Olivenolje", "Soyasaus", "Balsamico", "Honning", "Sirup", "Tomatpuré", "Kokosnøttmelk",
+  "Mandler", "Valnøtter", "Oliven", "Kapers", "Soltørket tomat", "Pinjekjerner"
 ];
 
 export const IngredientsInput = ({ 
@@ -100,7 +124,7 @@ export const IngredientsInput = ({
           <div>
             <p className="text-sm text-muted-foreground mb-3">Populære ingredienser:</p>
             <div className="flex flex-wrap gap-2">
-              {commonIngredients.slice(0, 8).map((ingredient) => (
+              {commonIngredients.slice(0, 12).map((ingredient) => (
                 <Button
                   key={ingredient}
                   variant="outline"
@@ -113,6 +137,63 @@ export const IngredientsInput = ({
                   {ingredient}
                 </Button>
               ))}
+            </div>
+            
+            {/* Kategorier */}
+            <div className="mt-4 space-y-3">
+              <div>
+                <p className="text-xs text-muted-foreground mb-2 font-medium">Kjøtt og fisk:</p>
+                <div className="flex flex-wrap gap-1">
+                  {commonIngredients.slice(8, 16).map((ingredient) => (
+                    <Button
+                      key={ingredient}
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => handleAddIngredient(ingredient)}
+                      disabled={selectedIngredients.includes(ingredient)}
+                      className="text-xs h-7 px-2"
+                    >
+                      {ingredient}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <p className="text-xs text-muted-foreground mb-2 font-medium">Ost og meieri:</p>
+                <div className="flex flex-wrap gap-1">
+                  {commonIngredients.slice(16, 24).map((ingredient) => (
+                    <Button
+                      key={ingredient}
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleAddIngredient(ingredient)}
+                      disabled={selectedIngredients.includes(ingredient)}
+                      className="text-xs h-7 px-2"
+                    >
+                      {ingredient}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <p className="text-xs text-muted-foreground mb-2 font-medium">Grønnsaker:</p>
+                <div className="flex flex-wrap gap-1">
+                  {commonIngredients.slice(24, 36).map((ingredient) => (
+                    <Button
+                      key={ingredient}
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleAddIngredient(ingredient)}
+                      disabled={selectedIngredients.includes(ingredient)}
+                      className="text-xs h-7 px-2"
+                    >
+                      {ingredient}
+                    </Button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
