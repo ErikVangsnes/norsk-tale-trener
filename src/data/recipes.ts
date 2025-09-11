@@ -809,5 +809,566 @@ export const recipes: Recipe[] = [
     ],
     tips: "Tradisjonelt lages dette i leirgryte!",
     category: "Marokkansk"
+  },
+  {
+    id: 31,
+    title: "Italiensk Osso Buco",
+    description: "Braissert kalveskank med safran-risotto",
+    ingredients: [
+      "1kg kalveskank",
+      "2 løk",
+      "2 gulrøtter",
+      "2 selleriblader",
+      "400g hermetiske tomater",
+      "500ml hvitvin",
+      "500ml kalvebuljong",
+      "Sitronskall og persille",
+      "Risotto rice og safran"
+    ],
+    cookingTime: "180",
+    difficulty: "Krevende",
+    totalIngredients: 9,
+    servings: 4,
+    instructions: [
+      "Brun kalveskanken godt",
+      "Sautér grønnsaker",
+      "Tilsett vin og buljong",
+      "Braiser i 2,5 timer",
+      "Server med safran-risotto"
+    ],
+    tips: "Beinmargen gir den rikeste smaken!",
+    category: "Italiensk"
+  },
+  {
+    id: 32,
+    title: "Libanesisk Tabbouleh",
+    description: "Frisk salat med bulgur, persille og mynthe",
+    ingredients: [
+      "200g bulgur",
+      "300g persille",
+      "100g mynthe",
+      "4 tomater",
+      "3 vårløk",
+      "Saft fra 3 sitroner",
+      "100ml olivenolje",
+      "Salt og pepper"
+    ],
+    cookingTime: "30",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Bløtlegg bulgur i varmt vann",
+      "Hakk alle urter fint",
+      "Bland med tomater og vårløk",
+      "Tilsett sitron og olje",
+      "La trekke i kjøleskapet"
+    ],
+    tips: "Persille skal dominere - ikke bulgur!",
+    category: "Libanesisk"
+  },
+  {
+    id: 33,
+    title: "Russisk Beef Stroganoff",
+    description: "Kremete oksekjött med sopp og rømme",
+    ingredients: [
+      "600g oksemørbrad",
+      "400g champignon",
+      "2 løk",
+      "300ml rømme",
+      "2 ss mel",
+      "3 ss cognac",
+      "Oksekraft",
+      "Dill og persille"
+    ],
+    cookingTime: "45",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Skjær kjøtt i strimler",
+      "Stek kjøtt raskt på høy varme",
+      "Sautér løk og sopp",
+      "Tilsett rømme og krydder",
+      "Server med ris eller pasta"
+    ],
+    tips: "Ikke overstekk kjøttet - skal være rosa!",
+    category: "Russisk"
+  },
+  {
+    id: 34,
+    title: "Peruansk Ceviche",
+    description: "Rå fisk marinert i limesaft med chili",
+    ingredients: [
+      "500g hvit fisk",
+      "Saft fra 8 limer",
+      "2 rødløk",
+      "2 chili",
+      "Koriander",
+      "1 søtpotet",
+      "Mais",
+      "Salt"
+    ],
+    cookingTime: "20",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Skjær fisk i terninger",
+      "Mariner i limesaft 15 min",
+      "Tilsett løk og chili",
+      "Garnér med koriander",
+      "Server med søtpotet"
+    ],
+    tips: "Fisken må være kjempeferskt!",
+    category: "Peruansk"
+  },
+  {
+    id: 35,
+    title: "Hungarsk Goulash",
+    description: "Hearty kjøttgryte med paprika og potet",
+    ingredients: [
+      "800g oksekjøtt",
+      "4 løk",
+      "3 ss paprika",
+      "4 poteter",
+      "2 paprika",
+      "400g tomater",
+      "Kmin og maggiram",
+      "Rømme til servering"
+    ],
+    cookingTime: "150",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Brun kjøtt i store biter",
+      "Sautér løk med paprika",
+      "Tilsett tomater og væske",
+      "Putre sakte i 2 timer",
+      "Tilsett poteter siste 30 min"
+    ],
+    tips: "Paprika er hovedingrediensen - ikke spar!",
+    category: "Hungarsk"
+  },
+  {
+    id: 36,
+    title: "Jamaikansk Jerk Chicken",
+    description: "Grillet kylling med krydret jerk-marinade",
+    ingredients: [
+      "1 hel kylling",
+      "4 scotch bonnet chili",
+      "6 vårløk",
+      "3 cm ingefær",
+      "4 hvitløksfedd",
+      "Saft fra 3 limer",
+      "3 ss allspice",
+      "2 ss brunsuker"
+    ],
+    cookingTime: "90",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Bland alle marinade-ingredienser",
+      "Mariner kylling over natten",
+      "Grill på middels varme",
+      "Vend ofte og pensle med marinade",
+      "Server med ris og bønner"
+    ],
+    tips: "Scotch bonnet gir autentisk smak og varme!",
+    category: "Jamaikansk"
+  },
+  {
+    id: 37,
+    title: "Kinesisk Sweet and Sour Pork",
+    description: "Fritert svinekjøtt i søt og sur saus",
+    ingredients: [
+      "500g svinekjøtt",
+      "1 ananas",
+      "1 grønn paprika",
+      "1 rød paprika",
+      "3 ss eddik",
+      "4 ss sukker",
+      "2 ss ketchup",
+      "Maisstivelse til panering"
+    ],
+    cookingTime: "35",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Paner og fritér svinekjøtt",
+      "Stek grønnsaker i wok",
+      "Lag søt og sur saus",
+      "Bland alt sammen",
+      "Server med dampet ris"
+    ],
+    tips: "Ananas må være fersk for best smak!",
+    category: "Kinesisk"
+  },
+  {
+    id: 38,
+    title: "Etiopisk Doro Wat",
+    description: "Krydret kyllinggryte med hardkokte egg",
+    ingredients: [
+      "1 hel kylling",
+      "6 hardkokte egg",
+      "4 røde løk",
+      "4 ss berbere-krydder",
+      "100ml rødvin",
+      "3 ss tomapuré",
+      "Ingefær og hvitløk",
+      "Injera brød"
+    ],
+    cookingTime: "120",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Karamelliser løk sakte",
+      "Tilsett berbere-krydder",
+      "Brun kyllingbiter",
+      "Putre sammen i 1,5 timer",
+      "Tilsett egg siste 15 min"
+    ],
+    tips: "Berbere-krydder er essensielt for autentisk smak!",
+    category: "Etiopisk"
+  },
+  {
+    id: 39,
+    title: "Argentinsk Chimichurri Steak",
+    description: "Grillet biff med fersk chimichurri-saus",
+    ingredients: [
+      "4 entrecôte-biter",
+      "200g persille",
+      "4 hvitløksfedd",
+      "100ml olivenolje",
+      "3 ss rødvinseddik",
+      "1 ts chili",
+      "Oregano",
+      "Grovt salt"
+    ],
+    cookingTime: "25",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Lag chimichurri av urter og olje",
+      "Salt kjøttet 30 min før grilling",
+      "Grill på høy varme",
+      "La hvile 5 minutter",
+      "Server med chimichurri"
+    ],
+    tips: "Kjøttet skal hvile etter grilling!",
+    category: "Argentinsk"
+  },
+  {
+    id: 40,
+    title: "Irsk Shepherd's Pie",
+    description: "Lammefars toppet med kremet potetmos",
+    ingredients: [
+      "600g lammefars",
+      "1kg poteter",
+      "2 løk",
+      "2 gulrøtter",
+      "200g erter",
+      "2 ss worcestersaus",
+      "500ml lammebuljong",
+      "Smør og melk til mos"
+    ],
+    cookingTime: "75",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Stek lammefars med grønnsaker",
+      "Tilsett buljong og saus",
+      "Lag kremet potetmos",
+      "Legg lagvis i ildfast form",
+      "Gratiner i ovn 25 min"
+    ],
+    tips: "Potetmosen skal være ekstra kremet!",
+    category: "Irsk"
+  },
+  {
+    id: 41,
+    title: "Spansk Gazpacho",
+    description: "Kald tomatsuppe med grønnsaker",
+    ingredients: [
+      "1kg modne tomater",
+      "1 agurk",
+      "1 rød paprika",
+      "1 løk",
+      "3 hvitløksfedd",
+      "100ml olivenolje",
+      "3 ss sherryeddik",
+      "Basilikum til garnering"
+    ],
+    cookingTime: "15",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Skald og skall tomater",
+      "Hakk alle grønnsaker",
+      "Kjør alt sammen i blender",
+      "Sil gjennom finmasket sil",
+      "Kjøl ned før servering"
+    ],
+    tips: "Bästa på varme sommerdager!",
+    category: "Spansk"
+  },
+  {
+    id: 42,
+    title: "Tyrkisk Börek",
+    description: "Lag på lag med butterdeig og fetaost",
+    ingredients: [
+      "8 ark filodeig",
+      "300g fetaost",
+      "4 egg",
+      "300ml melk",
+      "100g smør",
+      "Dill og persille",
+      "Sort pepper",
+      "Sesamfrø til topping"
+    ],
+    cookingTime: "60",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 8,
+    instructions: [
+      "Smelt smør og pensel deig",
+      "Bland ost med egg og urter",
+      "Legg lagvis i form",
+      "Hell melkblanding over",
+      "Bak til gyllen"
+    ],
+    tips: "Hold deigen fuktig under arbeidet!",
+    category: "Tyrkisk"
+  },
+  {
+    id: 43,
+    title: "Britisk Bangers and Mash",
+    description: "Grillede pølser med kremet potetmos og løksaus",
+    ingredients: [
+      "8 Cumberland pölser",
+      "1kg poteter",
+      "4 store løk",
+      "500ml oksekraft",
+      "100ml rødvin",
+      "100g smör",
+      "200ml melk",
+      "Timian"
+    ],
+    cookingTime: "45",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Grill pølsene sakte",
+      "Lag kremet potetmos",
+      "Karamelliser løk sakte",
+      "Tilsett kraft og vin til løk",
+      "Server alt sammen"
+    ],
+    tips: "Potetmosen må være silkemyk!",
+    category: "Britisk"
+  },
+  {
+    id: 44,
+    title: "Pakistansk Biryani",
+    description: "Krydret risdish med lam og safran",
+    ingredients: [
+      "500g lammekjøtt",
+      "400g basmatiris",
+      "2 løk",
+      "Safran",
+      "Kardemomme og kanel",
+      "Yoghurt",
+      "Ingefær og hvitløk",
+      "Koriander og mynthe"
+    ],
+    cookingTime: "90",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Mariner kjøtt i yoghurt",
+      "Fritér løk til gylden",
+      "Kok ris med krydder",
+      "Lag lagvis i tung gryte",
+      "Dum-cook på lav varme"
+    ],
+    tips: "Dum-cooking er nøkkelen til perfekt biryani!",
+    category: "Pakistansk"
+  },
+  {
+    id: 45,
+    title: "Nederlandsk Erwtensoep",
+    description: "Tykk ertedish med røkt kjøtt",
+    ingredients: [
+      "500g tørkede gule erter",
+      "300g røkt bacon",
+      "200g røkt pølse",
+      "2 løk",
+      "3 gulrøtter",
+      "2 poteter",
+      "Selleri",
+      "Laurbærblad"
+    ],
+    cookingTime: "180",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Kok erter til de faller fra hverandre",
+      "Tilsett røkt kjøtt",
+      "Legg i grønnsaker",
+      "Kok til tykk konsistens",
+      "Server med rugbrød"
+    ],
+    tips: "Skal være så tykk at skjeen står oppreist!",
+    category: "Nederlandsk"
+  },
+  {
+    id: 46,
+    title: "Filippinsk Adobo",
+    description: "Svinekjøtt braissert i soyasaus og eddik",
+    ingredients: [
+      "800g svinekjøtt",
+      "150ml soyasaus",
+      "100ml hviteddik",
+      "8 hvitløksfedd",
+      "3 laurbærblad",
+      "1 ts hele pepperkorn",
+      "2 ss brunsuker",
+      "Dampet ris"
+    ],
+    cookingTime: "75",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Mariner kjøtt i soyasaus",
+      "Brun kjøttstykker lett",
+      "Tilsett alle ingredienser",
+      "Putre til kjøttet er mørt",
+      "Server med dampet ris"
+    ],
+    tips: "Balansen mellom søtt, salt og surt er viktig!",
+    category: "Filippinsk"
+  },
+  {
+    id: 47,
+    title: "Polsk Pierogi",
+    description: "Dumplings fylt med potet og ost",
+    ingredients: [
+      "400g mel",
+      "200ml varmt vann",
+      "1 egg",
+      "4 store poteter",
+      "200g cottage cheese",
+      "2 løk",
+      "Smør til steking",
+      "Rømme til servering"
+    ],
+    cookingTime: "90",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Lag deig og la hvile",
+      "Kok og mos poteter",
+      "Bland potet med ost",
+      "Form pierogi og kok",
+      "Stek i smør før servering"
+    ],
+    tips: "Deigen må ikke bli for tørr!",
+    category: "Polsk"
+  },
+  {
+    id: 48,
+    title: "Svensk Köttbullar",
+    description: "Klassiske kjøttboller med fløtesaus",
+    ingredients: [
+      "300g oksekjøtt",
+      "200g svinekjøtt",
+      "1 løk",
+      "100ml melk",
+      "50g raspbrød",
+      "300ml fløte",
+      "2 ss mel",
+      "Tyttebær til servering"
+    ],
+    cookingTime: "45",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Bland kjøttdeig med raspbrød",
+      "Form små kjøttboller",
+      "Stek i smør til gylne",
+      "Lag fløtesaus i samme panne",
+      "Server med poteter og tyttebær"
+    ],
+    tips: "Kjøttbollene skal være jevnt gylne!",
+    category: "Svensk"
+  },
+  {
+    id: 49,
+    title: "Tsjekkisk Goulash",
+    description: "Hearty kjöttgryte med øl og kmin",
+    ingredients: [
+      "800g oksekjöt",
+      "4 løk",
+      "3 ss paprika",
+      "500ml mörkt öl",
+      "2 ss tomatpuré",
+      "2 ts kmin",
+      "2 laurbærblad",
+      "Knödel til servering"
+    ],
+    cookingTime: "150",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Brun kjöttet i store biter",
+      "Karamelliser löken sakte",
+      "Tilsett paprika og tomatpuré",
+      "Hell i öl og krydder",
+      "Putre sakte i 2 timer"
+    ],
+    tips: "Öl gir en dyp, mørk smak!",
+    category: "Tsjekkisk"
+  },
+  {
+    id: 50,
+    title: "Georgisk Khachapuri",
+    description: "Brödskål fyllt med ost og egg",
+    ingredients: [
+      "500g mel",
+      "300ml yoghurt",
+      "1 ts bakepulver",
+      "400g georgisk ost",
+      "4 egg",
+      "100g smør",
+      "Salt",
+      "Fersk koriander"
+    ],
+    cookingTime: "60",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Lag deig av mel og yoghurt",
+      "Form til båt-form",
+      "Fyll med ost",
+      "Bak til gyllen",
+      "Legg rådt egg på toppen"
+    ],
+    tips: "Spis medan det är varmt och ostigt!",
+    category: "Georgisk"
   }
 ];
