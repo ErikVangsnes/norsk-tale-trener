@@ -173,10 +173,13 @@ export class IngredientMatcher {
     availableIngredients: string[],
     recipes: Recipe[]
   ): SearchResult[] {
+    console.log("intelligentSearch kallt med query:", query, "recipes:", recipes.length);
+    console.log("Alle oppskrifter titler:", recipes.map(r => r.title));
     const results: SearchResult[] = [];
     
     // Hvis ingen søkeord, vis alle oppskrifter sortert etter ingredient match
     if (!query.trim() && availableIngredients.length === 0) {
+      console.log("Tomt søk, returnerer alle oppskrifter");
       return recipes.map(recipe => ({
         recipe,
         relevanceScore: 0.5,
@@ -187,7 +190,12 @@ export class IngredientMatcher {
     
     // Test for "kjøttkaker" søk
     if (query.toLowerCase().includes('kjøttkaker')) {
-      const kjottkakerRecipe = recipes.find(r => r.title.toLowerCase().includes('kjøttkaker'));
+      console.log("Søker spesifikt etter kjøttkaker");
+      const kjottkakerRecipe = recipes.find(r => {
+        console.log("Sjekker oppskrift:", r.title, "inneholder kjøttkaker?", r.title.toLowerCase().includes('kjøttkaker'));
+        return r.title.toLowerCase().includes('kjøttkaker');
+      });
+      console.log("Fant kjøttkaker oppskrift:", kjottkakerRecipe ? kjottkakerRecipe.title : "IKKE FUNNET");
       if (kjottkakerRecipe) {
         return [{
           recipe: kjottkakerRecipe,

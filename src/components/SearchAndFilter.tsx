@@ -55,16 +55,21 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
     difficulty = selectedDifficulty,
     time = selectedTime
   ) => {
+    console.log("applyFilters kallt med:", { search, category, difficulty, time });
     let filtered = [...recipes];
+    console.log("Starter med", filtered.length, "oppskrifter");
 
     // Hvis det er et søkeord, bruk intelligent søk
     if (search.trim()) {
+      console.log("Bruker intelligent søk for:", search);
       const searchResults = IngredientMatcher.intelligentSearch(
         search,
         availableIngredients,
         recipes
       );
+      console.log("Fikk", searchResults.length, "søkeresultater");
       filtered = searchResults.map(result => result.recipe);
+      console.log("Filtrerte resultater:", filtered.length);
     }
 
     // Filtrer på kategori
@@ -90,6 +95,7 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
       });
     }
 
+    console.log("Sender", filtered.length, "oppskrifter til onFilteredRecipes");
     onFilteredRecipes(filtered);
   };
 
