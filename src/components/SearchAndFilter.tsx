@@ -6,10 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Recipe } from "@/data/recipes";
+import { IngredientMatcher } from "@/lib/ingredientMatcher";
 
 interface SearchAndFilterProps {
   recipes: Recipe[];
   onFilteredRecipes: (filtered: Recipe[]) => void;
+  availableIngredients?: string[];
 }
 
 const categories = [
@@ -40,7 +42,7 @@ const cookingTimes = [
   { value: "long", label: "Over 30 min" }
 ];
 
-export const SearchAndFilter = ({ recipes, onFilteredRecipes }: SearchAndFilterProps) => {
+export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredients = [] }: SearchAndFilterProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
@@ -53,30 +55,27 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes }: SearchAndFilterP
     difficulty = selectedDifficulty,
     time = selectedTime
   ) => {
-    let filtered = [...recipes];
-
-    // Søk i tittel og beskrivelse
-    if (search.trim()) {
-      filtered = filtered.filter(recipe =>
-        recipe.title.toLowerCase().includes(search.toLowerCase()) ||
-        recipe.description.toLowerCase().includes(search.toLowerCase())
-      );
-    }
+    // Bruk intelligent søk som kombinerer tekst og ingredienser
+    let searchResults = IngredientMatcher.intelligentSearch(
+      search,
+      availableIngredients,
+      recipes
+    );
 
     // Filtrer på kategori
     if (category !== "all") {
-      filtered = filtered.filter(recipe => recipe.category === category);
+      searchResults = searchResults.filter(result => result.recipe.category === category);
     }
 
     // Filtrer på vanskelighetsgrad
     if (difficulty !== "all") {
-      filtered = filtered.filter(recipe => recipe.difficulty === difficulty);
+      searchResults = searchResults.filter(result => result.recipe.difficulty === difficulty);
     }
 
     // Filtrer på koketid
     if (time !== "all") {
-      filtered = filtered.filter(recipe => {
-        const minutes = parseInt(recipe.cookingTime);
+      searchResults = searchResults.filter(result => {
+        const minutes = parseInt(result.recipe.cookingTime);
         switch (time) {
           case "quick": return minutes < 15;
           case "medium": return minutes >= 15 && minutes <= 30;
@@ -86,6 +85,8 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes }: SearchAndFilterP
       });
     }
 
+    // Konverter tilbake til Recipe array, sortert etter relevanse
+    const filtered = searchResults.map(result => result.recipe);
     onFilteredRecipes(filtered);
   };
 

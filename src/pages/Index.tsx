@@ -12,6 +12,7 @@ import { SubstituteSuggestions } from "@/components/SubstituteSuggestions";
 import { SearchAndFilter } from "@/components/SearchAndFilter";
 import { recipes, Recipe } from "@/data/recipes";
 import { getFavoriteRecipeIds } from "@/components/FavoriteButton";
+import { IngredientMatcher } from "@/lib/ingredientMatcher";
 
 const Index = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -20,28 +21,23 @@ const Index = () => {
   
   const favoriteIds = getFavoriteRecipeIds();
 
-  // Kalkuler dynamisk hvilke oppskrifter som matcher
-  const recipesWithMatches = filteredRecipes.map(recipe => ({
-    ...recipe,
-    availableIngredients: selectedIngredients.filter(ing => {
-      if (Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0) {
-        // Check if it's DetailedIngredient[] or string[]
-        if (typeof recipe.ingredients[0] === 'object') {
-          const detailedIngredients = recipe.ingredients as any[];
-          return detailedIngredients.some(recipeIng => 
-            recipeIng.name.toLowerCase() === ing.toLowerCase()
-          );
-        } else {
-          // It's string[]
-          const stringIngredients = recipe.ingredients as string[];
-          return stringIngredients.some(recipeIng => 
-            recipeIng.toLowerCase() === ing.toLowerCase()
-          );
-        }
-      }
-      return false;
-    }).length
-  }));
+  // Bruk det nye intelligente matching-systemet
+  const getMatchingRecipes = () => {
+    if (selectedIngredients.length === 0) {
+      return filteredRecipes.map(recipe => ({
+        recipe,
+        match: IngredientMatcher.calculateIngredientMatch([], recipe)
+      }));
+    }
+    
+    return IngredientMatcher.findRecipesByIngredients(selectedIngredients, filteredRecipes)
+      .map(ingredientMatch => ({
+        recipe: ingredientMatch.recipe,
+        match: ingredientMatch
+      }));
+  };
+
+  const recipesWithMatches = getMatchingRecipes();
 
   const addIngredient = (ingredient: string) => {
     if (!selectedIngredients.includes(ingredient)) {
@@ -53,12 +49,12 @@ const Index = () => {
     setSelectedIngredients(selectedIngredients.filter(ing => ing !== ingredient));
   };
 
-  const matchingRecipes = recipesWithMatches.filter(recipe => 
-    recipe.availableIngredients > 0
-  ).sort((a, b) => b.availableIngredients - a.availableIngredients);
+  const matchingRecipes = selectedIngredients.length > 0 
+    ? recipesWithMatches.filter(({ match }) => match.matchPercentage > 0)
+    : recipesWithMatches;
 
   // Få favoritt-oppskrifter
-  const favoriteRecipes = recipesWithMatches.filter(recipe => 
+  const favoriteRecipes = recipesWithMatches.filter(({ recipe }) => 
     favoriteIds.includes(recipe.id)
   );
 
@@ -123,6 +119,7 @@ const Index = () => {
           <SearchAndFilter 
             recipes={recipes}
             onFilteredRecipes={setFilteredRecipes}
+            availableIngredients={selectedIngredients}
           />
         </section>
 
@@ -184,7 +181,7 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedRecipes.length > 0 ? (
-                displayedRecipes.map(recipe => (
+                displayedRecipes.map(({ recipe }) => (
                   <RecipeCard 
                     key={recipe.id} 
                     recipe={recipe} 

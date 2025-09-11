@@ -1,4 +1,4 @@
-import { Clock, Users, Star, ChefHat } from "lucide-react";
+import { Clock, Users, Star, ChefHat, Check, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,20 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { Recipe } from "@/data/recipes";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ShoppingListGenerator } from "@/components/ShoppingListGenerator";
-
-interface RecipeWithMatches extends Recipe {
-  availableIngredients: number;
-}
+import { IngredientMatcher } from "@/lib/ingredientMatcher";
 
 interface RecipeCardProps {
-  recipe: RecipeWithMatches;
+  recipe: Recipe;
   selectedIngredients: string[];
 }
 
 export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => {
   const navigate = useNavigate();
-  const matchPercentage = Math.round((recipe.availableIngredients / recipe.totalIngredients) * 100);
-  const missingIngredients = recipe.totalIngredients - recipe.availableIngredients;
+  
+  // Beregn ingredient match med det nye systemet
+  const ingredientMatch = IngredientMatcher.calculateIngredientMatch(selectedIngredients, recipe);
+  const matchPercentage = Math.round(ingredientMatch.matchPercentage);
+  const missingIngredients = ingredientMatch.missingIngredients.length;
   
   return (
     <Card className="shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 bg-gradient-to-br from-card to-recipe overflow-hidden">
@@ -69,7 +69,7 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
               Ingredienser du har
             </span>
             <span className="text-sm font-bold text-primary">
-              {recipe.availableIngredients}/{recipe.totalIngredients}
+              {ingredientMatch.availableIngredients}/{ingredientMatch.totalIngredients}
             </span>
           </div>
           <Progress value={matchPercentage} className="h-2" />
@@ -91,39 +91,50 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
           </div>
         </div>
         
-        {/* Missing Ingredients */}
+        {/* Missing Ingredients with Substitutions */}
         {missingIngredients > 0 && (
           <div className="mb-4 p-3 bg-secondary/50 rounded-md">
             <p className="text-sm font-medium text-foreground mb-2">
               Mangler {missingIngredients} ingrediens{missingIngredients > 1 ? 'er' : ''}:
             </p>
             <div className="flex flex-wrap gap-1">
-              {(() => {
-                // Handle both string[] and DetailedIngredient[] formats
-                const recipeIngredients = Array.isArray(recipe.ingredients) 
-                  ? recipe.ingredients.map(ing => 
-                      typeof ing === 'object' ? ing.name : ing
-                    )
-                  : [];
-                
-                return recipeIngredients
-                  .filter(ingredient => 
-                    !selectedIngredients.some(selected => 
-                      selected.toLowerCase() === ingredient.toLowerCase()
-                    )
-                  )
-                  .slice(0, 3)
-                  .map((ingredient, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {ingredient}
-                    </Badge>
-                  ));
-              })()}
+              {ingredientMatch.missingIngredients.slice(0, 3).map((ingredient, index) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {ingredient}
+                </Badge>
+              ))}
               {missingIngredients > 3 && (
                 <Badge variant="outline" className="text-xs">
                   +{missingIngredients - 3} til
                 </Badge>
               )}
+            </div>
+            
+            {/* Substitution Suggestions */}
+            {ingredientMatch.substitutionSuggestions.length > 0 && (
+              <div className="mt-2 pt-2 border-t border-border/50">
+                <p className="text-xs text-muted-foreground mb-1">💡 Forslag til erstatninger:</p>
+                <div className="space-y-1">
+                  {ingredientMatch.substitutionSuggestions.slice(0, 2).map((sub, index) => (
+                    <div key={index} className="text-xs text-blue-600">
+                      <span className="font-medium">{sub.substitute}</span> kan erstatte <span className="font-medium">{sub.missing}</span>
+                      <span className="text-muted-foreground ml-1">({Math.round(sub.confidence * 100)}% match)</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        
+        {/* Perfect Match Indicator */}
+        {matchPercentage === 100 && (
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-md border border-green-200 dark:border-green-800">
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-700 dark:text-green-400">
+                Du har alle ingrediensene! 🎉
+              </span>
             </div>
           </div>
         )}
