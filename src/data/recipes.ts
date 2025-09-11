@@ -1370,5 +1370,565 @@ export const recipes: Recipe[] = [
     ],
     tips: "Spis medan det är varmt och ostigt!",
     category: "Georgisk"
+  },
+  {
+    id: 51,
+    title: "Australsk Meat Pie",
+    description: "Klassisk kjøttpai med flakmousse",
+    ingredients: [
+      "500g oksekjøtt",
+      "2 løk",
+      "2 ss mel",
+      "500ml oksekraft",
+      "2 butterdeigsplater",
+      "1 egg",
+      "Worcestersaus",
+      "Tomatsaus til servering"
+    ],
+    cookingTime: "75",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Stek kjøtt og løk",
+      "Tilsett mel og kraft",
+      "La koke til tykk",
+      "Fyll i paiform med deig",
+      "Bak til gyllen"
+    ],
+    tips: "Perfekt til fotballkamp!",
+    category: "Australsk"
+  },
+  {
+    id: 52,
+    title: "Singaporeansk Chili Crab",
+    description: "Krabbe i søt og krydret tomatsaus",
+    ingredients: [
+      "2 store krabber",
+      "4 ss ketchup",
+      "2 ss chilisaus",
+      "3 ss riservin",
+      "2 ss sukker",
+      "4 hvitløksfedd",
+      "2 cm ingefær",
+      "2 egg"
+    ],
+    cookingTime: "30",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Del krabber i biter",
+      "Stek hvitløk og ingefær",
+      "Tilsett sauser og sukker",
+      "Wok krabbene i sausen",
+      "Rør inn egg på slutten"
+    ],
+    tips: "Bruk hendene - det blir sølete!",
+    category: "Singaporeansk"
+  },
+  {
+    id: 53,
+    title: "Kanadisk Poutine",
+    description: "Pommes frites med ostekorn og gravy",
+    ingredients: [
+      "1kg poteter",
+      "300g ostekorn",
+      "500ml oksekraft",
+      "3 ss mel",
+      "2 ss smør",
+      "Olje til frittering",
+      "Salt og pepper",
+      "Fersk tymian"
+    ],
+    cookingTime: "40",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Fritér poteter til gylne",
+      "Lag tykk gravy av kraft",
+      "Legg pommes frites i skål",
+      "Dryss ostekorn over",
+      "Hell varm gravy over alt"
+    ],
+    tips: "Ostekornene må være friske og squeaky!",
+    category: "Kanadisk"
+  },
+  {
+    id: 54,
+    title: "Afrikansk Bobotie",
+    description: "Krydret lammefars med eggstanning",
+    ingredients: [
+      "600g lammefars",
+      "2 løk",
+      "2 ss karri",
+      "100g rosiner",
+      "2 skiver brød",
+      "300ml melk",
+      "3 egg",
+      "Mandler og aprikos"
+    ],
+    cookingTime: "60",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Stek lammefars med krydder",
+      "Tilsett rosiner og frukt",
+      "Legg i ildfast form",
+      "Topp med eggestanning",
+      "Gratiner til gyllen"
+    ],
+    tips: "Søt og krydret kombinasjon!",
+    category: "Sørafrikansk"
+  },
+  {
+    id: 55,
+    title: "Israelsk Shakshuka",
+    description: "Pocherte egg i krydret tomatsaus",
+    ingredients: [
+      "6 egg",
+      "400g hermetiske tomater",
+      "2 rød paprika",
+      "1 løk",
+      "4 hvitløksfedd",
+      "2 ts paprika",
+      "1 ts kmin",
+      "Fetaost og persille"
+    ],
+    cookingTime: "30",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Sautér løk og paprika",
+      "Tilsett tomater og krydder",
+      "La putre 15 minutter",
+      "Lag hull og knekk inn egg",
+      "Dekk til eggene stokner"
+    ],
+    tips: "Perfekt frokost eller lunch!",
+    category: "Israelsk"
+  },
+  {
+    id: 56,
+    title: "Skotsk Haggis",
+    description: "Tradisjonell skotsk pölse med nepe og potet",
+    ingredients: [
+      "500g lammeinnmat",
+      "200g havremel",
+      "2 løk",
+      "Salvie og timian",
+      "500g nepe",
+      "500g poteter",
+      "Smør",
+      "Whisky til flambering"
+    ],
+    cookingTime: "180",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Kok innmat til mørt",
+      "Mal sammen med havremel",
+      "Krydre godt",
+      "Form og kok i klut",
+      "Server med nepe og potet"
+    ],
+    tips: "Burns Night tradisjon!",
+    category: "Skotsk"
+  },
+  {
+    id: 57,
+    title: "Armenisk Dolma",
+    description: "Fylte vinblad med ris og kjøtt",
+    ingredients: [
+      "30 vinblad",
+      "300g lammefars",
+      "200g ris",
+      "2 løk",
+      "Mynthe og persille",
+      "Sitron",
+      "Olivenolje",
+      "Pinjenøtter"
+    ],
+    cookingTime: "90",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Blankkok vinblad",
+      "Bland fars med ris",
+      "Rull i vinblad",
+      "Legg lagvis i gryte",
+      "Putre i sitronvann"
+    ],
+    tips: "Rull stramt men ikke for hardt!",
+    category: "Armenisk"
+  },
+  {
+    id: 58,
+    title: "Malteisisk Fenkata",
+    description: "Braissert kanin med hvitvin og krydder",
+    ingredients: [
+      "1 kanin i biter",
+      "500ml hvitvin",
+      "4 tomater",
+      "2 løk",
+      "Rosmarin og tymian",
+      "Hvitløk",
+      "Olivenolje",
+      "Poteter til servering"
+    ],
+    cookingTime: "120",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Brun kaninbitene godt",
+      "Sautér løk og hvitløk",
+      "Tilsett vin og tomater",
+      "Braiser til mørt",
+      "Server med poteter"
+    ],
+    tips: "Nasjonal rett på Malta!",
+    category: "Malteisisk"
+  },
+  {
+    id: 59,
+    title: "Nepalsk Dal Bhat",
+    description: "Linsdish med ris og grønnsaker",
+    ingredients: [
+      "300g røde linser",
+      "300g basmatiris",
+      "1 aubergine",
+      "200g spinat",
+      "Kurkuma og koriander",
+      "Ingefær og hvitløk",
+      "Ghee",
+      "Pickle til servering"
+    ],
+    cookingTime: "45",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Kok linser med krydder",
+      "Dampkok ris",
+      "Sautér grønnsaker",
+      "Krydre med garam masala",
+      "Server alt sammen"
+    ],
+    tips: "Daglig mat i Nepal!",
+    category: "Nepalsk"
+  },
+  {
+    id: 60,
+    title: "Islandsk Hákarl",
+    description: "Fermentert hai med brennevin",
+    ingredients: [
+      "500g fermentert hai",
+      "Brennevin",
+      "Rugbrød",
+      "Smør",
+      "Kaviar",
+      "Hardkokte egg",
+      "Dill",
+      "Sennep"
+    ],
+    cookingTime: "10",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 8,
+    instructions: [
+      "Skjær hai i terninger",
+      "Server på rugbrød",
+      "Drikk brennevin til",
+      "Pust dypt før du spiser",
+      "Hold pusten!"
+    ],
+    tips: "Ikke for de sarte sjeler!",
+    category: "Islandsk"
+  },
+  {
+    id: 61,
+    title: "Bulgarsk Shopska Salat",
+    description: "Frisk salat med fetaost og tomater",
+    ingredients: [
+      "4 tomater",
+      "2 agurker",
+      "1 rød paprika",
+      "1 løk",
+      "200g fetaost",
+      "Olivenolje",
+      "Rødvinseddik",
+      "Fersk petersille"
+    ],
+    cookingTime: "15",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Skjær alle grønnsaker",
+      "Bland med olje og eddik",
+      "Riv fetaost grovt over",
+      "Garnér med petersille",
+      "La trekke 15 minutter"
+    ],
+    tips: "Perfekt sommerrett!",
+    category: "Bulgarsk"
+  },
+  {
+    id: 62,
+    title: "Uruguayansk Asado",
+    description: "Grillet kjøtt med chimichurri",
+    ingredients: [
+      "1kg biffe-udskæringer",
+      "4 chorizo pølser",
+      "200g persille",
+      "Hvitløk og oregano",
+      "Olivenolje",
+      "Rødvinseddik",
+      "Grovt salt",
+      "Rødvin til servering"
+    ],
+    cookingTime: "90",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 8,
+    instructions: [
+      "Tenn grill med glør",
+      "Salt kjøttet 1 time før",
+      "Grill sakte på lav varme",
+      "Lag chimichurri",
+      "Server med rødvin"
+    ],
+    tips: "Tålmodighet gir det beste resultatet!",
+    category: "Uruguayansk"
+  },
+  {
+    id: 63,
+    title: "Indonesisk Rendang",
+    description: "Langsomt kokt oksekjøtt i kokosmjölk",
+    ingredients: [
+      "1kg oksekjøtt",
+      "400ml kokosmjölk",
+      "8 sjalottløk",
+      "6 chilier",
+      "Galangal og sitrongress",
+      "Tamarind",
+      "Palm sugar",
+      "Kaffirlime blad"
+    ],
+    cookingTime: "240",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Lag krydderpasta",
+      "Brun kjøtt med krydder",
+      "Tilsett kokosmjölk",
+      "Putre på lav varme 3-4 timer",
+      "Kjøttet skal bli mørkt"
+    ],
+    tips: "Verdens beste slow-cook rett!",
+    category: "Indonesisk"
+  },
+  {
+    id: 64,
+    title: "Kazakstansk Beshbarmak",
+    description: "Kokt kjøtt med hjemmelaget pasta",
+    ingredients: [
+      "800g lammekjøtt",
+      "400g mel",
+      "3 egg",
+      "3 løk",
+      "Salt og pepper",
+      "Laurbærblad",
+      "Fersk dill",
+      "Kjöttbuljong"
+    ],
+    cookingTime: "150",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Kok kjøtt til mørt",
+      "Lag pasta av mel og egg",
+      "Rul og skjær pasta",
+      "Kok pasta i kjøttbuljong",
+      "Bland kjøtt med pasta"
+    ],
+    tips: "Nasjonalretten i Kazakstan!",
+    category: "Kazakstansk"
+  },
+  {
+    id: 65,
+    title: "Litauisk Cepelinai",
+    description: "Store potetdumplings med kjøttfyll",
+    ingredients: [
+      "2kg poteter",
+      "400g svinekjøttfars",
+      "200g bacon",
+      "2 løk",
+      "Rømme",
+      "Dill",
+      "Salt og pepper",
+      "Smør til servering"
+    ],
+    cookingTime: "90",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Riv poteter og press ut væske",
+      "Lag kjøttfyll",
+      "Form store dumplings",
+      "Kok i saltvann",
+      "Server med rømme og bacon"
+    ],
+    tips: "Looks like zeppelins - derav navnet!",
+    category: "Litauisk"
+  },
+  {
+    id: 66,
+    title: "Mongolsk Khorkhog",
+    description: "Fårekjøtt kokt med hete steiner",
+    ingredients: [
+      "2kg fårekjøtt",
+      "4 poteter",
+      "2 gulrøtter",
+      "1 kålhode",
+      "Løk",
+      "Salt og pepper",
+      "Hete steiner",
+      "Metallbeholder"
+    ],
+    cookingTime: "120",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 8,
+    instructions: [
+      "Varm steiner i ild",
+      "Legg kjøtt og grønnsaker lagvis",
+      "Legg hete steiner mellom lagene",
+      "Dekk til og la koke",
+      "Åpne etter 2 timer"
+    ],
+    tips: "Tradisjonell nomade-metode!",
+    category: "Mongolsk"
+  },
+  {
+    id: 67,
+    title: "Salvadoransk Pupusa",
+    description: "Tykk maistortilla fylt med ost og bønner",
+    ingredients: [
+      "500g masa harina",
+      "300ml varmt vann",
+      "200g mozzarella",
+      "200g svarte bønner",
+      "Koriander",
+      "Salsa verde",
+      "Curtido (syltet kål)",
+      "Salt"
+    ],
+    cookingTime: "45",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Bland masa med vann",
+      "Form til flate kaker",
+      "Fyll med ost og bønner",
+      "Lukk og form runde",
+      "Stek på griddle til sprø"
+    ],
+    tips: "El Salvador sin nasjonalrett!",
+    category: "Salvadoransk"
+  },
+  {
+    id: 68,
+    title: "Uzbekistansk Plov",
+    description: "Risrett med lam, gulrøtter og krydder",
+    ingredients: [
+      "500g lammekjøtt",
+      "400g ris",
+      "4 gulrøtter",
+      "2 løk",
+      "Spiskum og koriander",
+      "Safran",
+      "Rosiner",
+      "Bomullsolje"
+    ],
+    cookingTime: "90",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Brun kjøtt i gryten",
+      "Tilsett løk og gulrøtter",
+      "Legg ris på toppen",
+      "Hell over kokhett vann",
+      "Kok til ris er ferdig"
+    ],
+    tips: "Center stykke kjøtt i midten!",
+    category: "Uzbekistansk"
+  },
+  {
+    id: 69,
+    title: "Laotisk Larb",
+    description: "Krydret kjøttsalat med urter og lime",
+    ingredients: [
+      "500g svinekjøtt",
+      "4 sjalottløk",
+      "Mynthe og koriander",
+      "Saft fra 4 limer",
+      "3 ss fiskesaus",
+      "2 ss rismel",
+      "Chilier",
+      "Salathoder til servering"
+    ],
+    cookingTime: "25",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Stek kjøtt til gjennomstekt",
+      "Rist rismel i tørr panne",
+      "Bland kjøtt med alle ingredienser",
+      "Smak til med lime og fiskesaus",
+      "Server i salathoder"
+    ],
+    tips: "Friskt og krydret - perfect!",
+    category: "Laotisk"
+  },
+  {
+    id: 70,
+    title: "Jemenitisk Saltah",
+    description: "Krydret gryteret med fenugreek-skum",
+    ingredients: [
+      "500g lammekjøtt",
+      "4 tomater",
+      "2 løk",
+      "4 ss fenugreek-frø",
+      "Zhug (grønn chili-paste)",
+      "Koriander",
+      "Hulba (fenugreek-skum)",
+      "Flatbrød"
+    ],
+    cookingTime: "90",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Stek kjøtt til mørt",
+      "Tilsett tomater og løk",
+      "Lag hulba av fenugreek",
+      "Bland inn zhug",
+      "Topp med skummende hulba"
+    ],
+    tips: "Hulba gir unik tekstur!",
+    category: "Jemenitisk"
   }
 ];
