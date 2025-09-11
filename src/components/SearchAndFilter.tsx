@@ -55,27 +55,32 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
     difficulty = selectedDifficulty,
     time = selectedTime
   ) => {
-    // Bruk intelligent søk som kombinerer tekst og ingredienser
-    let searchResults = IngredientMatcher.intelligentSearch(
-      search,
-      availableIngredients,
-      recipes
-    );
+    let filtered = [...recipes];
+
+    // Hvis det er et søkeord, bruk intelligent søk
+    if (search.trim()) {
+      const searchResults = IngredientMatcher.intelligentSearch(
+        search,
+        availableIngredients,
+        recipes
+      );
+      filtered = searchResults.map(result => result.recipe);
+    }
 
     // Filtrer på kategori
     if (category !== "all") {
-      searchResults = searchResults.filter(result => result.recipe.category === category);
+      filtered = filtered.filter(recipe => recipe.category === category);
     }
 
     // Filtrer på vanskelighetsgrad
     if (difficulty !== "all") {
-      searchResults = searchResults.filter(result => result.recipe.difficulty === difficulty);
+      filtered = filtered.filter(recipe => recipe.difficulty === difficulty);
     }
 
     // Filtrer på koketid
     if (time !== "all") {
-      searchResults = searchResults.filter(result => {
-        const minutes = parseInt(result.recipe.cookingTime);
+      filtered = filtered.filter(recipe => {
+        const minutes = parseInt(recipe.cookingTime);
         switch (time) {
           case "quick": return minutes < 15;
           case "medium": return minutes >= 15 && minutes <= 30;
@@ -85,8 +90,6 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
       });
     }
 
-    // Konverter tilbake til Recipe array, sortert etter relevanse
-    const filtered = searchResults.map(result => result.recipe);
     onFilteredRecipes(filtered);
   };
 
