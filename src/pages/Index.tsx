@@ -20,9 +20,6 @@ const Index = () => {
       ingredients: ["egg", "bacon", "pasta", "parmesan", "hvitløk"],
       cookingTime: "20 min",
       difficulty: "Lett",
-      availableIngredients: selectedIngredients.filter(ing => 
-        ["egg", "bacon", "pasta", "parmesan", "hvitløk"].includes(ing.toLowerCase())
-      ).length,
       totalIngredients: 5
     },
     {
@@ -31,10 +28,7 @@ const Index = () => {
       description: "Frisk salat med tomater, løk og basilikum",
       ingredients: ["tomat", "løk", "basilikum", "olivenolej", "salt"],
       cookingTime: "10 min", 
-      difficulty: "Meget lett",
-      availableIngredients: selectedIngredients.filter(ing => 
-        ["tomat", "løk", "basilikum", "olivenolej", "salt"].includes(ing.toLowerCase())
-      ).length,
+      difficulty: "Mycket lett",
       totalIngredients: 5
     },
     {
@@ -44,12 +38,17 @@ const Index = () => {
       ingredients: ["kylling", "paprika", "løk", "rosmarin", "salt"],
       cookingTime: "35 min",
       difficulty: "Middels", 
-      availableIngredients: selectedIngredients.filter(ing => 
-        ["kylling", "paprika", "løk", "rosmarin", "salt"].includes(ing.toLowerCase())
-      ).length,
       totalIngredients: 5
     }
   ];
+
+  // Kalkuler dynamisk hvilke oppskrifter som matcher
+  const recipesWithMatches = mockRecipes.map(recipe => ({
+    ...recipe,
+    availableIngredients: selectedIngredients.filter(ing => 
+      recipe.ingredients.some(recipeIng => recipeIng.toLowerCase() === ing.toLowerCase())
+    ).length
+  }));
 
   const addIngredient = (ingredient: string) => {
     if (!selectedIngredients.includes(ingredient)) {
@@ -61,9 +60,13 @@ const Index = () => {
     setSelectedIngredients(selectedIngredients.filter(ing => ing !== ingredient));
   };
 
-  const matchingRecipes = mockRecipes.filter(recipe => 
+  const matchingRecipes = recipesWithMatches.filter(recipe => 
     recipe.availableIngredients > 0
   ).sort((a, b) => b.availableIngredients - a.availableIngredients);
+
+  console.log("Selected ingredients:", selectedIngredients);
+  console.log("Recipes with matches:", recipesWithMatches);
+  console.log("Matching recipes:", matchingRecipes);
 
   return (
     <div className="min-h-screen bg-background">
