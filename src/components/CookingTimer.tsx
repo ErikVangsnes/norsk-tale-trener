@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { Timer, Play, Pause, RotateCcw, Bell } from "lucide-react";
+import { Timer, Play, Pause, RotateCcw, Bell, BellRing } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
+import { useNotifications } from "@/hooks/use-notifications";
 
 interface CookingTimerProps {
   cookingTime: string;
@@ -19,6 +20,7 @@ export const CookingTimer = ({ cookingTime, recipeName }: CookingTimerProps) => 
   const [hasStarted, setHasStarted] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
+  const { sendNotification, requestPermission, canSendNotifications } = useNotifications();
 
   // Parse cooking time (e.g., "20 min" -> 20 minutes)
   const parseTime = (timeStr: string): number => {
@@ -41,14 +43,23 @@ export const CookingTimer = ({ cookingTime, recipeName }: CookingTimerProps) => 
         setTimeLeft(prev => {
           if (prev <= 1) {
             setIsRunning(false);
-            // Timer finished!
+            
+            // Send push notification
+            const notificationSent = sendNotification({
+              title: "⏰ Timer ferdig!",
+              body: `${recipeName} bør være klar nå! Sjekk maten din.`,
+              tag: 'timer-finished',
+              requireInteraction: true
+            });
+            
+            // Also show toast (fallback or additional notification)
             toast({
               title: "⏰ Timer ferdig!",
               description: `${recipeName} bør være klar nå!`,
               duration: 10000,
             });
             
-            // Play notification sound (if supported)
+            // Play notification sound
             try {
               const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmETBDuBzvLZiTYIGGS57eSSSgwOUarm7blmHhI1j9byyy4FJHfH8N2QQAoTXrTp66hVFAlFnt/xvGESBw==');
               audio.play().catch(() => {}); // Ignore errors if sound fails
@@ -107,7 +118,11 @@ export const CookingTimer = ({ cookingTime, recipeName }: CookingTimerProps) => 
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="flex items-center gap-2">
-          <Timer className="w-4 h-4" />
+          {canSendNotifications ? (
+            <BellRing className="w-4 h-4 text-green-600" />
+          ) : (
+            <Timer className="w-4 h-4" />
+          )}
           {cookingTime}
         </Button>
       </DialogTrigger>
@@ -121,6 +136,23 @@ export const CookingTimer = ({ cookingTime, recipeName }: CookingTimerProps) => 
           <DialogDescription>
             {recipeName} • {cookingTime}
           </DialogDescription>
+          
+          {!canSendNotifications && (
+            <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-md">
+              <div className="flex items-center gap-2 text-amber-700 text-sm">
+                <Bell className="w-4 h-4" />
+                <span>Aktiver varsler for å få beskjed når timeren er ferdig</span>
+              </div>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="mt-1 text-amber-700 hover:bg-amber-100"
+                onClick={requestPermission}
+              >
+                Aktiver varsler
+              </Button>
+            </div>
+          )}
         </DialogHeader>
 
         <Card className={`${isFinished ? 'border-green-500 bg-green-50' : ''}`}>

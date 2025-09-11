@@ -10,6 +10,7 @@ import { ServingCalculator } from "@/components/ServingCalculator";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ShoppingListGenerator } from "@/components/ShoppingListGenerator";
 import { CookingTimer } from "@/components/CookingTimer";
+import { ReminderButton } from "@/components/ReminderButton";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -112,6 +113,11 @@ const Recipe = () => {
               size="lg"
               showLabel
             />
+            <ReminderButton
+              recipeName={recipe.title}
+              variant="outline"
+              size="default"
+            />
             <ShoppingListGenerator 
               recipe={recipe}
               selectedIngredients={[]} // Empty since we're on recipe page
@@ -210,11 +216,21 @@ const Recipe = () => {
             <CardContent>
               <ol className="space-y-4">
                 {recipe.instructions.map((step, index) => (
-                  <li key={index} className="flex gap-4">
+                  <li key={index} className="flex gap-4 items-start">
                     <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm">
                       {index + 1}
                     </div>
-                    <p className="text-foreground leading-relaxed pt-1">{step}</p>
+                    <div className="flex-1">
+                      <p className="text-foreground leading-relaxed pt-1">{step}</p>
+                    </div>
+                    <div className="flex-shrink-0 mt-1">
+                      <ReminderButton
+                        recipeName={recipe.title}
+                        step={`Steg ${index + 1}`}
+                        variant="ghost"
+                        size="sm"
+                      />
+                    </div>
                   </li>
                 ))}
               </ol>
