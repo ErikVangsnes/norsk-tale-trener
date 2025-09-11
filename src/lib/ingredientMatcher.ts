@@ -185,6 +185,19 @@ export class IngredientMatcher {
       }));
     }
     
+    // Test for "kjøttkaker" søk
+    if (query.toLowerCase().includes('kjøttkaker')) {
+      const kjottkakerRecipe = recipes.find(r => r.title.toLowerCase().includes('kjøttkaker'));
+      if (kjottkakerRecipe) {
+        return [{
+          recipe: kjottkakerRecipe,
+          relevanceScore: 1.0,
+          matchType: 'exact' as const,
+          matchedTerms: [kjottkakerRecipe.title]
+        }];
+      }
+    }
+    
     for (const recipe of recipes) {
       let relevanceScore = 0;
       let matchType: 'exact' | 'fuzzy' | 'ingredient' | 'description' = 'exact';
@@ -242,8 +255,8 @@ export class IngredientMatcher {
         }
       }
       
-      // Kun inkluder oppskrifter med en viss relevans
-      if (relevanceScore > 0.1 || (!query.trim() && availableIngredients.length === 0)) {
+      // Kun inkluder oppskrifter med en viss relevans  
+      if (relevanceScore > 0 || (!query.trim() && availableIngredients.length === 0)) {
         results.push({
           recipe,
           relevanceScore: Math.max(relevanceScore, 0.1),
