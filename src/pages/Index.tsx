@@ -8,42 +8,13 @@ import heroImage from "@/assets/hero-cooking.jpg";
 import { IngredientsInput } from "@/components/IngredientsInput";
 import { RecipeCard } from "@/components/RecipeCard";
 import { SubstituteSuggestions } from "@/components/SubstituteSuggestions";
+import { recipes } from "@/data/recipes";
 
 const Index = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
-  const mockRecipes = [
-    {
-      id: 1,
-      title: "Pasta Carbonara",
-      description: "Kremet og deilig carbonara med egg, bacon og parmesan",
-      ingredients: ["egg", "bacon", "pasta", "parmesan", "hvitløk"],
-      cookingTime: "20 min",
-      difficulty: "Lett",
-      totalIngredients: 5
-    },
-    {
-      id: 2,  
-      title: "Tomatsalat",
-      description: "Frisk salat med tomater, løk og basilikum",
-      ingredients: ["tomat", "løk", "basilikum", "olivenolej", "salt"],
-      cookingTime: "10 min", 
-      difficulty: "Mycket lett",
-      totalIngredients: 5
-    },
-    {
-      id: 3,
-      title: "Stekt Kylling",
-      description: "Saftig kyllingbryst med urter og grønnsaker",
-      ingredients: ["kylling", "paprika", "løk", "rosmarin", "salt"],
-      cookingTime: "35 min",
-      difficulty: "Middels", 
-      totalIngredients: 5
-    }
-  ];
-
   // Kalkuler dynamisk hvilke oppskrifter som matcher
-  const recipesWithMatches = mockRecipes.map(recipe => ({
+  const recipesWithMatches = recipes.map(recipe => ({
     ...recipe,
     availableIngredients: selectedIngredients.filter(ing => 
       recipe.ingredients.some(recipeIng => recipeIng.toLowerCase() === ing.toLowerCase())

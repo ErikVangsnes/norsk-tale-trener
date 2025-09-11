@@ -4,63 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
-const recipes = [
-  {
-    id: 1,
-    title: "Pasta Carbonara",
-    description: "Kremet og deilig carbonara med egg, bacon og parmesan",
-    ingredients: ["egg", "bacon", "pasta", "parmesan", "hvitløk"],
-    cookingTime: "20 min",
-    difficulty: "Lett",
-    servings: 4,
-    instructions: [
-      "Kok pastaen i saltet vann ifølge pakningens anvisning",
-      "Stek bacon i en stor panne til det er sprøtt",
-      "Visp sammen egg og riven parmesan i en bolle",
-      "Hell den varme pastaen i pannen med bacon",
-      "Ta pannen av varmen og bland inn eggblandingen raskt",
-      "Krydre med salt og pepper, server umiddelbart"
-    ],
-    tips: "Viktig: Bland eggene inn når pannen er av varmen for å unngå at eggene koagulerer!"
-  },
-  {
-    id: 2,
-    title: "Tomatsalat",
-    description: "Frisk salat med tomater, løk og basilikum",
-    ingredients: ["tomat", "løk", "basilikum", "olivenolej", "salt"],
-    cookingTime: "10 min",
-    difficulty: "Mycket lett",
-    servings: 2,
-    instructions: [
-      "Skjær tomatene i biter",
-      "Skjær løken i tynne skiver", 
-      "Riv basilikumblad i store stykker",
-      "Bland alt sammen i en bolle",
-      "Drypp over olivenoljé og krydre med salt",
-      "La salaten trekke i 5 minutter før servering"
-    ],
-    tips: "Bruk modne tomater for best smak!"
-  },
-  {
-    id: 3,
-    title: "Stekt Kylling",
-    description: "Saftig kyllingbryst med urter og grønnsaker",
-    ingredients: ["kylling", "paprika", "løk", "rosmarin", "salt"],
-    cookingTime: "35 min",
-    difficulty: "Middels",
-    servings: 3,
-    instructions: [
-      "Krydre kyllingbrystet med salt, pepper og rosmarin",
-      "Stek kyllingen i en varm panne med olje, 6-7 min per side",
-      "Skjær paprika og løk i strimler",
-      "Stek grønnsakene i samme panne i 5-6 minutter",
-      "La kyllingen hvile i 5 minutter før skjæring",
-      "Skjær i skiver og server med grønnsakene"
-    ],
-    tips: "Bruk stektermometer - kyllingen er ferdig ved 75°C innvendig temperatur"
-  }
-];
+import { recipes } from "@/data/recipes";
 
 const Recipe = () => {
   const { id } = useParams();
