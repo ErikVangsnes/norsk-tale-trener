@@ -1,8 +1,14 @@
+export interface DetailedIngredient {
+  name: string;
+  amount: number;
+  unit: string;
+}
+
 export interface Recipe {
   id: number;
   title: string;
   description: string;
-  ingredients: string[];
+  ingredients: string[] | DetailedIngredient[];
   cookingTime: string;
   difficulty: string;
   totalIngredients: number;
@@ -10,19 +16,27 @@ export interface Recipe {
   instructions: string[];
   tips: string;
   category: string;
+  hasDetailedIngredients?: boolean;
 }
 
 export const recipes: Recipe[] = [
-  // Italiensk
+  // Detaljerte oppskrifter med mengder
   {
     id: 1,
     title: "Pasta Carbonara",
     description: "Kremet og deilig carbonara med egg, bacon og parmesan",
-    ingredients: ["egg", "bacon", "pasta", "parmesan", "hvitløk"],
+    ingredients: [
+      { name: "egg", amount: 4, unit: "stk" },
+      { name: "bacon", amount: 200, unit: "g" },
+      { name: "pasta", amount: 400, unit: "g" },
+      { name: "parmesan", amount: 100, unit: "g" },
+      { name: "hvitløk", amount: 2, unit: "fedd" }
+    ],
     cookingTime: "20 min",
     difficulty: "Lett",
     totalIngredients: 5,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
       "Kok pastaen i saltet vann ifølge pakningens anvisning",
       "Stek bacon i en stor panne til det er sprøtt",
@@ -38,11 +52,18 @@ export const recipes: Recipe[] = [
     id: 2,
     title: "Margherita Pizza",
     description: "Klassisk pizza med tomat, mozzarella og basilikum",
-    ingredients: ["brød", "tomat", "mozzarella", "basilikum", "olivenolej"],
+    ingredients: [
+      { name: "brød", amount: 2, unit: "stk pizzabunn" },
+      { name: "tomat", amount: 200, unit: "ml puré" },
+      { name: "mozzarella", amount: 250, unit: "g" },
+      { name: "basilikum", amount: 10, unit: "blad" },
+      { name: "olivenolej", amount: 2, unit: "ss" }
+    ],
     cookingTime: "25 min",
     difficulty: "Middels",
     totalIngredients: 5,
     servings: 2,
+    hasDetailedIngredients: true,
     instructions: [
       "Forvarm ovnen til 250°C",
       "Rull ut pizzadeigen på et bakepapir",
@@ -57,6 +78,35 @@ export const recipes: Recipe[] = [
   },
   {
     id: 3,
+    title: "Scrambled Eggs",
+    description: "Perfekt krøsket eggerøre på norsk vis",
+    ingredients: [
+      { name: "egg", amount: 6, unit: "stk" },
+      { name: "melk", amount: 50, unit: "ml" },
+      { name: "smør", amount: 20, unit: "g" },
+      { name: "salt", amount: 1, unit: "ts" },
+      { name: "pepper", amount: 0.5, unit: "ts" }
+    ],
+    cookingTime: "5 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 2,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Visp eggene med melk i en bolle",
+      "Krydre med salt og pepper",
+      "Varm smør i en panne på lav varme",
+      "Hell i eggblandingen",
+      "Rør forsiktig til eggene setter seg",
+      "Server umiddelbart med brød"
+    ],
+    tips: "Lav varme er nøkkelen til kremetekst eggerøre!",
+    category: "Rask"
+  },
+
+  // Enkle oppskrifter uten detaljerte mengder
+  {
+    id: 4,
     title: "Spaghetti Aglio e Olio",
     description: "Enkel og elegant pasta med hvitløk og olivenolje",
     ingredients: ["pasta", "hvitløk", "olivenolej", "chili", "parmesan"],
@@ -75,10 +125,8 @@ export const recipes: Recipe[] = [
     tips: "Ikke la hvitløken bli brun - da blir smaken bitter!",
     category: "Italiensk"
   },
-  
-  // Norsk
   {
-    id: 4,
+    id: 5,
     title: "Fiskekaker med Poteter",
     description: "Tradisjonelle norske fiskekaker med kokte poteter",
     ingredients: ["laks", "egg", "melk", "poteter", "smør"],
@@ -98,7 +146,7 @@ export const recipes: Recipe[] = [
     category: "Norsk"
   },
   {
-    id: 5,
+    id: 6,
     title: "Kjøttkaker i Brun Saus",
     description: "Saftige kjøttkaker med kremet brun saus",
     ingredients: ["kjøttdeig", "egg", "løk", "melk", "smør"],
@@ -117,10 +165,8 @@ export const recipes: Recipe[] = [
     tips: "Tilsett litt revet gulrot i kjøttdeigen for ekstra saftighet!",
     category: "Norsk"
   },
-
-  // Asiatisk
   {
-    id: 6,
+    id: 7,
     title: "Fried Rice",
     description: "Asiatisk stekt ris med egg og grønnsaker",
     ingredients: ["ris", "egg", "gulrot", "ærter", "soyasaus"],
@@ -140,7 +186,7 @@ export const recipes: Recipe[] = [
     category: "Asiatisk"
   },
   {
-    id: 7,
+    id: 8,
     title: "Kylling Teriyaki",
     description: "Søt og salt kylling med asiatiske smaker",
     ingredients: ["kylling", "soyasaus", "honning", "ingefær", "ris"],
@@ -159,10 +205,8 @@ export const recipes: Recipe[] = [
     tips: "Tilsett sesamfrø som pynt for ekstra crunch!",
     category: "Asiatisk"
   },
-
-  // Vegetarisk
   {
-    id: 8,
+    id: 9,
     title: "Caprese Salat",
     description: "Frisk italiensk salat med tomat, mozzarella og basilikum",
     ingredients: ["tomat", "mozzarella", "basilikum", "olivenolej", "balsamico"],
@@ -182,7 +226,7 @@ export const recipes: Recipe[] = [
     category: "Vegetarisk"
   },
   {
-    id: 9,
+    id: 10,
     title: "Champignon Risotto",
     description: "Kremet risotto med sauterte champignoner",
     ingredients: ["ris", "champignon", "løk", "parmesan", "smør"],
@@ -200,28 +244,6 @@ export const recipes: Recipe[] = [
     ],
     tips: "Bruk gjerne flere soppsorter for mer kompleks smak!",
     category: "Vegetarisk"
-  },
-
-  // Rask og enkel
-  {
-    id: 10,
-    title: "Scrambled Eggs",
-    description: "Perfekt krøsket eggerøre på norsk vis",
-    ingredients: ["egg", "melk", "smør", "salt", "pepper"],
-    cookingTime: "5 min",
-    difficulty: "Lett",
-    totalIngredients: 5,
-    servings: 2,
-    instructions: [
-      "Visp eggene med melk i en bolle",
-      "Krydre med salt og pepper",
-      "Varm smør i en panne på lav varme",
-      "Hell i eggblandingen",
-      "Rør forsiktig til eggene setter seg",
-      "Server umiddelbart med brød"
-    ],
-    tips: "Lav varme er nøkkelen til kremetekst eggerøre!",
-    category: "Rask"
   },
   {
     id: 11,
@@ -243,8 +265,6 @@ export const recipes: Recipe[] = [
     tips: "Tilsett et stekt egg på toppen for ekstra protein!",
     category: "Rask"
   },
-
-  // Salater og supper
   {
     id: 12,
     title: "Cæsar Salat",
@@ -264,131 +284,5 @@ export const recipes: Recipe[] = [
     ],
     tips: "Tilsett grillet kylling for å gjøre det til hovedrett!",
     category: "Salat"
-  },
-  {
-    id: 13,
-    title: "Tomatsuppe",
-    description: "Kremet og varmende tomatsuppe",
-    ingredients: ["tomat", "løk", "hvitløk", "rømme", "basilikum"],
-    cookingTime: "25 min",
-    difficulty: "Lett",
-    totalIngredients: 5,
-    servings: 4,
-    instructions: [
-      "Sautér løk og hvitløk til mykt",
-      "Tilsett hermetiske tomater og la koke 15 min",
-      "Kjør suppen jevn med stavmikser",
-      "Rør inn rømme og varm forsiktig",
-      "Krydre med salt, pepper og basilikum",
-      "Server med brød"
-    ],
-    tips: "Tilsett litt sukker om tomatene er sure!",
-    category: "Suppe"
-  },
-
-  // Kjøtt og fisk
-  {
-    id: 14,
-    title: "Laks med Dill",
-    description: "Stekt laks med kremete dillsaus",
-    ingredients: ["laks", "dill", "rømme", "sitron", "smør"],
-    cookingTime: "20 min",
-    difficulty: "Lett",
-    totalIngredients: 5,
-    servings: 3,
-    instructions: [
-      "Krydre laksen med salt og pepper",
-      "Stek i smør, skin side først",
-      "Snu og stek ferdig",
-      "Lag saus av rømme, dill og sitronsaft",
-      "Varm sausen forsiktig",
-      "Server laksen med sausen"
-    ],
-    tips: "Ikke stek laksen for lenge - den blir tørr!",
-    category: "Fisk"
-  },
-  {
-    id: 15,
-    title: "Kylling Tikka Masala",
-    description: "Kremet indisk curry med kylling",
-    ingredients: ["kylling", "tomat", "rømme", "karri", "hvitløk"],
-    cookingTime: "40 min",
-    difficulty: "Middels",
-    totalIngredients: 5,
-    servings: 4,
-    instructions: [
-      "Skjær kyllingen i biter og krydre med karri",
-      "Stek kyllingen til gyllen",
-      "Sautér hvitløk i samme panne",
-      "Tilsett hermetiske tomater og la koke",
-      "Rør inn rømme og la puttre 15 min",
-      "Server med ris eller naanbrød"
-    ],
-    tips: "Mariner kyllingen i yoghurt og krydder for ekstra smak!",
-    category: "Indisk"
-  },
-
-  // Retter med egg
-  {
-    id: 16,
-    title: "Spansk Tortilla",
-    description: "Tradisjonell spansk omelett med poteter",
-    ingredients: ["poteter", "egg", "løk", "olivenolej", "salt"],
-    cookingTime: "35 min",
-    difficulty: "Krevende",
-    totalIngredients: 5,
-    servings: 4,
-    instructions: [
-      "Skjær poteter og løk i tynne skiver",
-      "Stek i olivenolej til møre",
-      "Visp eggene og bland med potet-løk blandingen",
-      "Stek tortillaen på begge sider",
-      "Vend med et fat eller lokk",
-      "Server varm eller kald"
-    ],
-    tips: "La tortillaen hvile litt før du skjærer den!",
-    category: "Spansk"
-  },
-
-  // Pasta varianter
-  {
-    id: 17,
-    title: "Pasta Arrabbiata",
-    description: "Spicy italiensk pasta med tomat og chili",
-    ingredients: ["pasta", "tomat", "hvitløk", "chili", "parmesan"],
-    cookingTime: "20 min",
-    difficulty: "Lett",
-    totalIngredients: 5,
-    servings: 3,
-    instructions: [
-      "Kok pastaen al dente",
-      "Sautér hvitløk og chili i olivenolej",
-      "Tilsett hermetiske tomater",
-      "La sausen koke inn 10 minutter",
-      "Bland med den varme pastaen",
-      "Topp med parmesan og persille"
-    ],
-    tips: "Juster chilimengden etter hvor sterkt du liker det!",
-    category: "Italiensk"
-  },
-  {
-    id: 18,
-    title: "Fettuccine Alfredo",
-    description: "Kremet pasta med smør og parmesan",
-    ingredients: ["pasta", "smør", "parmesan", "rømme", "hvitløk"],
-    cookingTime: "18 min",
-    difficulty: "Lett",
-    totalIngredients: 5,
-    servings: 3,
-    instructions: [
-      "Kok fettuccine al dente",
-      "Smelt smør i en stor panne",
-      "Tilsett rømme og varm forsiktig",
-      "Rør inn revet parmesan til sausen tykner",
-      "Bland inn den varme pastaen",
-      "Server umiddelbart med extra parmesan"
-    ],
-    tips: "Bruk pastavann til å tynne sausen om nødvendig!",
-    category: "Italiensk"
   }
 ];

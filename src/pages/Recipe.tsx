@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Users, Star, ChefHat } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { recipes } from "@/data/recipes";
+import { recipes, DetailedIngredient } from "@/data/recipes";
+import { ServingCalculator } from "@/components/ServingCalculator";
 
 const Recipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const recipe = recipes.find(r => r.id === Number(id));
+  const [selectedServings, setSelectedServings] = useState(recipe?.servings || 4);
 
   if (!recipe) {
     return (
@@ -25,9 +28,38 @@ const Recipe = () => {
     );
   }
 
+  // Sjekk om oppskriften har detaljerte ingredienser
+  const hasDetailedIngredients = recipe.hasDetailedIngredients && 
+    Array.isArray(recipe.ingredients) && 
+    recipe.ingredients.length > 0 && 
+    typeof recipe.ingredients[0] === 'object';
+
+  // Kalkuler justerte mengder kun hvis vi har detaljerte ingredienser
+  const adjustedIngredients = hasDetailedIngredients 
+    ? (recipe.ingredients as DetailedIngredient[]).map(ingredient => {
+        const multiplier = selectedServings / recipe.servings;
+        const adjustedAmount = ingredient.amount * multiplier;
+        
+        // Rund av til fornuftige tall
+        let roundedAmount;
+        if (adjustedAmount < 1) {
+          roundedAmount = Math.round(adjustedAmount * 10) / 10;
+        } else if (adjustedAmount < 10) {
+          roundedAmount = Math.round(adjustedAmount * 2) / 2;
+        } else {
+          roundedAmount = Math.round(adjustedAmount);
+        }
+        
+        return {
+          ...ingredient,
+          adjustedAmount: roundedAmount
+        };
+      })
+    : [];
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="container mx-auto px-6 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
           <Button
@@ -55,7 +87,7 @@ const Recipe = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
-                  <span>{recipe.servings} porsjoner</span>
+                  <span>{selectedServings} porsjoner</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4" />
@@ -68,33 +100,73 @@ const Recipe = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className={`grid ${hasDetailedIngredients ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-8`}>
+          {/* Serving Calculator - Only show for detailed recipes */}
+          {hasDetailedIngredients && (
+            <div className="md:col-span-1">
+              <ServingCalculator 
+                originalServings={recipe.servings}
+                onServingChange={setSelectedServings}
+              />
+            </div>
+          )}
+
           {/* Ingredients */}
-          <Card className="shadow-medium">
+          <Card className="shadow-medium md:col-span-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <span>Ingredienser</span>
                 <Badge variant="secondary">{recipe.ingredients.length} stk</Badge>
               </CardTitle>
+              {hasDetailedIngredients && selectedServings !== recipe.servings && (
+                <p className="text-sm text-accent">
+                  Mengdene er justert for {selectedServings} porsjoner
+                </p>
+              )}
             </CardHeader>
             <CardContent>
               <ul className="space-y-3">
-                {recipe.ingredients.map((ingredient, index) => (
-                  <li key={index} className="flex items-center gap-3 p-2 rounded-md hover:bg-secondary/50 transition-colors">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="capitalize font-medium">{ingredient}</span>
-                  </li>
-                ))}
+                {hasDetailedIngredients ? (
+                  // Detaljerte ingredienser med mengder
+                  adjustedIngredients.map((ingredient, index) => (
+                    <li key={index} className="flex items-start gap-3 p-2 rounded-md hover:bg-secondary/50 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline gap-2 flex-wrap">
+                          <span className="font-bold text-accent">
+                            {ingredient.adjustedAmount} {ingredient.unit}
+                          </span>
+                          <span className="capitalize text-foreground">
+                            {ingredient.name}
+                          </span>
+                        </div>
+                        {selectedServings !== recipe.servings && (
+                          <div className="text-xs text-muted-foreground mt-1">
+                            Opprinnelig: {ingredient.amount} {ingredient.unit}
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  // Enkle ingredienser uten mengder
+                  (recipe.ingredients as string[]).map((ingredient, index) => (
+                    <li key={index} className="flex items-center gap-3 p-2 rounded-md hover:bg-secondary/50 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-primary"></div>
+                      <span className="capitalize font-medium">{ingredient}</span>
+                    </li>
+                  ))
+                )}
               </ul>
             </CardContent>
           </Card>
 
           {/* Instructions */}
-          <Card className="md:col-span-2 shadow-medium">
+          <Card className={`shadow-medium ${hasDetailedIngredients ? 'md:col-span-2' : 'md:col-span-2'}`}>
             <CardHeader>
               <CardTitle>Fremgangsmåte</CardTitle>
               <CardDescription>
-                Følg disse stegene for å lage {recipe.title}
+                Følg disse stegene for å lage {recipe.title} til {selectedServings} {selectedServings === 1 ? "person" : "personer"}
               </CardDescription>
             </CardHeader>
             <CardContent>

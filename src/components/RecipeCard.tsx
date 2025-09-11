@@ -4,20 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
+import { Recipe } from "@/data/recipes";
 
-interface Recipe {
-  id: number;
-  title: string;
-  description: string;
-  ingredients: string[];
-  cookingTime: string;
-  difficulty: string;
+interface RecipeWithMatches extends Recipe {
   availableIngredients: number;
-  totalIngredients: number;
 }
 
 interface RecipeCardProps {
-  recipe: Recipe;
+  recipe: RecipeWithMatches;
   selectedIngredients: string[];
 }
 
@@ -77,18 +71,27 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
               Mangler {missingIngredients} ingrediens{missingIngredients > 1 ? 'er' : ''}:
             </p>
             <div className="flex flex-wrap gap-1">
-              {recipe.ingredients
-                .filter(ingredient => 
-                  !selectedIngredients.some(selected => 
-                    selected.toLowerCase() === ingredient.toLowerCase()
+              {(() => {
+                // Handle both string[] and DetailedIngredient[] formats
+                const recipeIngredients = Array.isArray(recipe.ingredients) 
+                  ? recipe.ingredients.map(ing => 
+                      typeof ing === 'object' ? ing.name : ing
+                    )
+                  : [];
+                
+                return recipeIngredients
+                  .filter(ingredient => 
+                    !selectedIngredients.some(selected => 
+                      selected.toLowerCase() === ingredient.toLowerCase()
+                    )
                   )
-                )
-                .slice(0, 3)
-                .map((ingredient, index) => (
-                <Badge key={index} variant="outline" className="text-xs">
-                  {ingredient}
-                </Badge>
-              ))}
+                  .slice(0, 3)
+                  .map((ingredient, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">
+                      {ingredient}
+                    </Badge>
+                  ));
+              })()}
               {missingIngredients > 3 && (
                 <Badge variant="outline" className="text-xs">
                   +{missingIngredients - 3} til

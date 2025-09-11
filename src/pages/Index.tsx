@@ -16,9 +16,24 @@ const Index = () => {
   // Kalkuler dynamisk hvilke oppskrifter som matcher
   const recipesWithMatches = recipes.map(recipe => ({
     ...recipe,
-    availableIngredients: selectedIngredients.filter(ing => 
-      recipe.ingredients.some(recipeIng => recipeIng.toLowerCase() === ing.toLowerCase())
-    ).length
+    availableIngredients: selectedIngredients.filter(ing => {
+      if (Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0) {
+        // Check if it's DetailedIngredient[] or string[]
+        if (typeof recipe.ingredients[0] === 'object') {
+          const detailedIngredients = recipe.ingredients as any[];
+          return detailedIngredients.some(recipeIng => 
+            recipeIng.name.toLowerCase() === ing.toLowerCase()
+          );
+        } else {
+          // It's string[]
+          const stringIngredients = recipe.ingredients as string[];
+          return stringIngredients.some(recipeIng => 
+            recipeIng.toLowerCase() === ing.toLowerCase()
+          );
+        }
+      }
+      return false;
+    }).length
   }));
 
   const addIngredient = (ingredient: string) => {
