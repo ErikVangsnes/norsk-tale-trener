@@ -12,6 +12,8 @@ interface SearchAndFilterProps {
   recipes: Recipe[];
   onFilteredRecipes: (filtered: Recipe[]) => void;
   availableIngredients?: string[];
+  excludedIngredients?: string[];
+  onExcludedIngredientsChange?: (excluded: string[]) => void;
 }
 
 const categories = [
@@ -42,12 +44,19 @@ const cookingTimes = [
   { value: "long", label: "Over 30 min" }
 ];
 
-export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredients = [] }: SearchAndFilterProps) => {
+export const SearchAndFilter = ({ 
+  recipes, 
+  onFilteredRecipes, 
+  availableIngredients = [],
+  excludedIngredients = [],
+  onExcludedIngredientsChange 
+}: SearchAndFilterProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [selectedTime, setSelectedTime] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
+  const [excludeInput, setExcludeInput] = useState("");
 
   const applyFilters = (
     search = searchTerm,
@@ -57,12 +66,21 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
   ) => {
     let filtered = [...recipes];
 
+    // Filtrer bort oppskrifter med ekskluderte ingredienser først
+    if (excludedIngredients.length > 0) {
+      filtered = IngredientMatcher.findRecipesWithExclusions(
+        availableIngredients,
+        excludedIngredients,
+        filtered
+      ).map(match => match.recipe);
+    }
+
     // Hvis det er et søkeord, bruk intelligent søk
     if (search.trim()) {
       const searchResults = IngredientMatcher.intelligentSearch(
         search,
         availableIngredients,
-        recipes
+        filtered
       );
       filtered = searchResults.map(result => result.recipe);
     }
@@ -98,6 +116,23 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
     applyFilters(value);
   };
 
+  const handleAddExclusion = () => {
+    if (excludeInput.trim() && onExcludedIngredientsChange) {
+      const newExcluded = [...excludedIngredients, excludeInput.trim().toLowerCase()];
+      onExcludedIngredientsChange(newExcluded);
+      setExcludeInput("");
+      applyFilters(); // Re-apply filters with new exclusions
+    }
+  };
+
+  const handleRemoveExclusion = (ingredientToRemove: string) => {
+    if (onExcludedIngredientsChange) {
+      const newExcluded = excludedIngredients.filter(ingredient => ingredient !== ingredientToRemove);
+      onExcludedIngredientsChange(newExcluded);
+      applyFilters(); // Re-apply filters with updated exclusions
+    }
+  };
+
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
     applyFilters(searchTerm, value);
@@ -125,7 +160,8 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
     (searchTerm ? 1 : 0) + 
     (selectedCategory !== "all" ? 1 : 0) + 
     (selectedDifficulty !== "all" ? 1 : 0) + 
-    (selectedTime !== "all" ? 1 : 0);
+    (selectedTime !== "all" ? 1 : 0) +
+    excludedIngredients.length;
 
   return (
     <Card className="shadow-medium mb-8">
@@ -177,59 +213,108 @@ export const SearchAndFilter = ({ recipes, onFilteredRecipes, availableIngredien
 
           {/* Filter options */}
           {showFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t">
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Kategori
-                </label>
-                <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map(category => (
-                      <SelectItem key={category.value} value={category.value}>
-                        {category.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-4 pt-4 border-t">
+              {/* Exclusion section */}
+              {onExcludedIngredientsChange && (
+                <div className="bg-muted/30 p-4 rounded-lg">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Unngå ingredienser
+                  </label>
+                  <div className="flex gap-2 mb-3">
+                    <Input
+                      type="text"
+                      placeholder="f.eks. melk, nøtter..."
+                      value={excludeInput}
+                      onChange={(e) => setExcludeInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleAddExclusion()}
+                      className="flex-1"
+                    />
+                    <Button 
+                      type="button" 
+                      onClick={handleAddExclusion}
+                      variant="outline"
+                      size="sm"
+                    >
+                      Legg til
+                    </Button>
+                  </div>
+                  {excludedIngredients.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {excludedIngredients.map((ingredient, index) => (
+                        <Badge 
+                          key={index} 
+                          variant="destructive" 
+                          className="flex items-center gap-1"
+                        >
+                          {ingredient}
+                          <button 
+                            onClick={() => handleRemoveExclusion(ingredient)}
+                            className="ml-1 hover:bg-destructive-foreground/20 rounded-full p-0.5"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* Regular filter options */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Kategori
+                  </label>
+                  <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map(category => (
+                        <SelectItem key={category.value} value={category.value}>
+                          {category.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Vanskelighetsgrad
-                </label>
-                <Select value={selectedDifficulty} onValueChange={handleDifficultyChange}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {difficulties.map(difficulty => (
-                      <SelectItem key={difficulty.value} value={difficulty.value}>
-                        {difficulty.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Vanskelighetsgrad
+                  </label>
+                  <Select value={selectedDifficulty} onValueChange={handleDifficultyChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {difficulties.map(difficulty => (
+                        <SelectItem key={difficulty.value} value={difficulty.value}>
+                          {difficulty.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Koketid
-                </label>
-                <Select value={selectedTime} onValueChange={handleTimeChange}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {cookingTimes.map(time => (
-                      <SelectItem key={time.value} value={time.value}>
-                        {time.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Koketid
+                  </label>
+                  <Select value={selectedTime} onValueChange={handleTimeChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {cookingTimes.map(time => (
+                        <SelectItem key={time.value} value={time.value}>
+                          {time.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
           )}

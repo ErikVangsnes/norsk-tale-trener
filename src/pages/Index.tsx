@@ -16,25 +16,29 @@ import { IngredientMatcher } from "@/lib/ingredientMatcher";
 
 const Index = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [excludedIngredients, setExcludedIngredients] = useState<string[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes);
   const [activeTab, setActiveTab] = useState<"all" | "favorites">("all");
   
   const favoriteIds = getFavoriteRecipeIds();
 
-  // Bruk det nye intelligente matching-systemet
+  // Bruk det forbedrede intelligente matching-systemet med ekskludering
   const getMatchingRecipes = () => {
-    if (selectedIngredients.length === 0) {
+    if (selectedIngredients.length === 0 && excludedIngredients.length === 0) {
       return filteredRecipes.map(recipe => ({
         recipe,
         match: IngredientMatcher.calculateIngredientMatch([], recipe)
       }));
     }
     
-    return IngredientMatcher.findRecipesByIngredients(selectedIngredients, filteredRecipes)
-      .map(ingredientMatch => ({
-        recipe: ingredientMatch.recipe,
-        match: ingredientMatch
-      }));
+    return IngredientMatcher.findRecipesWithExclusions(
+      selectedIngredients, 
+      excludedIngredients,
+      filteredRecipes
+    ).map(ingredientMatch => ({
+      recipe: ingredientMatch.recipe,
+      match: ingredientMatch
+    }));
   };
 
   const recipesWithMatches = getMatchingRecipes();
@@ -120,6 +124,8 @@ const Index = () => {
             recipes={recipes}
             onFilteredRecipes={setFilteredRecipes}
             availableIngredients={selectedIngredients}
+            excludedIngredients={excludedIngredients}
+            onExcludedIngredientsChange={setExcludedIngredients}
           />
         </section>
 

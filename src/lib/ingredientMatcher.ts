@@ -173,54 +173,139 @@ export class IngredientMatcher {
     availableIngredients: string[],
     recipes: Recipe[]
   ): SearchResult[] {
-    const results: SearchResult[] = [];
-    
-    // Hvis ingen søkeord, vis alle oppskrifter
+    // Hvis ingen søkeord, vis alle oppskrifter med litt randomisering
     if (!query.trim()) {
       return recipes.map(recipe => ({
         recipe,
-        relevanceScore: 0.5,
+        relevanceScore: 0.5 + Math.random() * 0.1, // Litt tilfeldig for variasjon
         matchType: 'exact' as const,
         matchedTerms: []
-      }));
+      })).sort((a, b) => b.relevanceScore - a.relevanceScore);
     }
     
-    // Enkel søk i tittel og beskrivelse
-    for (const recipe of recipes) {
-      const queryLower = query.toLowerCase();
-      const titleLower = recipe.title.toLowerCase();
-      const descLower = recipe.description.toLowerCase();
+    // Bruk FuzzyMatcher for bedre søkeresultater
+    const searchResults = FuzzyMatcher.search(
+      query,
+      recipes,
+      (recipe) => [
+        recipe.title,
+        recipe.description,
+        recipe.category,
+        ...this.getRecipeIngredients(recipe)
+      ],
+      0.2 // Lavere terskel for mer inkluderende søk
+    );
+    
+    // Konverter til SearchResult format med forbedret poenggivning
+    const results: SearchResult[] = searchResults.map(result => {
+      let matchType: 'exact' | 'fuzzy' | 'ingredient' | 'description' = 'fuzzy';
+      let relevanceScore = result.matchScore;
       
-      if (titleLower.includes(queryLower) || descLower.includes(queryLower)) {
-        results.push({
-          recipe,
-          relevanceScore: 1.0,
-          matchType: 'exact' as const,
-          matchedTerms: [recipe.title]
-        });
+      // Gi bonus for eksakt match i tittel
+      if (result.title.toLowerCase().includes(query.toLowerCase())) {
+        matchType = 'exact';
+        relevanceScore += 0.3;
       }
-    }
+      
+      // Gi bonus for match i ingredienser
+      const recipeIngredients = this.getRecipeIngredients(result);
+      if (recipeIngredients.some(ing => 
+        ing.toLowerCase().includes(query.toLowerCase()) ||
+        FuzzyMatcher.similarity(ing, query) > 0.7
+      )) {
+        matchType = 'ingredient';
+        relevanceScore += 0.2;
+      }
+      
+      // Gi bonus for match i kategori
+      if (result.category.toLowerCase().includes(query.toLowerCase())) {
+        relevanceScore += 0.15;
+      }
+      
+      return {
+        recipe: result,
+        relevanceScore: Math.min(relevanceScore, 1.0),
+        matchType,
+        matchedTerms: result.matchedFields
+      };
+    });
     
-    return results;
+    // Sorter etter relevans med litt diversitet
+    return results.sort((a, b) => {
+      // Primær sortering etter relevance score
+      const scoreDiff = b.relevanceScore - a.relevanceScore;
+      if (Math.abs(scoreDiff) > 0.1) {
+        return scoreDiff;
+      }
+      
+      // Sekundær sortering: foretrekk forskjellige kategorier
+      if (a.recipe.category !== b.recipe.category) {
+        return Math.random() - 0.5; // Tilfeldig for diversitet
+      }
+      
+      return scoreDiff;
+    });
   }
 
   // Finn oppskrifter basert kun på tilgjengelige ingredienser
   static findRecipesByIngredients(
     availableIngredients: string[],
-    recipes: Recipe[]
+    recipes: Recipe[],
+    excludedIngredients: string[] = []
   ): IngredientMatch[] {
-    if (availableIngredients.length === 0) {
-      return recipes.map(recipe => this.calculateIngredientMatch([], recipe));
+    // Filtrer ut oppskrifter som inneholder ekskluderte ingredienser
+    let filteredRecipes = recipes;
+    if (excludedIngredients.length > 0) {
+      filteredRecipes = recipes.filter(recipe => {
+        const recipeIngredients = this.getRecipeIngredients(recipe);
+        return !recipeIngredients.some(ingredient => 
+          excludedIngredients.some(excluded => 
+            ingredient.toLowerCase().includes(excluded.toLowerCase()) ||
+            FuzzyMatcher.similarity(ingredient, excluded) > 0.8
+          )
+        );
+      });
     }
     
-    return recipes
+    if (availableIngredients.length === 0) {
+      // Når ingen ingredienser er valgt, vis en blanding med litt randomisering
+      return filteredRecipes
+        .map(recipe => ({
+          ...this.calculateIngredientMatch([], recipe),
+          matchScore: Math.random() * 0.3 + 0.1 // Litt tilfeldig score for variasjon
+        }))
+        .sort((a, b) => b.matchScore - a.matchScore);
+    }
+    
+    const matches = filteredRecipes
       .map(recipe => this.calculateIngredientMatch(availableIngredients, recipe))
-      .sort((a, b) => {
-        // Sorter først etter match percentage, så etter match score
-        if (Math.abs(a.matchPercentage - b.matchPercentage) > 5) {
-          return b.matchPercentage - a.matchPercentage;
-        }
-        return b.matchScore - a.matchScore;
-      });
+      .filter(match => match.matchPercentage > 0); // Kun oppskrifter med noen match
+
+    // Forbedret sorteringsalgoritme med diversitet
+    return matches.sort((a, b) => {
+      // Først: favoriser oppskrifter med høy match percentage
+      const matchDiff = b.matchPercentage - a.matchPercentage;
+      if (Math.abs(matchDiff) > 15) {
+        return matchDiff;
+      }
+      
+      // Så: favoriser forskjellige kategorier for diversitet
+      if (a.recipe.category !== b.recipe.category && Math.abs(matchDiff) < 25) {
+        return Math.random() - 0.5;
+      }
+      
+      // Til slutt: bruk match score og litt tilfeldig variasjon
+      const scoreDiff = b.matchScore - a.matchScore;
+      return scoreDiff + (Math.random() - 0.5) * 0.1;
+    });
+  }
+
+  // Ny metode for å finne oppskrifter med ekskludering
+  static findRecipesWithExclusions(
+    availableIngredients: string[],
+    excludedIngredients: string[],
+    recipes: Recipe[]
+  ): IngredientMatch[] {
+    return this.findRecipesByIngredients(availableIngredients, recipes, excludedIngredients);
   }
 }
