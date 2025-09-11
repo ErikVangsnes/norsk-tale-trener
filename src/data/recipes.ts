@@ -17,6 +17,7 @@ export interface Recipe {
   tips: string;
   category: string;
   hasDetailedIngredients?: boolean;
+  image?: string;
 }
 
 export const recipes: Recipe[] = [

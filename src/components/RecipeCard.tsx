@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { Recipe } from "@/data/recipes";
+import { FavoriteButton } from "@/components/FavoriteButton";
+import { ShoppingListGenerator } from "@/components/ShoppingListGenerator";
 
 interface RecipeWithMatches extends Recipe {
   availableIngredients: number;
@@ -21,7 +23,32 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
   const missingIngredients = recipe.totalIngredients - recipe.availableIngredients;
   
   return (
-    <Card className="shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 bg-gradient-to-br from-card to-recipe">
+    <Card className="shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 bg-gradient-to-br from-card to-recipe overflow-hidden">
+      {/* Recipe Image */}
+      {recipe.image && (
+        <div className="relative h-48 overflow-hidden">
+          <img 
+            src={recipe.image} 
+            alt={recipe.title}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute top-3 right-3">
+            <FavoriteButton 
+              recipeId={recipe.id}
+              recipeTitle={recipe.title}
+              size="sm"
+            />
+          </div>
+          <Badge 
+            variant="secondary" 
+            className="absolute bottom-3 left-3 bg-white/90 text-foreground"
+          >
+            {recipe.category}
+          </Badge>
+        </div>
+      )}
+
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -32,7 +59,7 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
               {recipe.description}
             </CardDescription>
           </div>
-          <ChefHat className="w-6 h-6 text-accent ml-2 flex-shrink-0" />
+          {!recipe.image && <ChefHat className="w-6 h-6 text-accent ml-2 flex-shrink-0" />}
         </div>
         
         {/* Match Progress */}
@@ -101,18 +128,26 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
           </div>
         )}
         
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button 
-            className="flex-1" 
+            className="flex-1 min-w-0" 
             variant={matchPercentage === 100 ? "default" : "outline"}
             onClick={() => navigate(`/recipe/${recipe.id}`)}
           >
             Se oppskrift
           </Button>
+          {!recipe.image && (
+            <FavoriteButton 
+              recipeId={recipe.id}
+              recipeTitle={recipe.title}
+              size="sm"
+            />
+          )}
           {missingIngredients > 0 && (
-            <Button variant="outline" size="sm">
-              Finn substitutter
-            </Button>
+            <ShoppingListGenerator 
+              recipe={recipe}
+              selectedIngredients={selectedIngredients}
+            />
           )}
         </div>
       </CardContent>

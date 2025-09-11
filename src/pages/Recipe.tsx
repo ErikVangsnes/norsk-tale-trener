@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Users, Star, ChefHat } from "lucide-react";
+import { ArrowLeft, Clock, Users, Star, ChefHat, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { recipes, DetailedIngredient } from "@/data/recipes";
 import { ServingCalculator } from "@/components/ServingCalculator";
+import { FavoriteButton } from "@/components/FavoriteButton";
+import { ShoppingListGenerator } from "@/components/ShoppingListGenerator";
+import { CookingTimer } from "@/components/CookingTimer";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -82,8 +85,10 @@ const Recipe = () => {
               
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{recipe.cookingTime}</span>
+                  <CookingTimer 
+                    cookingTime={recipe.cookingTime}
+                    recipeName={recipe.title}
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
@@ -98,12 +103,45 @@ const Recipe = () => {
             
             <ChefHat className="w-12 h-12 text-accent" />
           </div>
+
+          {/* Action buttons */}
+          <div className="flex gap-4 mt-6">
+            <FavoriteButton 
+              recipeId={recipe.id}
+              recipeTitle={recipe.title}
+              size="lg"
+              showLabel
+            />
+            <ShoppingListGenerator 
+              recipe={recipe}
+              selectedIngredients={[]} // Empty since we're on recipe page
+              servings={selectedServings}
+            />
+          </div>
         </div>
 
-        <div className={`grid ${hasDetailedIngredients ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-8`}>
+        <div className={`grid ${hasDetailedIngredients ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-8`}>
+          {/* Recipe Image */}
+          {recipe.image && (
+            <Card className="shadow-medium">
+              <div className="aspect-square overflow-hidden rounded-t-lg">
+                <img 
+                  src={recipe.image} 
+                  alt={recipe.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardContent className="p-4">
+                <Badge variant="secondary" className="w-full justify-center">
+                  {recipe.category}
+                </Badge>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Serving Calculator - Only show for detailed recipes */}
           {hasDetailedIngredients && (
-            <div className="md:col-span-1">
+            <div className="lg:col-span-1">
               <ServingCalculator 
                 originalServings={recipe.servings}
                 onServingChange={setSelectedServings}
@@ -162,7 +200,7 @@ const Recipe = () => {
           </Card>
 
           {/* Instructions */}
-          <Card className={`shadow-medium ${hasDetailedIngredients ? 'md:col-span-2' : 'md:col-span-2'}`}>
+          <Card className={`shadow-medium ${recipe.image ? 'lg:col-span-2' : hasDetailedIngredients ? 'lg:col-span-2' : 'lg:col-span-2'}`}>
             <CardHeader>
               <CardTitle>Fremgangsmåte</CardTitle>
               <CardDescription>
