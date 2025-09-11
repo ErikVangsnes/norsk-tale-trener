@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-cooking.jpg";
+import logo from "@/assets/kokkehjelpen-logo.png";
 import { IngredientsInput } from "@/components/IngredientsInput";
 import { RecipeCard } from "@/components/RecipeCard";
 import { SubstituteSuggestions } from "@/components/SubstituteSuggestions";
@@ -65,8 +66,25 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-white/95 backdrop-blur-sm border-b border-border/40 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center gap-4">
+            <img 
+              src={logo} 
+              alt="KokkeHjelpen Logo" 
+              className="w-10 h-10"
+            />
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">KokkeHjelpen</h1>
+              <p className="text-sm text-muted-foreground">Din personlige kokeassistent</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -74,20 +92,19 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/60" />
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <ChefHat className="w-16 h-16 mx-auto mb-6" />
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <img 
+              src={logo} 
+              alt="KokkeHjelpen" 
+              className="w-20 h-20 drop-shadow-lg"
+            />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
             Oppskrifter fra ditt kjøleskap
-          </h1>
+          </h2>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
             Fortell meg hvilke ingredienser du har, så foreslår jeg deilige oppskrifter du kan lage akkurat nå
           </p>
-          <Button 
-            size="lg" 
-            variant="secondary"
-            className="text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Kom i gang
-          </Button>
         </div>
       </section>
 
