@@ -173,13 +173,10 @@ export class IngredientMatcher {
     availableIngredients: string[],
     recipes: Recipe[]
   ): SearchResult[] {
-    console.log("intelligentSearch kallt med query:", query, "recipes:", recipes.length);
-    console.log("Alle oppskrifter titler:", recipes.map(r => r.title));
     const results: SearchResult[] = [];
     
-    // Hvis ingen søkeord, vis alle oppskrifter sortert etter ingredient match
-    if (!query.trim() && availableIngredients.length === 0) {
-      console.log("Tomt søk, returnerer alle oppskrifter");
+    // Hvis ingen søkeord, vis alle oppskrifter
+    if (!query.trim()) {
       return recipes.map(recipe => ({
         recipe,
         relevanceScore: 0.5,
@@ -188,94 +185,23 @@ export class IngredientMatcher {
       }));
     }
     
-    // Test for "kjøttkaker" søk
-    if (query.toLowerCase().includes('kjøttkaker')) {
-      console.log("Søker spesifikt etter kjøttkaker");
-      const kjottkakerRecipe = recipes.find(r => {
-        console.log("Sjekker oppskrift:", r.title, "inneholder kjøttkaker?", r.title.toLowerCase().includes('kjøttkaker'));
-        return r.title.toLowerCase().includes('kjøttkaker');
-      });
-      console.log("Fant kjøttkaker oppskrift:", kjottkakerRecipe ? kjottkakerRecipe.title : "IKKE FUNNET");
-      if (kjottkakerRecipe) {
-        return [{
-          recipe: kjottkakerRecipe,
-          relevanceScore: 1.0,
-          matchType: 'exact' as const,
-          matchedTerms: [kjottkakerRecipe.title]
-        }];
-      }
-    }
-    
+    // Enkel søk i tittel og beskrivelse
     for (const recipe of recipes) {
-      let relevanceScore = 0;
-      let matchType: 'exact' | 'fuzzy' | 'ingredient' | 'description' = 'exact';
-      let matchedTerms: string[] = [];
+      const queryLower = query.toLowerCase();
+      const titleLower = recipe.title.toLowerCase();
+      const descLower = recipe.description.toLowerCase();
       
-      // 1. Søk i tittel (høyest prioritet)
-      if (query.trim()) {
-        const titleSimilarity = FuzzyMatcher.partialMatch(query, recipe.title);
-        if (titleSimilarity > 0) {
-          relevanceScore += titleSimilarity * 1.0;
-          matchedTerms.push(recipe.title);
-          if (titleSimilarity > 0.8) {
-            matchType = 'exact';
-          } else {
-            matchType = 'fuzzy';
-          }
-        }
-        
-        // 2. Søk i beskrivelse
-        const descriptionSimilarity = FuzzyMatcher.partialMatch(query, recipe.description);
-        if (descriptionSimilarity > 0) {
-          relevanceScore += descriptionSimilarity * 0.6;
-          matchedTerms.push('beskrivelse');
-          if (matchType === 'exact') matchType = 'description';
-        }
-        
-        // 3. Søk i ingredienser
-        const recipeIngredients = this.getRecipeIngredients(recipe);
-        for (const ingredient of recipeIngredients) {
-          const ingredientSimilarity = FuzzyMatcher.partialMatch(query, ingredient);
-          if (ingredientSimilarity > 0) {
-            relevanceScore += ingredientSimilarity * 0.8;
-            matchedTerms.push(ingredient);
-            if (matchType === 'exact') matchType = 'ingredient';
-          }
-        }
-        
-        // 4. Søk i instruksjoner
-        const allInstructions = recipe.instructions.join(' ');
-        const instructionSimilarity = FuzzyMatcher.partialMatch(query, allInstructions);
-        if (instructionSimilarity > 0) {
-          relevanceScore += instructionSimilarity * 0.4;
-          matchedTerms.push('instruksjoner');
-        }
-      }
-      
-      // 5. Ingredient matching bonus
-      if (availableIngredients.length > 0) {
-        const ingredientMatch = this.calculateIngredientMatch(availableIngredients, recipe);
-        relevanceScore += ingredientMatch.matchScore * 0.5;
-        
-        // Extra boost for high ingredient matches
-        if (ingredientMatch.matchPercentage > 80) {
-          relevanceScore += 0.3;
-        }
-      }
-      
-      // Kun inkluder oppskrifter med en viss relevans  
-      if (relevanceScore > 0 || (!query.trim() && availableIngredients.length === 0)) {
+      if (titleLower.includes(queryLower) || descLower.includes(queryLower)) {
         results.push({
           recipe,
-          relevanceScore: Math.max(relevanceScore, 0.1),
-          matchType,
-          matchedTerms: [...new Set(matchedTerms)] // fjern duplikater
+          relevanceScore: 1.0,
+          matchType: 'exact' as const,
+          matchedTerms: [recipe.title]
         });
       }
     }
     
-    // Sorter etter relevance score
-    return results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+    return results;
   }
 
   // Finn oppskrifter basert kun på tilgjengelige ingredienser
