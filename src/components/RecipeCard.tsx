@@ -17,9 +17,10 @@ interface Recipe {
 
 interface RecipeCardProps {
   recipe: Recipe;
+  selectedIngredients: string[];
 }
 
-export const RecipeCard = ({ recipe }: RecipeCardProps) => {
+export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => {
   const matchPercentage = Math.round((recipe.availableIngredients / recipe.totalIngredients) * 100);
   const missingIngredients = recipe.totalIngredients - recipe.availableIngredients;
   
@@ -75,7 +76,11 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
             </p>
             <div className="flex flex-wrap gap-1">
               {recipe.ingredients
-                .filter(ing => !recipe.ingredients.slice(0, recipe.availableIngredients).includes(ing))
+                .filter(ingredient => 
+                  !selectedIngredients.some(selected => 
+                    selected.toLowerCase() === ingredient.toLowerCase()
+                  )
+                )
                 .slice(0, 3)
                 .map((ingredient, index) => (
                 <Badge key={index} variant="outline" className="text-xs">
