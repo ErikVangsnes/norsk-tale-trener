@@ -64,10 +64,6 @@ const Index = () => {
     recipe.availableIngredients > 0
   ).sort((a, b) => b.availableIngredients - a.availableIngredients);
 
-  console.log("Selected ingredients:", selectedIngredients);
-  console.log("Recipes with matches:", recipesWithMatches);
-  console.log("Matching recipes:", matchingRecipes);
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}

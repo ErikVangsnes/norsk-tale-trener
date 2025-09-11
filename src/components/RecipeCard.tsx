@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
 
 interface Recipe {
   id: number;
@@ -21,6 +22,7 @@ interface RecipeCardProps {
 }
 
 export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => {
+  const navigate = useNavigate();
   const matchPercentage = Math.round((recipe.availableIngredients / recipe.totalIngredients) * 100);
   const missingIngredients = recipe.totalIngredients - recipe.availableIngredients;
   
@@ -100,6 +102,7 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
           <Button 
             className="flex-1" 
             variant={matchPercentage === 100 ? "default" : "outline"}
+            onClick={() => navigate(`/recipe/${recipe.id}`)}
           >
             Se oppskrift
           </Button>
