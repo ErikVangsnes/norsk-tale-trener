@@ -81,7 +81,7 @@ export const ingredientSynonyms: Record<string, string[]> = {
   "appelsin": ["orange", "appelsinsaft"],
   
   // Diverse
-  "olivenolej": ["olive oil", "extra virgin olive oil"],
+  "olivenolje": ["olive oil", "extra virgin olive oil", "olivenolej"],
   "soyasaus": ["soy sauce", "soja"],
   "balsamico": ["balsamic vinegar", "balsamicoeddik"],
   "honning": ["honey"],

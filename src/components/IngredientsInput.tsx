@@ -13,7 +13,7 @@ interface IngredientsInputProps {
 
 const commonIngredients = [
   // Grunnleggende
-  "Egg", "Melk", "Smør", "Salt", "Pepper", "Olivenolej", "Hvitløk", "Løk", 
+  "Egg", "Melk", "Smør", "Salt", "Pepper", "Olivenolje", "Hvitløk", "Løk",
   
   // Kjøtt og fisk
   "Kylling", "Bacon", "Kjøttdeig", "Laks", "Reker", "Kalkun", "Pølse", "Skinke",
