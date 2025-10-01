@@ -167,6 +167,206 @@ export const recipes: Recipe[] = [
     category: "Norsk"
   },
   {
+    id: 200,
+    title: "Tacos med Kjøttdeig",
+    description: "Meksikansk klassiker med krydret kjøttdeig og friske tilbehør",
+    ingredients: ["kjøttdeig", "tacoskjell", "tomat", "salat", "ost", "rødløk", "tacokrydder"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    instructions: [
+      "Brun kjøttdeigen i en panne",
+      "Tilsett tacokrydder og litt vann",
+      "La det småkoke i 10 minutter",
+      "Varm tacoskjellene i ovnen",
+      "Hakk salat, tomat og løk",
+      "Fyll tacoskjellene med kjøttdeig og tilbehør"
+    ],
+    tips: "Tilsett en klatt rømme og guacamole for ekstra god smak!",
+    category: "Meksikansk"
+  },
+  {
+    id: 201,
+    title: "Lasagne",
+    description: "Italiensk klassiker med kjøttdeig, tomatsaus og hvit saus",
+    ingredients: ["kjøttdeig", "lasagneplater", "tomat", "løk", "hvitløk", "melk", "ost", "smør", "mel"],
+    cookingTime: "90 min",
+    difficulty: "Middels",
+    totalIngredients: 9,
+    servings: 6,
+    instructions: [
+      "Brun kjøttdeigen med løk og hvitløk",
+      "Tilsett hermetiske tomater og la putre",
+      "Lag hvit saus av smør, mel og melk",
+      "Lag lag med kjøttsaus, lasagneplater og hvit saus",
+      "Topp med revet ost",
+      "Stek i ovnen på 180°C i 45 minutter"
+    ],
+    tips: "La lasagnen hvile 10 minutter før servering for lettere kutt!",
+    category: "Italiensk"
+  },
+  {
+    id: 202,
+    title: "Spaghetti Bolognese",
+    description: "Klassisk italiensk pasta med rik kjøttsaus",
+    ingredients: ["kjøttdeig", "spaghetti", "tomat", "løk", "hvitløk", "gulrot", "selleri", "rødvin"],
+    cookingTime: "60 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    instructions: [
+      "Sautér løk, hvitløk, gulrot og selleri",
+      "Tilsett kjøttdeig og brun den",
+      "Hell i knuste tomater og rødvin",
+      "La småkoke i 45 minutter",
+      "Kok spaghettien al dente",
+      "Server kjøttsausen over pastaen"
+    ],
+    tips: "Jo lengre sausen får putre, jo bedre smak!",
+    category: "Italiensk"
+  },
+  {
+    id: 203,
+    title: "Chili con Carne",
+    description: "Meksikansk gryterett med kjøttdeig og bønner",
+    ingredients: ["kjøttdeig", "kidneybønner", "tomat", "løk", "paprika", "chili", "spisskum"],
+    cookingTime: "50 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 6,
+    instructions: [
+      "Brun kjøttdeigen med løk",
+      "Tilsett hakket paprika",
+      "Hell i hermetiske tomater og kidneybønner",
+      "Krydre med chili og spisskum",
+      "La småkoke i 30 minutter",
+      "Server med ris, rømme og tortillachips"
+    ],
+    tips: "Smaken blir bedre dagen etter - perfekt for meal prep!",
+    category: "Meksikansk"
+  },
+  {
+    id: 204,
+    title: "Klassisk Hamburger",
+    description: "Saftig hjemmelaget burger med kjøttdeig",
+    ingredients: ["kjøttdeig", "hamburgerbrød", "salat", "tomat", "ost", "løk", "agurk"],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    instructions: [
+      "Form kjøttdeigen til burgere",
+      "Krydre med salt og pepper",
+      "Stek på høy varme, 3-4 min per side",
+      "Legg på ost siste minutt",
+      "Rist brødene lett",
+      "Bygg burgeren med salat, tomat, løk og agurk"
+    ],
+    tips: "Press ikke ned burgeren mens den steker - da mister den saften!",
+    category: "Amerikansk"
+  },
+  {
+    id: 205,
+    title: "Kjøttboller i Tomatsaus",
+    description: "Italiensk inspirerte kjøttboller i rik tomatsaus",
+    ingredients: ["kjøttdeig", "egg", "brødsmuler", "parmesan", "tomat", "hvitløk", "basilikum"],
+    cookingTime: "45 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 4,
+    instructions: [
+      "Bland kjøttdeig med egg, brødsmuler og parmesan",
+      "Form til små kjøttboller",
+      "Brun kjøttbollene i panne",
+      "Lag tomatsaus med hvitløk og basilikum",
+      "La kjøttbollene småkoke i sausen i 20 min",
+      "Server med pasta eller brød"
+    ],
+    tips: "Tilsett litt melk i kjøttdeigen for ekstra møre kjøttboller!",
+    category: "Italiensk"
+  },
+  {
+    id: 206,
+    title: "Cottage Pie",
+    description: "Britisk komfortmat med kjøttdeig og potetmos",
+    ingredients: ["kjøttdeig", "poteter", "løk", "gulrot", "ærter", "oksekraft", "smør"],
+    cookingTime: "60 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 6,
+    instructions: [
+      "Brun kjøttdeigen med løk",
+      "Tilsett gulrot, ærter og oksekraft",
+      "La småkoke til tykk konsistens",
+      "Kok og mos potetene med smør og melk",
+      "Legg kjøttblandingen i ildfast form",
+      "Topp med potetmos og gratiner i ovnen"
+    ],
+    tips: "Bruk en gaffel til å lage mønster i potetmoset - det blir ekstra sprøtt!",
+    category: "Britisk"
+  },
+  {
+    id: 207,
+    title: "Taco-pai",
+    description: "Tex-Mex paiform med kjøttdeig og ost",
+    ingredients: ["kjøttdeig", "paideig", "tomat", "paprika", "mais", "ost", "tacokrydder", "rømme"],
+    cookingTime: "50 min",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    instructions: [
+      "Brun kjøttdeigen med tacokrydder",
+      "Bland kjøtt med hakket paprika, mais og tomat",
+      "Legg paideig i en form",
+      "Hell i kjøttblandingen",
+      "Topp med revet ost",
+      "Stek på 200°C i 30 minutter"
+    ],
+    tips: "Server med rømme, salsa og guacamole!",
+    category: "Meksikansk"
+  },
+  {
+    id: 208,
+    title: "Kjøttpudding",
+    description: "Tradisjonell norsk rett med kjøttdeig og kålrotstappe",
+    ingredients: ["kjøttdeig", "løk", "melk", "potetmel", "kålrot", "poteter", "smør"],
+    cookingTime: "90 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 6,
+    instructions: [
+      "Bland kjøttdeig med løk, melk og potetmel",
+      "Hell i smurt form",
+      "Damp i 60 minutter",
+      "Kok og mos kålrot og poteter",
+      "Server kjøttpuddingen i skiver",
+      "Legg til kålrotstappe og brun saus"
+    ],
+    tips: "Kjøttpuddingen kan fryses og varmes opp senere!",
+    category: "Norsk"
+  },
+  {
+    id: 209,
+    title: "Stuffed Paprika",
+    description: "Fylt paprika med kjøttdeig og ris",
+    ingredients: ["kjøttdeig", "paprika", "ris", "løk", "tomat", "hvitløk", "ost"],
+    cookingTime: "50 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 4,
+    instructions: [
+      "Kutt toppen av paprikaene og fjern kjernene",
+      "Brun kjøttdeig med løk og hvitløk",
+      "Bland kjøtt med kokt ris og hakket tomat",
+      "Fyll paprikaene med blandingen",
+      "Topp med revet ost",
+      "Stek i ovn på 180°C i 35 minutter"
+    ],
+    tips: "Bruk fargerike paprikaer for et vakkert fat!",
+    category: "Internasjonal"
+  },
+  {
     id: 7,
     title: "Fried Rice",
     description: "Asiatisk stekt ris med egg og grønnsaker",
