@@ -147,6 +147,146 @@ export const recipes: Recipe[] = [
     category: "Norsk"
   },
   {
+    id: 222,
+    title: "Stekt Laks med Poteter",
+    description: "Enkel og sunn lakserett",
+    ingredients: ["laks", "poteter", "smør", "sitron", "dill"],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Kok potetene",
+      "Krydre laksen med salt og pepper",
+      "Stek i smør, skinnsiden først",
+      "Vend og stek ferdig",
+      "Hell over brunet smør og sitron",
+      "Pynt med dill"
+    ],
+    tips: "Ikke overstekk laksen!",
+    category: "Norsk"
+  },
+  {
+    id: 223,
+    title: "Laks i Ovn med Grønnsaker",
+    description: "Sunn og enkel ovnsrett",
+    ingredients: ["laks", "brokkoli", "paprika", "squash", "olivenolej", "hvitløk"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Forvarm ovnen til 200°C",
+      "Legg laks og grønnsaker på brett",
+      "Drypp over olje og krydre",
+      "Tilsett hvitløk",
+      "Stek i 18-20 minutter",
+      "Server med sitron"
+    ],
+    tips: "Perfekt hverdagsmiddag!",
+    category: "Norsk"
+  },
+  {
+    id: 224,
+    title: "Lakseburger",
+    description: "Saftig lakseburger med dill",
+    ingredients: ["laks", "egg", "brødsmuler", "dill", "løk", "hamburgerbrød"],
+    cookingTime: "25 min",
+    difficulty: "Middels",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Hakk laksen fint",
+      "Bland med egg, brødsmuler og dill",
+      "Form til burgere",
+      "Stek i panne på middels varme",
+      "Rist brødene",
+      "Bygg burgeren med tilbehør"
+    ],
+    tips: "Server med remoulade!",
+    category: "Rask"
+  },
+  {
+    id: 225,
+    title: "Lakselasagne",
+    description: "Kremet lasagne med laks og spinat",
+    ingredients: ["laks", "lasagneplater", "spinat", "fløte", "ost", "løk"],
+    cookingTime: "60 min",
+    difficulty: "Middels",
+    totalIngredients: 6,
+    servings: 6,
+    instructions: [
+      "Lag hvit saus med fløte",
+      "Stek laksen i biter",
+      "Bland laks med spinat",
+      "Lag lag med plater og fyll",
+      "Topp med ost",
+      "Stek på 180°C i 40 minutter"
+    ],
+    tips: "Kan lages dagen før!",
+    category: "Italiensk"
+  },
+  {
+    id: 226,
+    title: "Laksepasta",
+    description: "Kremet pasta med røkt laks",
+    ingredients: ["laks", "pasta", "fløte", "spinat", "hvitløk", "sitron"],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Kok pastaen",
+      "Stek hvitløk i smør",
+      "Tilsett fløte og spinat",
+      "Riv i laks",
+      "Bland inn pastaen",
+      "Tilsett sitronsaft"
+    ],
+    tips: "Ferdig på 20 minutter!",
+    category: "Italiensk"
+  },
+  {
+    id: 227,
+    title: "Gravlaks",
+    description: "Hjemmelaget gravlaks med dill",
+    ingredients: ["laks", "sukker", "salt", "dill", "pepper"],
+    cookingTime: "48 timer",
+    difficulty: "Middels",
+    totalIngredients: 5,
+    servings: 8,
+    instructions: [
+      "Bland sukker og salt",
+      "Gni inn i laksen",
+      "Dekk med mye dill",
+      "Legg laksebitene mot hverandre",
+      "Pakk inn og legg på noe tungt",
+      "La ligge i kjøleskapet i 48 timer"
+    ],
+    tips: "Perfekt til festmåltid!",
+    category: "Norsk"
+  },
+  {
+    id: 228,
+    title: "Laksewrap",
+    description: "Rask og sunn lunsj",
+    ingredients: ["laks", "tortilla", "salat", "avokado", "tomat", "rømme"],
+    cookingTime: "15 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 2,
+    instructions: [
+      "Stek eller bruk røkt laks",
+      "Varm tortillaen",
+      "Legg på salat og grønnsaker",
+      "Tilsett laks",
+      "Topp med rømme",
+      "Rull sammen"
+    ],
+    tips: "Perfekt lunsjmat!",
+    category: "Rask"
+  },
+  {
     id: 6,
     title: "Kjøttkaker i Brun Saus",
     description: "Saftige kjøttkaker med kremet brun saus",
@@ -387,6 +527,106 @@ export const recipes: Recipe[] = [
     category: "Asiatisk"
   },
   {
+    id: 210,
+    title: "Omelett",
+    description: "Klassisk fransk omelett med valgfritt fyll",
+    ingredients: ["egg", "melk", "smør", "ost", "tomat", "løk"],
+    cookingTime: "10 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 2,
+    instructions: [
+      "Visp egg og melk sammen",
+      "Varm smør i en panne",
+      "Hell i eggblandingen",
+      "La stivne på bunnen, dra kanten inn",
+      "Legg fyll på den ene siden",
+      "Brett omeletten og server"
+    ],
+    tips: "Lav varme gir mykere omelett!",
+    category: "Rask"
+  },
+  {
+    id: 211,
+    title: "Egg Benedict",
+    description: "Luksuriøs frokost med posjert egg og hollandaisesaus",
+    ingredients: ["egg", "bacon", "brød", "smør", "sitron", "hvitvin"],
+    cookingTime: "25 min",
+    difficulty: "Middels",
+    totalIngredients: 6,
+    servings: 2,
+    instructions: [
+      "Lag hollandaise av eggeplommer, smør og sitron",
+      "Posjer eggene i vann med eddik",
+      "Rist brødskivene",
+      "Stek bacon sprø",
+      "Legg bacon og posjert egg på brød",
+      "Topp med hollandaisesaus"
+    ],
+    tips: "Hold hollandaisen varm i vannbad!",
+    category: "Frokost"
+  },
+  {
+    id: 212,
+    title: "Spansk Tortilla",
+    description: "Tykk potetomelett fra Spania",
+    ingredients: ["egg", "poteter", "løk", "olivenolej", "salt"],
+    cookingTime: "30 min",
+    difficulty: "Middels",
+    totalIngredients: 5,
+    servings: 4,
+    instructions: [
+      "Skjær poteter og løk i tynne skiver",
+      "Stek i olivenolje til myke",
+      "Visp egg og bland med poteter",
+      "Hell i panne og stek på begge sider",
+      "Server varm eller kald",
+      "Kutt i trekanter"
+    ],
+    tips: "Perfekt som tapas eller piknik-mat!",
+    category: "Spansk"
+  },
+  {
+    id: 213,
+    title: "Shakshuka",
+    description: "Israelske egg i krydret tomatsaus",
+    ingredients: ["egg", "tomat", "paprika", "løk", "hvitløk", "spiskum"],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Sautér løk, hvitløk og paprika",
+      "Tilsett hermetiske tomater og krydder",
+      "La småkoke i 15 minutter",
+      "Lag fordypninger og knekk egg oppi",
+      "Dekk til og kok til eggene stivner",
+      "Server med brød"
+    ],
+    tips: "Perfekt for brunch!",
+    category: "Israelittisk"
+  },
+  {
+    id: 214,
+    title: "Posjerte Egg på Toast",
+    description: "Enkel og elegant frokost",
+    ingredients: ["egg", "brød", "eddik", "smør", "salt"],
+    cookingTime: "10 min",
+    difficulty: "Lett",
+    totalIngredients: 5,
+    servings: 2,
+    instructions: [
+      "Kok vann med litt eddik",
+      "Lag en virvelvind i vannet",
+      "Slipp egget forsiktig oppi",
+      "Kok i 3-4 minutter",
+      "Ta opp med hullslev",
+      "Server på ristet brød"
+    ],
+    tips: "Ferske egg gir best resultat!",
+    category: "Frokost"
+  },
+  {
     id: 8,
     title: "Kylling Teriyaki",
     description: "Søt og salt kylling med asiatiske smaker",
@@ -405,6 +645,146 @@ export const recipes: Recipe[] = [
     ],
     tips: "Tilsett sesamfrø som pynt for ekstra crunch!",
     category: "Asiatisk"
+  },
+  {
+    id: 215,
+    title: "Kylling i Karri",
+    description: "Kremet kyllingkarri med kokosmjølk",
+    ingredients: ["kylling", "kokosmjølk", "karripasta", "løk", "paprika", "ingefær"],
+    cookingTime: "35 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Kutt kylling i biter",
+      "Stek løk og ingefær",
+      "Tilsett karripasta",
+      "Hell i kokosmjølk og kylling",
+      "La småkoke i 20 minutter",
+      "Server med ris"
+    ],
+    tips: "Tilsett lime for friskhet!",
+    category: "Asiatisk"
+  },
+  {
+    id: 216,
+    title: "Ovnsbakt Kylling med Grønnsaker",
+    description: "Enkel hverdagsmiddag fra ovnen",
+    ingredients: ["kylling", "poteter", "gulrot", "løk", "hvitløk", "rosmarin"],
+    cookingTime: "60 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Skjær grønnsaker i biter",
+      "Krydre kylling med salt, pepper og rosmarin",
+      "Legg alt på et stekebrett",
+      "Drypp over olje",
+      "Stek på 200°C i 45-50 minutter",
+      "Sjekk at kyllingen er gjennomstekt"
+    ],
+    tips: "Vend grønnsakene halvveis!",
+    category: "Norsk"
+  },
+  {
+    id: 217,
+    title: "Kyllingpanne med Pasta",
+    description: "Rask og enkel pastarett",
+    ingredients: ["kylling", "pasta", "fløte", "parmesan", "hvitløk", "spinat"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Kok pastaen",
+      "Stek kylling i biter",
+      "Tilsett hvitløk og spinat",
+      "Hell i fløte og parmesan",
+      "Bland inn pastaen",
+      "Server med ekstra parmesan"
+    ],
+    tips: "Bruk pastavann for tynnere saus!",
+    category: "Italiensk"
+  },
+  {
+    id: 218,
+    title: "Kyllingwok med Nudler",
+    description: "Asiatisk wok med grønnsaker",
+    ingredients: ["kylling", "nudler", "paprika", "brokkoli", "soyasaus", "ingefær"],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 3,
+    instructions: [
+      "Kok nudlene",
+      "Stek kylling på høy varme",
+      "Tilsett grønnsaker",
+      "Hell i soyasaus og ingefær",
+      "Bland inn nudlene",
+      "Stek i 2 minutter"
+    ],
+    tips: "Høy varme er nøkkelen!",
+    category: "Asiatisk"
+  },
+  {
+    id: 219,
+    title: "Grillet Kylling med Salat",
+    description: "Sunn og enkel sommerrett",
+    ingredients: ["kylling", "salat", "tomat", "agurk", "olivenolej", "sitron"],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    instructions: [
+      "Mariner kylling med olje og sitron",
+      "Grill kyllingen til gjennomstekt",
+      "Kutt salat og grønnsaker",
+      "Lag dressing av olje og sitron",
+      "Skjær kyllingen i skiver",
+      "Bland alt sammen"
+    ],
+    tips: "Perfekt sommermat!",
+    category: "Salat"
+  },
+  {
+    id: 220,
+    title: "Kylling Quesadilla",
+    description: "Meksikansk tortilla med kylling",
+    ingredients: ["kylling", "tortilla", "ost", "paprika", "løk", "kremer"],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 2,
+    instructions: [
+      "Stek kylling med paprika og løk",
+      "Legg fyll på tortilla",
+      "Strø over ost",
+      "Brett sammen og stek",
+      "Vend når gyllen",
+      "Skjær i biter og server"
+    ],
+    tips: "Server med guacamole!",
+    category: "Meksikansk"
+  },
+  {
+    id: 221,
+    title: "Kyllingsuppe",
+    description: "Varmende suppe med kylling og grønnsaker",
+    ingredients: ["kylling", "gulrot", "selleri", "løk", "kyllingbuljong", "nudler"],
+    cookingTime: "45 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 6,
+    instructions: [
+      "Kok kylling i buljong",
+      "Ta ut kyllingen og plukk kjøttet",
+      "Tilsett grønnsaker i buljongen",
+      "La koke til møre",
+      "Tilsett kylling og nudler",
+      "Kok 5 minutter til"
+    ],
+    tips: "Perfekt når du er forkjølet!",
+    category: "Suppe"
   },
   {
     id: 9,
