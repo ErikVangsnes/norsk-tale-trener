@@ -19,9 +19,6 @@ interface Rating {
   rating: number;
   comment: string | null;
   created_at: string;
-  profiles?: {
-    email: string;
-  };
 }
 
 export const RecipeRating = ({ recipeId, recipeTitle }: RecipeRatingProps) => {
@@ -43,7 +40,7 @@ export const RecipeRating = ({ recipeId, recipeTitle }: RecipeRatingProps) => {
     // Load all ratings for this recipe
     const { data: ratings } = await supabase
       .from('recipe_ratings')
-      .select('*, profiles(email)')
+      .select('*')
       .eq('recipe_id', recipeId)
       .order('created_at', { ascending: false });
 

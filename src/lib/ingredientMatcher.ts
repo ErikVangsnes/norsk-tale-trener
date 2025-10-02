@@ -279,24 +279,24 @@ export class IngredientMatcher {
     
     const matches = filteredRecipes
       .map(recipe => this.calculateIngredientMatch(availableIngredients, recipe))
-      .filter(match => match.matchPercentage > 0); // Kun oppskrifter med noen match
+      .filter(match => match.matchPercentage >= 40); // Krev minimum 40% ingrediensmatch
 
-    // Forbedret sorteringsalgoritme med diversitet
+    // Forbedret sorteringsalgoritme med større variasjon
     return matches.sort((a, b) => {
       // Først: favoriser oppskrifter med høy match percentage
       const matchDiff = b.matchPercentage - a.matchPercentage;
-      if (Math.abs(matchDiff) > 15) {
+      if (Math.abs(matchDiff) > 20) {
         return matchDiff;
       }
       
-      // Så: favoriser forskjellige kategorier for diversitet
-      if (a.recipe.category !== b.recipe.category && Math.abs(matchDiff) < 25) {
-        return Math.random() - 0.5;
-      }
+      // Så: legg til betydelig tilfeldig variasjon for diversitet
+      const randomFactor = (Math.random() - 0.5) * 0.4;
       
-      // Til slutt: bruk match score og litt tilfeldig variasjon
-      const scoreDiff = b.matchScore - a.matchScore;
-      return scoreDiff + (Math.random() - 0.5) * 0.1;
+      // Bruk en kombinasjon av match percentage og tilfeldig faktor
+      const aScore = a.matchPercentage + randomFactor * 20;
+      const bScore = b.matchPercentage + randomFactor * 20;
+      
+      return bScore - aScore;
     });
   }
 
