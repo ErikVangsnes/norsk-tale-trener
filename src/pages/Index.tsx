@@ -84,11 +84,6 @@ const Index = () => {
 
   const recipesWithMatches = getMatchingRecipes();
 
-  // Sjekk favoritt-oppskrifter ved bruk av state (ikke direkte Promise)
-  const favoriteRecipes = recipesWithMatches.filter(({ recipe }) => 
-    favoriteIds.includes(recipe.id)
-  );
-
   const addIngredient = (ingredient: string) => {
     if (!selectedIngredients.includes(ingredient)) {
       setSelectedIngredients([...selectedIngredients, ingredient]);
@@ -102,6 +97,11 @@ const Index = () => {
   const matchingRecipes = selectedIngredients.length > 0 
     ? recipesWithMatches.filter(({ match }) => match.matchPercentage > 0)
     : recipesWithMatches.filter(({ recipe }) => filteredRecipes.includes(recipe));
+
+  // Få favoritt-oppskrifter
+  const favoriteRecipes = recipesWithMatches.filter(({ recipe }) => 
+    favoriteIds.includes(recipe.id)
+  );
 
   const displayedRecipes = activeTab === "favorites" ? favoriteRecipes : matchingRecipes;
 
