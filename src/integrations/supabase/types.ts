@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      recipe_ratings: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          rating: number
+          recipe_id: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating: number
+          recipe_id: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          recipe_id?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_favorites: {
+        Row: {
+          created_at: string
+          id: string
+          recipe_id: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          recipe_id: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          recipe_id?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_ingredients: {
+        Row: {
+          created_at: string
+          id: string
+          ingredient: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ingredient: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ingredient?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
