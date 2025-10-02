@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Search, ChefHat, Lightbulb, Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, ChefHat, Lightbulb, Heart, LogIn, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -13,14 +13,55 @@ import { SearchAndFilter } from "@/components/SearchAndFilter";
 import { recipes, Recipe } from "@/data/recipes";
 import { getFavoriteRecipeIds } from "@/components/FavoriteButton";
 import { IngredientMatcher } from "@/lib/ingredientMatcher";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [excludedIngredients, setExcludedIngredients] = useState<string[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes);
   const [activeTab, setActiveTab] = useState<"all" | "favorites">("all");
-  
-  const favoriteIds = getFavoriteRecipeIds();
+  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const { user, loading, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  // Load favorites when user changes
+  useEffect(() => {
+    loadFavorites();
+  }, [user]);
+
+  // Load user's saved ingredients when logged in
+  useEffect(() => {
+    if (user) {
+      loadUserIngredients();
+    }
+  }, [user]);
+
+  const loadFavorites = async () => {
+    const favorites = await getFavoriteRecipeIds(user?.id);
+    setFavoriteIds(favorites);
+  };
+
+  const loadUserIngredients = async () => {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from('user_ingredients')
+      .select('ingredient')
+      .eq('user_id', user.id);
+
+    if (data && data.length > 0) {
+      const ingredients = data.map(item => item.ingredient);
+      setSelectedIngredients(ingredients);
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    setFavoriteIds([]);
+    // Keep local ingredients after logout
+  };
 
   // Bruk det forbedrede intelligente matching-systemet med ekskludering
   const getMatchingRecipes = () => {
@@ -69,15 +110,38 @@ const Index = () => {
       {/* Header */}
       <header className="bg-white/95 backdrop-blur-sm border-b border-border/40 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center gap-4">
-            <img 
-              src={logo} 
-              alt="KokkeHjelpen Logo" 
-              className="w-10 h-10"
-            />
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">KokkeHjelpen</h1>
-              <p className="text-sm text-muted-foreground">Din personlige kokeassistent</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img 
+                src={logo} 
+                alt="KokkeHjelpen Logo" 
+                className="w-10 h-10"
+              />
+              <div>
+                <h1 className="text-2xl font-bold text-foreground">KokkeHjelpen</h1>
+                <p className="text-sm text-muted-foreground">Din personlige kokeassistent</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {loading ? (
+                <div className="text-sm text-muted-foreground">Laster...</div>
+              ) : user ? (
+                <>
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    <span className="hidden sm:inline">{user.email}</span>
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleSignOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logg ut
+                  </Button>
+                </>
+              ) : (
+                <Button variant="default" size="sm" onClick={() => navigate("/auth")}>
+                  <LogIn className="w-4 h-4 mr-2" />
+                  Logg inn
+                </Button>
+              )}
             </div>
           </div>
         </div>

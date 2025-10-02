@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, X, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 interface IngredientsInputProps {
   onAddIngredient: (ingredient: string) => void;
@@ -48,6 +50,36 @@ export const IngredientsInput = ({
 }: IngredientsInputProps) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+  const { user } = useAuth();
+
+  // Sync to database when user is logged in
+  useEffect(() => {
+    if (user && selectedIngredients.length > 0) {
+      syncIngredientsToDatabase();
+    }
+  }, [selectedIngredients, user]);
+
+  const syncIngredientsToDatabase = async () => {
+    if (!user) return;
+
+    // Delete all current ingredients for this user
+    await supabase
+      .from('user_ingredients')
+      .delete()
+      .eq('user_id', user.id);
+
+    // Insert all selected ingredients
+    if (selectedIngredients.length > 0) {
+      const ingredientsToInsert = selectedIngredients.map(ing => ({
+        user_id: user.id,
+        ingredient: ing.toLowerCase()
+      }));
+
+      await supabase
+        .from('user_ingredients')
+        .insert(ingredientsToInsert);
+    }
+  };
 
   const handleInputChange = (value: string) => {
     setInputValue(value);

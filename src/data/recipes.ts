@@ -4,6 +4,13 @@ export interface DetailedIngredient {
   unit: string;
 }
 
+export interface NutritionInfo {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
 export interface Recipe {
   id: number;
   title: string;
@@ -18,6 +25,7 @@ export interface Recipe {
   category: string;
   hasDetailedIngredients?: boolean;
   image?: string;
+  nutrition?: NutritionInfo;
 }
 
 export const recipes: Recipe[] = [
@@ -47,7 +55,13 @@ export const recipes: Recipe[] = [
       "Krydre med salt og pepper, server umiddelbart"
     ],
     tips: "Viktig: Bland eggene inn når pannen er av varmen for å unngå at eggene koagulerer!",
-    category: "Italiensk"
+    category: "Italiensk",
+    nutrition: {
+      calories: 520,
+      protein: 24,
+      carbs: 52,
+      fat: 22
+    }
   },
   {
     id: 2,

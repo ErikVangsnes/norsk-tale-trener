@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Users, Star, ChefHat, Timer } from "lucide-react";
+import { ArrowLeft, Clock, Users, Star, ChefHat, Timer, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +11,8 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { ShoppingListGenerator } from "@/components/ShoppingListGenerator";
 import { CookingTimer } from "@/components/CookingTimer";
 import { ReminderButton } from "@/components/ReminderButton";
+import { RecipeRating } from "@/components/RecipeRating";
+import { PrintRecipe } from "@/components/PrintRecipe";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -106,7 +108,7 @@ const Recipe = () => {
           </div>
 
           {/* Action buttons */}
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-wrap gap-4 mt-6">
             <FavoriteButton 
               recipeId={recipe.id}
               recipeTitle={recipe.title}
@@ -122,6 +124,11 @@ const Recipe = () => {
               recipe={recipe}
               selectedIngredients={[]} // Empty since we're on recipe page
               servings={selectedServings}
+            />
+            <PrintRecipe 
+              recipe={recipe}
+              servings={selectedServings}
+              adjustedIngredients={hasDetailedIngredients ? adjustedIngredients : undefined}
             />
           </div>
         </div>
@@ -246,6 +253,50 @@ const Recipe = () => {
               )}
             </CardContent>
           </Card>
+        </div>
+
+        {/* Nutritional Info & Ratings Section */}
+        <div className="grid lg:grid-cols-2 gap-8 mt-8">
+          {/* Nutritional Information */}
+          {recipe.nutrition && (
+            <Card className="shadow-medium">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-accent" />
+                  Næringsinnhold
+                </CardTitle>
+                <CardDescription>Per porsjon</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-secondary/50 p-4 rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{recipe.nutrition.calories}</div>
+                    <div className="text-sm text-muted-foreground">Kalorier</div>
+                  </div>
+                  <div className="bg-secondary/50 p-4 rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{recipe.nutrition.protein}g</div>
+                    <div className="text-sm text-muted-foreground">Protein</div>
+                  </div>
+                  <div className="bg-secondary/50 p-4 rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{recipe.nutrition.carbs}g</div>
+                    <div className="text-sm text-muted-foreground">Karbohydrater</div>
+                  </div>
+                  <div className="bg-secondary/50 p-4 rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{recipe.nutrition.fat}g</div>
+                    <div className="text-sm text-muted-foreground">Fett</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Ratings */}
+          <div className={recipe.nutrition ? "" : "lg:col-span-2"}>
+            <RecipeRating 
+              recipeId={recipe.id}
+              recipeTitle={recipe.title}
+            />
+          </div>
         </div>
       </div>
     </div>

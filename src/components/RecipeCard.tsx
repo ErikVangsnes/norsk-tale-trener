@@ -89,6 +89,11 @@ export const RecipeCard = ({ recipe, selectedIngredients }: RecipeCardProps) => 
             <Star className="w-4 h-4" />
             <span>{recipe.difficulty}</span>
           </div>
+          {recipe.nutrition && (
+            <div className="flex items-center gap-1 text-accent">
+              <span className="font-semibold">{recipe.nutrition.calories} kcal</span>
+            </div>
+          )}
         </div>
         
         {/* Missing Ingredients with Substitutions */}

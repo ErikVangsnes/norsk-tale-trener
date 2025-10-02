@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface FavoriteButtonProps {
   recipeId: number;
@@ -18,40 +21,99 @@ export const FavoriteButton = ({
 }: FavoriteButtonProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const favorites = getFavorites();
-    setIsFavorite(favorites.includes(recipeId));
-  }, [recipeId]);
+    checkFavoriteStatus();
+  }, [recipeId, user]);
 
-  const getFavorites = (): number[] => {
-    const favorites = localStorage.getItem("recipe-favorites");
-    return favorites ? JSON.parse(favorites) : [];
+  const checkFavoriteStatus = async () => {
+    if (!user) {
+      // Fallback to localStorage for non-logged in users
+      const favorites = localStorage.getItem("recipe-favorites");
+      const localFavorites: number[] = favorites ? JSON.parse(favorites) : [];
+      setIsFavorite(localFavorites.includes(recipeId));
+      return;
+    }
+
+    // Check database for logged in users
+    const { data } = await supabase
+      .from('user_favorites')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('recipe_id', recipeId)
+      .maybeSingle();
+
+    setIsFavorite(!!data);
   };
 
-  const saveFavorites = (favorites: number[]) => {
-    localStorage.setItem("recipe-favorites", JSON.stringify(favorites));
-  };
+  const toggleFavorite = async () => {
+    if (!user) {
+      toast({
+        title: "Logg inn for å lagre favoritter",
+        description: "Dine favoritter vil bli lagret permanent når du logger inn"
+      });
+      
+      setTimeout(() => navigate("/auth"), 1500);
+      
+      // Still allow local storage for non-logged in users
+      const favorites = localStorage.getItem("recipe-favorites");
+      const localFavorites: number[] = favorites ? JSON.parse(favorites) : [];
+      
+      if (isFavorite) {
+        const updated = localFavorites.filter(id => id !== recipeId);
+        localStorage.setItem("recipe-favorites", JSON.stringify(updated));
+        setIsFavorite(false);
+      } else {
+        const updated = [...localFavorites, recipeId];
+        localStorage.setItem("recipe-favorites", JSON.stringify(updated));
+        setIsFavorite(true);
+      }
+      return;
+    }
 
-  const toggleFavorite = () => {
-    const favorites = getFavorites();
-    
     if (isFavorite) {
-      const updated = favorites.filter(id => id !== recipeId);
-      saveFavorites(updated);
-      setIsFavorite(false);
-      toast({
-        title: "Fjernet fra favoritter",
-        description: `${recipeTitle} er fjernet fra dine favoritter`,
-      });
+      const { error } = await supabase
+        .from('user_favorites')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('recipe_id', recipeId);
+
+      if (error) {
+        toast({
+          title: "Feil",
+          description: error.message,
+          variant: "destructive"
+        });
+      } else {
+        setIsFavorite(false);
+        toast({
+          title: "Fjernet fra favoritter",
+          description: `${recipeTitle} er fjernet fra dine favoritter`,
+        });
+      }
     } else {
-      const updated = [...favorites, recipeId];
-      saveFavorites(updated);
-      setIsFavorite(true);
-      toast({
-        title: "Lagt til i favoritter",
-        description: `${recipeTitle} er lagt til i dine favoritter`,
-      });
+      const { error } = await supabase
+        .from('user_favorites')
+        .insert({
+          user_id: user.id,
+          recipe_id: recipeId
+        });
+
+      if (error) {
+        toast({
+          title: "Feil",
+          description: error.message,
+          variant: "destructive"
+        });
+      } else {
+        setIsFavorite(true);
+        toast({
+          title: "Lagt til i favoritter",
+          description: `${recipeTitle} er lagt til i dine favoritter`,
+        });
+      }
     }
   };
 
@@ -92,7 +154,17 @@ export const FavoriteButton = ({
   );
 };
 
-export const getFavoriteRecipeIds = (): number[] => {
-  const favorites = localStorage.getItem("recipe-favorites");
-  return favorites ? JSON.parse(favorites) : [];
+export const getFavoriteRecipeIds = async (userId?: string): Promise<number[]> => {
+  if (!userId) {
+    // Fallback to localStorage
+    const favorites = localStorage.getItem("recipe-favorites");
+    return favorites ? JSON.parse(favorites) : [];
+  }
+
+  const { data } = await supabase
+    .from('user_favorites')
+    .select('recipe_id')
+    .eq('user_id', userId);
+
+  return data ? data.map(f => f.recipe_id) : [];
 };
