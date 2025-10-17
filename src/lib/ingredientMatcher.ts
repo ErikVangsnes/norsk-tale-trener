@@ -31,7 +31,7 @@ export class IngredientMatcher {
     "svin": ["svinekjøtt", "bacon", "skinke", "svineribbe", "svinefilet", "karbonadedeig"],
     "storfe": ["biff", "oksekjøtt", "entrecôte", "mørbrad"],
     "kjøttdeig": ["kjøttdeig", "hakket kjøtt"],
-    "pølse": ["pølse", "pølser", "wienerbrød", "grillpølse"],
+    "pølse": ["pølse", "pølser", "wienerpølse", "grillpølse"],
     "laks": ["laks", "laksefilet", "røkt laks"],
     "torsk": ["torsk", "hvit fisk", "sei", "hyse"],
     "kveite": ["kveite"],
@@ -97,17 +97,39 @@ export class IngredientMatcher {
 
   // Hjelpefunksjon for å sjekke om en ingrediens er en kjøtttype
   private static getMeatCategory(ingredient: string): string | null {
-    const normalized = normalizeIngredient(ingredient);
-    
-    // Spesiell håndtering for pølse - matche alt som inneholder "pølse" eller "pølser"
-    if (normalized.includes("polse") || normalized.includes("polser")) {
-      return "pølse";
+    const normalized = normalizeIngredient(ingredient).toLowerCase();
+
+    // Rens støy: fjern tall og spesialtegn for å matche "8 cumberland pölser"
+    const plain = normalized.replace(/[0-9.,/]/g, ' ').replace(/\s+/g, ' ').trim();
+
+    // Diakritikk-uavhengig versjon (ø/ö -> o, æ -> ae, å/ä -> a)
+    const simple = plain
+      .replace(/[øö]/g, 'o')
+      .replace(/æ/g, 'ae')
+      .replace(/[åä]/g, 'a');
+
+    // Spesiell håndtering for pølse (fanger pølse/pølser/pölse/pölser/polse/polser)
+    if (simple.includes('polse') || simple.includes('polser')) {
+      return 'pølse';
     }
-    
+
     for (const [category, types] of Object.entries(this.meatTypes)) {
-      if (types.some(type => normalized.includes(type) || type.includes(normalized))) {
-        return category;
-      }
+      const match = types.some((type) => {
+        const t = type.toLowerCase();
+        const tPlain = t; // typer er allerede rene enkeltnavn
+        const tSimple = tPlain
+          .replace(/[øö]/g, 'o')
+          .replace(/æ/g, 'ae')
+          .replace(/[åä]/g, 'a');
+
+        return (
+          plain.includes(tPlain) ||
+          tPlain.includes(plain) ||
+          simple.includes(tSimple) ||
+          tSimple.includes(simple)
+        );
+      });
+      if (match) return category;
     }
     return null;
   }
