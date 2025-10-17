@@ -201,13 +201,13 @@ const Index = () => {
         {/* Dagens oppskrift og populære - side ved side */}
         {recipeOfTheDay && showCategories && (
           <section className="mb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 isolate">
               {/* Recipe of the Day */}
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                   🌟 Dagens oppskrift
                 </h3>
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full overflow-hidden" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
                   <CardHeader>
                     <CardTitle className="text-lg">{recipeOfTheDay.title}</CardTitle>
                     <CardDescription>{recipeOfTheDay.description}</CardDescription>
@@ -228,7 +228,7 @@ const Index = () => {
                 </h3>
                 <div className="grid grid-cols-1 gap-4">
                   {getPopularRecipes().slice(0, 2).map(recipe => (
-                    <Card key={recipe.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/recipe/${recipe.id}`)}>
+                    <Card key={recipe.id} className="hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onClick={() => navigate(`/recipe/${recipe.id}`)}>
                       <CardHeader className="pb-3">
                         <CardTitle className="text-base">{recipe.title}</CardTitle>
                       </CardHeader>
