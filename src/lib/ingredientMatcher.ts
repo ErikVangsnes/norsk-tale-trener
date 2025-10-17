@@ -408,7 +408,12 @@ export class IngredientMatcher {
     const matches = filteredRecipes
       .map(recipe => this.calculateIngredientMatch(availableIngredients, recipe))
       .filter(match => {
-        // STRENGERE FILTRERING: Krev minimum 50% match OG minst 1 matchet ingrediens
+        // Når bruker har valgt en proteinkategori, slapp av terskelen slik at relevante proteinoppskrifter vises
+        const hasProteinSelected = availableIngredients.some(ing => this.getMeatCategory(ing) !== null);
+        if (hasProteinSelected) {
+          return match.matchedIngredients.length > 0; // krever minst én match (ofte selve proteinet)
+        }
+        // Ellers: strengere filtrering
         return match.matchPercentage >= 50 && match.matchedIngredients.length > 0;
       });
 
