@@ -197,7 +197,7 @@ const Index = () => {
         </div>
       </section>
 
-      <div className="container mx-auto px-6 py-8 max-w-6xl">
+      <div className="container mx-auto px-6 py-8 max-w-6xl relative z-0">
         {/* Dagens oppskrift og populære - side ved side */}
         {recipeOfTheDay && showCategories && (
           <section className="mb-8">
