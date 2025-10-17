@@ -34,7 +34,7 @@ const MEAL_TYPES = [
 ];
 
 const MealPlanner = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [mealPlans, setMealPlans] = useState<MealPlan[]>([]);
   const [currentWeekStart, setCurrentWeekStart] = useState<Date>(getMonday(new Date()));
@@ -60,12 +60,15 @@ const MealPlanner = () => {
   }
 
   useEffect(() => {
+    // Vent til auth er ferdig lastet før vi sjekker om bruker er logget inn
+    if (authLoading) return;
+    
     if (!user) {
       navigate("/auth");
       return;
     }
     loadMealPlans();
-  }, [user, currentWeekStart]);
+  }, [user, currentWeekStart, authLoading]);
 
   const loadMealPlans = async () => {
     if (!user) return;
@@ -178,6 +181,16 @@ const MealPlanner = () => {
   };
 
   const weekDates = Array.from({ length: 7 }, (_, i) => addDays(currentWeekStart, i));
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg text-muted-foreground">Laster...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
