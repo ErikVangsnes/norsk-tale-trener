@@ -205,6 +205,39 @@ export class IngredientMatcher {
       matchScore *= 0.6; // Moderat straff
     }
     
+    // Preferanser basert på tilgjengelig kjøtt (spesielt kjøttdeig)
+    const availableMeatCats = new Set(
+      normalizedAvailable
+        .map(ing => this.getMeatCategory(ing))
+        .filter((c): c is string => c !== null)
+    );
+    const recipeMeatCats = new Set(
+      recipeIngredients
+        .map(ing => this.getMeatCategory(ing))
+        .filter((c): c is string => c !== null)
+    );
+
+    if (availableMeatCats.size > 0) {
+      const hasAnyMeatInRecipe = recipeMeatCats.size > 0;
+      const hasGroundBeefAvailable = availableMeatCats.has("kjøttdeig");
+      const matchesGroundBeef = recipeMeatCats.has("kjøttdeig");
+
+      if (hasGroundBeefAvailable) {
+        if (matchesGroundBeef) {
+          matchScore += 0.25; // Fremhev oppskrifter som bruker kjøttdeig
+        } else if (!hasAnyMeatInRecipe) {
+          matchScore *= 0.5; // Nedprioriter kjøttfrie når bruker har kjøttdeig
+        } else {
+          matchScore *= 0.9; // Litt nedprioritering for annet kjøtt
+        }
+      } else {
+        // Generell regel: har man kjøtt, prioriter oppskrifter med kjøtt
+        if (!hasAnyMeatInRecipe) {
+          matchScore *= 0.8;
+        }
+      }
+    }
+    
     // Generer substitusjonsforslag
     const substitutionSuggestions = missingIngredients.flatMap(missing => {
       const subs = this.substitutions[missing] || [];
