@@ -2928,5 +2928,592 @@ export const recipes: Recipe[] = [
     ],
     tips: "Hulba gir unik tekstur!",
     category: "Jemenitisk"
+  },
+  {
+    id: 71,
+    title: "Fårikål",
+    description: "Tradisjonell norsk høstrett med lam og kål",
+    ingredients: [
+      { name: "lammekjøtt", amount: 1, unit: "kg" },
+      { name: "hodekål", amount: 1, unit: "kg" },
+      { name: "hel pepper", amount: 2, unit: "ss" },
+      { name: "mel", amount: 3, unit: "ss" },
+      { name: "salt", amount: 2, unit: "ts" },
+      { name: "vann", amount: 1, unit: "liter" }
+    ],
+    cookingTime: "150 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 6,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skjær 1 kg lammekjøtt i biter og 1 kg hodekål i store deler",
+      "Legg lagvis kjøtt og kål i en stor gryte",
+      "Strø over 2 ss hel pepper, 3 ss mel og 2 ts salt mellom lagene",
+      "Hell på 1 liter vann",
+      "La småkoke under lokk i 2-2,5 timer til kjøttet er mørt",
+      "Server med kokte poteter"
+    ],
+    tips: "Jo lengre det koker, jo bedre blir det!",
+    category: "Norsk"
+  },
+  {
+    id: 72,
+    title: "Poke Bowl",
+    description: "Hawaiisk risbolle med rå laks og grønnsaker",
+    ingredients: [
+      { name: "sushi ris", amount: 3, unit: "dl" },
+      { name: "laks", amount: 400, unit: "g rå filet" },
+      { name: "soyasaus", amount: 3, unit: "ss" },
+      { name: "sesamolje", amount: 1, unit: "ss" },
+      { name: "avokado", amount: 2, unit: "stk" },
+      { name: "edamame", amount: 200, unit: "g" },
+      { name: "agurk", amount: 1, unit: "stk" },
+      { name: "sesamfrø", amount: 2, unit: "ss" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 3 dl sushi ris etter pakningens anvisning",
+      "Skjær 400g rå laks i terninger og mariner i 3 ss soyasaus og 1 ss sesamolje",
+      "Kok 200g edamame i 5 minutter",
+      "Skjær 2 avokado og 1 agurk i skiver",
+      "Fordel risen i 4 boller",
+      "Topp med marinert laks, avokado, agurk, edamame og 2 ss sesamfrø"
+    ],
+    tips: "Bruk fersk laks av sushi-kvalitet!",
+    category: "Hawaiisk"
+  },
+  {
+    id: 73,
+    title: "Ratatouille",
+    description: "Fransk grønnsaksstuing fra Provence",
+    ingredients: [
+      { name: "aubergine", amount: 2, unit: "stk" },
+      { name: "squash", amount: 2, unit: "stk" },
+      { name: "paprika", amount: 2, unit: "stk" },
+      { name: "tomat", amount: 6, unit: "stk" },
+      { name: "løk", amount: 2, unit: "stk" },
+      { name: "hvitløk", amount: 4, unit: "fedd" },
+      { name: "timian", amount: 2, unit: "ts tørket" },
+      { name: "olivenolej", amount: 1, unit: "dl" }
+    ],
+    cookingTime: "60 min",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skjær 2 auberginer, 2 squash og 2 paprika i 1 cm skiver",
+      "Stek 2 hakket løk og 4 pressede fedd hvitløk i 3 ss olivenolej",
+      "Tilsett 6 hakket tomater og 2 ts timian, la putre i 15 min",
+      "Legg grønnsaksskivene vekselvis i en ildfast form på tomatsausen",
+      "Drypp over resten av olivenoljen og krydre med salt og pepper",
+      "Bak på 180°C i 40 minutter til grønnsakene er møre"
+    ],
+    tips: "Perfekt som tilbehør eller vegetarisk hovedrett!",
+    category: "Fransk"
+  },
+  {
+    id: 74,
+    title: "Tom Yum Suppe",
+    description: "Thai sursøt sjømatsuppe",
+    ingredients: [
+      { name: "reker", amount: 400, unit: "g" },
+      { name: "sitrongress", amount: 2, unit: "stilker" },
+      { name: "galangal", amount: 3, unit: "cm" },
+      { name: "kaffirlime blad", amount: 4, unit: "stk" },
+      { name: "chili", amount: 3, unit: "stk" },
+      { name: "champignon", amount: 200, unit: "g" },
+      { name: "fiskesaus", amount: 3, unit: "ss" },
+      { name: "limesaft", amount: 3, unit: "ss" },
+      { name: "koriander", amount: 1, unit: "bunt" }
+    ],
+    cookingTime: "25 min",
+    difficulty: "Middels",
+    totalIngredients: 9,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 1 liter vann med 2 stilker sitrongress, 3 cm galangal og 4 kaffirlimeblad i 10 min",
+      "Tilsett 200g skåret champignon og 3 hakket chili",
+      "Kok i 5 minutter",
+      "Tilsett 400g reker og kok til de blir rosa (3 min)",
+      "Smak til med 3 ss fiskesaus og 3 ss limesaft",
+      "Pynt med fersk koriander før servering"
+    ],
+    tips: "Balansen mellom surt, søtt og sterkt er viktig!",
+    category: "Thai"
+  },
+  {
+    id: 75,
+    title: "Boeuf Bourguignon",
+    description: "Klassisk fransk oksekjøttgryte i rødvin",
+    ingredients: [
+      { name: "oksekjøtt", amount: 1, unit: "kg" },
+      { name: "rødvin", amount: 750, unit: "ml" },
+      { name: "bacon", amount: 200, unit: "g" },
+      { name: "små løk", amount: 300, unit: "g" },
+      { name: "champignon", amount: 300, unit: "g" },
+      { name: "gulrot", amount: 3, unit: "stk" },
+      { name: "tomapuré", amount: 2, unit: "ss" },
+      { name: "oksekraft", amount: 3, unit: "dl" },
+      { name: "timian", amount: 3, unit: "kvister" }
+    ],
+    cookingTime: "180 min",
+    difficulty: "Krevende",
+    totalIngredients: 9,
+    servings: 6,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Brun 1 kg oksekjøtt i biter og 200g bacon i en gryte",
+      "Tilsett 300g små løk og 3 skåret gulrøtter",
+      "Tilsett 2 ss tomatpuré og stek i 2 minutter",
+      "Hell i 750ml rødvin og 3 dl oksekraft",
+      "Tilsett 3 kvister timian og la småkoke i 2,5 timer",
+      "Stek 300g champignon og tilsett siste 30 min"
+    ],
+    tips: "Bruk en god rødvin - det påvirker smaken!",
+    category: "Fransk"
+  },
+  {
+    id: 76,
+    title: "Quinoasalat med Fetaost",
+    description: "Sunn og mettende salat",
+    ingredients: [
+      { name: "quinoa", amount: 3, unit: "dl" },
+      { name: "fetaost", amount: 200, unit: "g" },
+      { name: "kirsebærtomat", amount: 300, unit: "g" },
+      { name: "agurk", amount: 1, unit: "stk" },
+      { name: "rødløk", amount: 1, unit: "stk" },
+      { name: "mynthe", amount: 1, unit: "bunt" },
+      { name: "olivenolej", amount: 4, unit: "ss" },
+      { name: "sitron", amount: 1, unit: "stk" }
+    ],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 3 dl quinoa i dobbelt mengde vann i 15 minutter",
+      "Halvér 300g kirsebærtomater, skjær 1 agurk og 1 rødløk i biter",
+      "Smuldr 200g fetaost og hakk 1 bunt mynthe",
+      "Bland alt med avkjølt quinoa",
+      "Lag dressing av 4 ss olivenolej og saft fra 1 sitron",
+      "Hell over dressingen og bland godt"
+    ],
+    tips: "Kan lages dagen før!",
+    category: "Salat"
+  },
+  {
+    id: 77,
+    title: "Pad Thai",
+    description: "Thailandsk wok med nudler",
+    ingredients: [
+      { name: "risnudler", amount: 300, unit: "g" },
+      { name: "reker", amount: 300, unit: "g" },
+      { name: "egg", amount: 2, unit: "stk" },
+      { name: "soyabønner", amount: 200, unit: "g" },
+      { name: "vårløk", amount: 3, unit: "stk" },
+      { name: "fiskesaus", amount: 3, unit: "ss" },
+      { name: "limesaft", amount: 2, unit: "ss" },
+      { name: "peanøtter", amount: 100, unit: "g" }
+    ],
+    cookingTime: "20 min",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Bløtlegg 300g risnudler i varmt vann i 10 minutter",
+      "Stek 2 egg i wok, ta ut og skjær i biter",
+      "Stek 300g reker på høy varme i 3 minutter",
+      "Tilsett nudlene, 200g soyabønner og 3 hakket vårløk",
+      "Bland inn 3 ss fiskesaus og 2 ss limesaft",
+      "Topp med egget og 100g hakkede peanøtter"
+    ],
+    tips: "Høy varme er essensielt!",
+    category: "Thai"
+  },
+  {
+    id: 78,
+    title: "Focaccia",
+    description: "Italiensk flatbrød med olivenolje",
+    ingredients: [
+      { name: "mel", amount: 600, unit: "g" },
+      { name: "gjær", amount: 25, unit: "g fersk" },
+      { name: "vann", amount: 400, unit: "ml" },
+      { name: "olivenolej", amount: 1.5, unit: "dl" },
+      { name: "salt", amount: 2, unit: "ts" },
+      { name: "rosmarin", amount: 2, unit: "ss frisk" },
+      { name: "grovt salt", amount: 1, unit: "ss" }
+    ],
+    cookingTime: "120 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 8,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Bland 600g mel, 25g gjær oppløst i 400ml lunkent vann, 5 ss olivenolej og 2 ts salt",
+      "Kna deigen i 10 minutter til den er glatt",
+      "La heve i 1 time til dobbel størrelse",
+      "Press deigen ut i en oljet langpanne (ca 30x40 cm)",
+      "Lag hull med fingrene, drypp over 5 ss olivenolej, strø over rosmarin og grovt salt",
+      "Bak på 220°C i 25 minutter til gyllen"
+    ],
+    tips: "Perfekt som tilbehør eller til dip!",
+    category: "Italiensk"
+  },
+  {
+    id: 79,
+    title: "Pinnekjøtt",
+    description: "Tradisjonell norsk julemat",
+    ingredients: [
+      { name: "pinnekjøtt", amount: 1.5, unit: "kg saltet" },
+      { name: "poteter", amount: 1, unit: "kg" },
+      { name: "kålrot", amount: 600, unit: "g" },
+      { name: "smør", amount: 100, unit: "g" }
+    ],
+    cookingTime: "180 min",
+    difficulty: "Middels",
+    totalIngredients: 4,
+    servings: 6,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Bløtlegg 1.5 kg pinnekjøtt i vann i 24-30 timer, skift vann 2-3 ganger",
+      "Legg bjørkepinner eller aluminiumsfolie i bunnen av en stor gryte",
+      "Legg pinnekjøttet på pinnene, hell vann til like under kjøttet",
+      "Damp under lokk i 2,5-3 timer til mørt",
+      "Kok 1 kg poteter og mos 600g kålrot med 100g smør",
+      "Server kjøttet med kålrot, poteter og sur kumle"
+    ],
+    tips: "Bløtlegging er viktig for å fjerne salt!",
+    category: "Norsk"
+  },
+  {
+    id: 80,
+    title: "Green Curry",
+    description: "Thai grønn curry med kylling",
+    ingredients: [
+      { name: "kylling", amount: 600, unit: "g bryst" },
+      { name: "grønn currypasta", amount: 3, unit: "ss" },
+      { name: "kokosmjølk", amount: 400, unit: "ml" },
+      { name: "aubergine", amount: 2, unit: "stk små" },
+      { name: "paprika", amount: 1, unit: "stk" },
+      { name: "basilikum", amount: 1, unit: "bunt thai" },
+      { name: "fiskesaus", amount: 2, unit: "ss" },
+      { name: "sukker", amount: 1, unit: "ss" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Stek 3 ss grønn currypasta i en wok i 2 minutter",
+      "Tilsett 400ml kokosmjølk og la koke opp",
+      "Tilsett 600g kyllingbryst i biter",
+      "Tilsett 2 skåret auberginer og 1 hakket paprika",
+      "La småkoke i 15 minutter til kyllingen er gjennomstekt",
+      "Smak til med 2 ss fiskesaus og 1 ss sukker, pynt med thai basilikum"
+    ],
+    tips: "Juster styrken etter smak!",
+    category: "Thai"
+  },
+  {
+    id: 81,
+    title: "Tiramisu",
+    description: "Italiensk kaffedessert",
+    ingredients: [
+      { name: "mascarpon", amount: 500, unit: "g" },
+      { name: "egg", amount: 6, unit: "stk" },
+      { name: "sukker", amount: 150, unit: "g" },
+      { name: "kaffe", amount: 3, unit: "dl sterk" },
+      { name: "amaretto", amount: 3, unit: "ss" },
+      { name: "loff", amount: 300, unit: "g" },
+      { name: "kakao", amount: 3, unit: "ss" }
+    ],
+    cookingTime: "30 min + 4 timer kjøling",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 8,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skill 6 egg, visp plommene med 150g sukker til lys og luftig",
+      "Rør inn 500g mascarpone forsiktig",
+      "Visp eggehvitene til stive topper og vend inn i mascarponeblandingen",
+      "Bland 3 dl kald kaffe med 3 ss amaretto",
+      "Dypp 300g loff raskt i kaffen og legg i en form",
+      "Dekk med halvparten av mascarponeblandingen, gjenta lagene, dryss 3 ss kakao over"
+    ],
+    tips: "La stå i kjøleskapet i minst 4 timer!",
+    category: "Dessert"
+  },
+  {
+    id: 82,
+    title: "Lakseloin med Ertepuré",
+    description: "Elegant fiskerett",
+    ingredients: [
+      { name: "laks", amount: 600, unit: "g loin" },
+      { name: "frosne erter", amount: 500, unit: "g" },
+      { name: "fløte", amount: 1, unit: "dl" },
+      { name: "mynthe", amount: 0.5, unit: "bunt" },
+      { name: "smør", amount: 50, unit: "g" },
+      { name: "sitron", amount: 1, unit: "stk" }
+    ],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 500g frosne erter i 5 minutter",
+      "Mikse ertene med 1 dl fløte, 0.5 bunt mynthe og smak til med salt og pepper",
+      "Krydre 600g laks med salt, pepper og saft fra 0.5 sitron",
+      "Stek laksen i 50g smør, skinnsiden først, i 4 min per side",
+      "Server laksen på ertepuré med sitronbåter"
+    ],
+    tips: "Ikke overstekk laksen!",
+    category: "Norsk"
+  },
+  {
+    id: 83,
+    title: "Couscous med Grønnsaker",
+    description: "Nordafrikansk vegetarrett",
+    ingredients: [
+      { name: "couscous", amount: 3, unit: "dl" },
+      { name: "aubergine", amount: 1, unit: "stk" },
+      { name: "squash", amount: 1, unit: "stk" },
+      { name: "paprika", amount: 2, unit: "stk" },
+      { name: "kikerter", amount: 1, unit: "boks 400g" },
+      { name: "ras el hanout", amount: 2, unit: "ts" },
+      { name: "grønnsaksbuljong", amount: 4, unit: "dl" },
+      { name: "koriander", amount: 1, unit: "bunt" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 4 dl grønnsaksbuljong og hell over 3 dl couscous, la trekke i 5 min",
+      "Stek 1 terningskåret aubergine, 1 squash og 2 paprika med 2 ts ras el hanout",
+      "Tilsett 1 boks kikerter (400g) og varm",
+      "Løsne couscous med en gaffel",
+      "Server couscous med grønnsakene oppå",
+      "Pynt med fersk koriander"
+    ],
+    tips: "Tilsett rosiner for sødme!",
+    category: "Nordafrikansk"
+  },
+  {
+    id: 84,
+    title: "Banh Mi",
+    description: "Vietnamesisk baguette",
+    ingredients: [
+      { name: "baguette", amount: 2, unit: "stk" },
+      { name: "svinekjøtt", amount: 400, unit: "g skiver" },
+      { name: "gulrot", amount: 2, unit: "stk" },
+      { name: "agurk", amount: 1, unit: "stk" },
+      { name: "koriander", amount: 1, unit: "bunt" },
+      { name: "soyasaus", amount: 3, unit: "ss" },
+      { name: "eddik", amount: 2, unit: "ss" },
+      { name: "chilimajones", amount: 3, unit: "ss" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Mariner 400g svinekjøtt i 3 ss soyasaus i 15 minutter",
+      "Riv 2 gulrøtter og 1 agurk i tynne strimler, mariner i 2 ss eddik",
+      "Stek kjøttet til gjennomstekt",
+      "Skjær 2 baguetter i lengden",
+      "Smør med 3 ss chilimajones",
+      "Fyll med kjøtt, marinerte grønnsaker og fersk koriander"
+    ],
+    tips: "Perfekt street food!",
+    category: "Vietnamesisk"
+  },
+  {
+    id: 85,
+    title: "Brownie",
+    description: "Sjokoladekake med sprø bunn",
+    ingredients: [
+      { name: "mørk sjokolade", amount: 200, unit: "g" },
+      { name: "smør", amount: 200, unit: "g" },
+      { name: "sukker", amount: 3, unit: "dl" },
+      { name: "egg", amount: 4, unit: "stk" },
+      { name: "mel", amount: 2, unit: "dl" },
+      { name: "kakao", amount: 3, unit: "ss" },
+      { name: "vanilje", amount: 1, unit: "ts" }
+    ],
+    cookingTime: "35 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 12,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Smelt 200g sjokolade og 200g smør sammen",
+      "Visp inn 3 dl sukker",
+      "Tilsett 4 egg, ett om gangen",
+      "Rør inn 2 dl mel, 3 ss kakao og 1 ts vanilje",
+      "Hell i en smurt form (ca 20x30 cm)",
+      "Bak på 175°C i 25-30 minutter (skal være litt klissete i midten)"
+    ],
+    tips: "Ikke overbak - de skal være saftige!",
+    category: "Dessert"
+  },
+  {
+    id: 86,
+    title: "Sushi",
+    description: "Japanske risruller",
+    ingredients: [
+      { name: "sushi ris", amount: 3, unit: "dl" },
+      { name: "riseddik", amount: 3, unit: "ss" },
+      { name: "laks", amount: 300, unit: "g rå" },
+      { name: "avokado", amount: 2, unit: "stk" },
+      { name: "agurk", amount: 1, unit: "stk" },
+      { name: "nori", amount: 6, unit: "ark" },
+      { name: "soyasaus", amount: 1, unit: "dl" },
+      { name: "wasabi", amount: 2, unit: "ts" }
+    ],
+    cookingTime: "45 min",
+    difficulty: "Krevende",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 3 dl sushi ris, bland med 3 ss riseddik når den er ferdig",
+      "Skjær 300g laks, 2 avokado og 1 agurk i tynne strimler",
+      "Legg 1 nori-ark på en sushimatte",
+      "Spre et tynt lag ris over arket, legg fyll i en stripe",
+      "Rull sammen stramt med matten",
+      "Skjær i 8 biter, server med soyasaus og wasabi"
+    ],
+    tips: "Fukt kniven mellom hvert kutt!",
+    category: "Japansk"
+  },
+  {
+    id: 87,
+    title: "Pavlova",
+    description: "Australsk marengskake",
+    ingredients: [
+      { name: "eggehviter", amount: 4, unit: "stk" },
+      { name: "sukker", amount: 2.5, unit: "dl" },
+      { name: "eddik", amount: 1, unit: "ts" },
+      { name: "maisstivelse", amount: 1, unit: "ts" },
+      { name: "kremfløte", amount: 3, unit: "dl" },
+      { name: "bær", amount: 400, unit: "g blandet" },
+      { name: "flormelis", amount: 2, unit: "ss" }
+    ],
+    cookingTime: "90 min",
+    difficulty: "Middels",
+    totalIngredients: 7,
+    servings: 8,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Visp 4 eggehviter til stive topper",
+      "Tilsett 2.5 dl sukker gradvis mens du visper",
+      "Vend inn 1 ts eddik og 1 ts maisstivelse",
+      "Form til en stor kake på et bakepapir",
+      "Bak på 120°C i 75 minutter, la kjølne i ovnen",
+      "Topp med 3 dl pisket krem og 400g friske bær"
+    ],
+    tips: "Skal være sprø utenpå og myk inni!",
+    category: "Dessert"
+  },
+  {
+    id: 88,
+    title: "Falafel",
+    description: "Midtøstenske kikertboller",
+    ingredients: [
+      { name: "tørkede kikerter", amount: 400, unit: "g" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "hvitløk", amount: 4, unit: "fedd" },
+      { name: "persille", amount: 1, unit: "bunt" },
+      { name: "koriander", amount: 1, unit: "bunt" },
+      { name: "spiskum", amount: 2, unit: "ts" },
+      { name: "bakepulver", amount: 1, unit: "ts" },
+      { name: "olje", amount: 1, unit: "liter til frityrering" }
+    ],
+    cookingTime: "30 min + 12 timer bløtlegging",
+    difficulty: "Middels",
+    totalIngredients: 8,
+    servings: 6,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Bløtlegg 400g tørkede kikerter i vann i 12-24 timer",
+      "Mal kikertene med 1 løk, 4 fedd hvitløk, 1 bunt persille, 1 bunt koriander og 2 ts spiskum",
+      "Tilsett 1 ts bakepulver og la hvile i 30 minutter",
+      "Form til små boller",
+      "Fritér i 180°C olje til gylne (ca 4 min)",
+      "Server i pitabrød med tahini, salat og tomat"
+    ],
+    tips: "Bruk tørkede, ikke kokte kikerter!",
+    category: "Midtøsten"
+  },
+  {
+    id: 89,
+    title: "Risengrynsgrøt",
+    description: "Norsk julegrøt",
+    ingredients: [
+      { name: "rundkorna ris", amount: 2, unit: "dl" },
+      { name: "vann", amount: 3, unit: "dl" },
+      { name: "melk", amount: 1, unit: "liter" },
+      { name: "salt", amount: 1, unit: "ts" },
+      { name: "sukker", amount: 2, unit: "ss" },
+      { name: "kanel", amount: 1, unit: "ts" },
+      { name: "smør", amount: 30, unit: "g" }
+    ],
+    cookingTime: "50 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 2 dl ris i 3 dl vann i 10 minutter",
+      "Tilsett 1 liter melk og 1 ts salt",
+      "La småkoke under omrøring i 40 minutter til kremete",
+      "Smak til med 2 ss sukker",
+      "Server med 1 ts kanel, 30g smør og ekstra sukker",
+      "Gjøm en mandel i grøten til den heldige!"
+    ],
+    tips: "Rør ofte for å unngå at det brenner ved!",
+    category: "Norsk"
+  },
+  {
+    id: 90,
+    title: "Ceviche de Camarón",
+    description: "Ecuadoriansk rekeceviche",
+    ingredients: [
+      { name: "reker", amount: 500, unit: "g kokte" },
+      { name: "tomat", amount: 4, unit: "stk" },
+      { name: "rødløk", amount: 2, unit: "stk" },
+      { name: "limesaft", amount: 1, unit: "dl" },
+      { name: "koriander", amount: 1, unit: "bunt" },
+      { name: "ketchup", amount: 3, unit: "ss" },
+      { name: "appelsin", amount: 2, unit: "stk" }
+    ],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Bland 500g kokte reker med 4 terningskåret tomater",
+      "Tilsett 2 finhakket rødløk",
+      "Bland inn 1 dl limesaft, 3 ss ketchup og saft fra 2 appelsiner",
+      "Tilsett 1 bunt hakket koriander",
+      "La trekke i kjøleskapet i 15 minutter",
+      "Server med tortillachips eller fritert banan"
+    ],
+    tips: "Serveres tradisjonelt kald!",
+    category: "Ecuadoriansk"
   }
 ];

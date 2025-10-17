@@ -184,12 +184,20 @@ export class IngredientMatcher {
     
     // Bonus for oppskrifter hvor du har alle ingrediensene
     if (availableCount === totalCount && totalCount > 0) {
-      matchScore += 0.2;
+      matchScore += 0.3;
     }
     
     // Bonus for oppskrifter med færre totale ingredienser (enklere å lage)
-    if (totalCount <= 5) {
+    // MEN kun hvis du faktisk har de fleste ingrediensene
+    if (totalCount <= 5 && matchPercentage >= 60) {
       matchScore += 0.1;
+    }
+    
+    // Straff for oppskrifter der du har veldig få ingredienser
+    if (matchPercentage < 30) {
+      matchScore *= 0.3; // Reduser score kraftig
+    } else if (matchPercentage < 50) {
+      matchScore *= 0.6; // Moderat straff
     }
     
     // Generer substitusjonsforslag
@@ -330,20 +338,20 @@ export class IngredientMatcher {
 
     // Forbedret sorteringsalgoritme med større variasjon
     return matches.sort((a, b) => {
-      // Først: favoriser oppskrifter med høy match percentage
-      const matchDiff = b.matchPercentage - a.matchPercentage;
-      if (Math.abs(matchDiff) > 20) {
-        return matchDiff;
+      // Først: bruk matchScore som tar hensyn til både percentage og bonuser/straffer
+      const scoreDiff = b.matchScore - a.matchScore;
+      if (Math.abs(scoreDiff) > 0.15) {
+        return scoreDiff;
       }
       
-      // Så: legg til betydelig tilfeldig variasjon for diversitet
-      const randomFactor = (Math.random() - 0.5) * 0.4;
+      // Sekundært: legg til tilfeldig variasjon for diversitet blant like scorer
+      const randomFactor = (Math.random() - 0.5) * 0.3;
       
-      // Bruk en kombinasjon av match percentage og tilfeldig faktor
-      const aScore = a.matchPercentage + randomFactor * 20;
-      const bScore = b.matchPercentage + randomFactor * 20;
+      // Favoriser også oppskrifter med flere totale ingredienser for å unngå
+      // at enkle oppskrifter alltid dominerer
+      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.005;
       
-      return bScore - aScore;
+      return (b.matchScore - a.matchScore) + randomFactor + complexityBonus;
     });
   }
 
