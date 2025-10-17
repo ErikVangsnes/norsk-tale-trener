@@ -31,8 +31,9 @@ export class IngredientMatcher {
     "svin": ["svinekjøtt", "bacon", "skinke", "svineribbe", "svinefilet", "karbonadedeig"],
     "storfe": ["biff", "oksekjøtt", "entrecôte", "mørbrad"],
     "kjøttdeig": ["kjøttdeig", "hakket kjøtt"],
+    "pølse": ["pølse", "pølser", "wienerbrød", "grillpølse"],
     "laks": ["laks", "laksefilet", "røkt laks"],
-    "torsk": ["torsk", "hvit fisk", "sei"],
+    "torsk": ["torsk", "hvit fisk", "sei", "hyse"],
     "kveite": ["kveite"],
     "kalkun": ["kalkun", "kalkunbryst"]
   };
@@ -158,11 +159,11 @@ export class IngredientMatcher {
         }
       }
       
-      // Hvis ikke funnet, prøv fuzzy matching
+      // Hvis ikke funnet, prøv fuzzy matching (MYE STRENGERE)
       if (!found) {
         for (const available of normalizedAvailable) {
           const similarity = FuzzyMatcher.similarity(recipeIng, available);
-          if (similarity > 0.7) { // 70% likhet
+          if (similarity > 0.85) { // 85% likhet - MYE STRENGERE for å unngå falske matches
             matchedIngredients.push(recipeIng);
             found = true;
             break;
@@ -372,21 +373,30 @@ export class IngredientMatcher {
     
     const matches = filteredRecipes
       .map(recipe => this.calculateIngredientMatch(availableIngredients, recipe))
-      .filter(match => match.matchPercentage >= 40); // Krev minimum 40% ingrediensmatch
+      .filter(match => {
+        // STRENGERE FILTRERING: Krev minimum 50% match OG minst 1 matchet ingrediens
+        return match.matchPercentage >= 50 && match.matchedIngredients.length > 0;
+      });
 
-    // Forbedret sorteringsalgoritme med større variasjon
+    // Forbedret sorteringsalgoritme - prioriter oppskrifter med høyere matchPercentage
     return matches.sort((a, b) => {
-      // Først: bruk matchScore som tar hensyn til både percentage og bonuser/straffer
+      // Først: Prioriter oppskrifter med høyere match percentage
+      const percentageDiff = b.matchPercentage - a.matchPercentage;
+      if (Math.abs(percentageDiff) > 20) {
+        return percentageDiff;
+      }
+
+      // Deretter: bruk matchScore som tar hensyn til bonuser/straffer
       const scoreDiff = b.matchScore - a.matchScore;
-      if (Math.abs(scoreDiff) > 0.15) {
+      if (Math.abs(scoreDiff) > 0.2) {
         return scoreDiff;
       }
       
-      // Sekundært: legg til tilfeldig variasjon for diversitet blant like scorer
-      const randomFactor = (Math.random() - 0.5) * 0.4; // Økt tilfeldig variasjon
+      // Sekundært: legg til litt tilfeldig variasjon for diversitet blant like scorer
+      const randomFactor = (Math.random() - 0.5) * 0.2; // Redusert randomisering
       
-      // Kraftigere kompleksitetsbonus for å prioritere interessante oppskrifter
-      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.02; // Økt fra 0.005
+      // Kompleksitetsbonus for å prioritere interessante oppskrifter
+      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.01;
       
       return (b.matchScore - a.matchScore) + randomFactor + complexityBonus;
     });
