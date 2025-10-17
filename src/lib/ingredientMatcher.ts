@@ -184,13 +184,18 @@ export class IngredientMatcher {
     
     // Bonus for oppskrifter hvor du har alle ingrediensene
     if (availableCount === totalCount && totalCount > 0) {
-      matchScore += 0.3;
+      matchScore += 0.2; // Redusert fra 0.3
     }
     
-    // Bonus for oppskrifter med færre totale ingredienser (enklere å lage)
-    // MEN kun hvis du faktisk har de fleste ingrediensene
-    if (totalCount <= 5 && matchPercentage >= 60) {
-      matchScore += 0.1;
+    // Straff for veldig enkle oppskrifter (under 6 ingredienser)
+    // for å unngå at de alltid dominerer søket
+    if (totalCount < 6) {
+      matchScore *= 0.4; // Kraftig nedprioritering
+    }
+    
+    // Bonus for mer komplekse oppskrifter (7-12 ingredienser)
+    if (totalCount >= 7 && totalCount <= 12 && matchPercentage >= 70) {
+      matchScore += 0.15;
     }
     
     // Straff for oppskrifter der du har veldig få ingredienser
@@ -345,11 +350,10 @@ export class IngredientMatcher {
       }
       
       // Sekundært: legg til tilfeldig variasjon for diversitet blant like scorer
-      const randomFactor = (Math.random() - 0.5) * 0.3;
+      const randomFactor = (Math.random() - 0.5) * 0.4; // Økt tilfeldig variasjon
       
-      // Favoriser også oppskrifter med flere totale ingredienser for å unngå
-      // at enkle oppskrifter alltid dominerer
-      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.005;
+      // Kraftigere kompleksitetsbonus for å prioritere interessante oppskrifter
+      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.02; // Økt fra 0.005
       
       return (b.matchScore - a.matchScore) + randomFactor + complexityBonus;
     });
