@@ -755,18 +755,26 @@ export const recipes: Recipe[] = [
     id: 210,
     title: "Omelett",
     description: "Klassisk fransk omelett med valgfritt fyll",
-    ingredients: ["egg", "melk", "smør", "ost", "tomat", "løk"],
+    ingredients: [
+      { name: "egg", amount: 4, unit: "stk" },
+      { name: "melk", amount: 2, unit: "ss" },
+      { name: "smør", amount: 20, unit: "g" },
+      { name: "ost", amount: 50, unit: "g revet" },
+      { name: "tomat", amount: 1, unit: "stk" },
+      { name: "løk", amount: 0.5, unit: "stk" }
+    ],
     cookingTime: "10 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 2,
+    hasDetailedIngredients: true,
     instructions: [
-      "Visp egg og melk sammen",
-      "Varm smør i en panne",
-      "Hell i eggblandingen",
-      "La stivne på bunnen, dra kanten inn",
-      "Legg fyll på den ene siden",
-      "Brett omeletten og server"
+      "Visp 4 egg og 2 ss melk sammen i en bolle",
+      "Varm 20g smør i en panne på middels varme",
+      "Hell i eggblandingen og la den dekke bunnen",
+      "La stivne på bunnen, dra kanten inn med slikkepott",
+      "Legg 50g revet ost, 1 hakket tomat og 0.5 hakket løk på den ene siden",
+      "Brett omeletten forsiktig og server umiddelbart"
     ],
     tips: "Lav varme gir mykere omelett!",
     category: "Rask"
@@ -775,18 +783,26 @@ export const recipes: Recipe[] = [
     id: 211,
     title: "Egg Benedict",
     description: "Luksuriøs frokost med posjert egg og hollandaisesaus",
-    ingredients: ["egg", "bacon", "brød", "smør", "sitron", "hvitvin"],
+    ingredients: [
+      { name: "egg", amount: 6, unit: "stk" },
+      { name: "bacon", amount: 150, unit: "g" },
+      { name: "brød", amount: 4, unit: "skiver" },
+      { name: "smør", amount: 100, unit: "g" },
+      { name: "sitron", amount: 0.5, unit: "stk" },
+      { name: "hvitvin", amount: 1, unit: "ss" }
+    ],
     cookingTime: "25 min",
     difficulty: "Middels",
     totalIngredients: 6,
     servings: 2,
+    hasDetailedIngredients: true,
     instructions: [
-      "Lag hollandaise av eggeplommer, smør og sitron",
-      "Posjer eggene i vann med eddik",
-      "Rist brødskivene",
-      "Stek bacon sprø",
-      "Legg bacon og posjert egg på brød",
-      "Topp med hollandaisesaus"
+      "Lag hollandaise: pisk 2 eggeplommer med 1 ss hvitvin i vannbad, tilsett gradvis 100g smeltet smør og saft fra 0.5 sitron",
+      "Posjer 4 egg i kokende vann med litt eddik i 3-4 minutter",
+      "Rist 4 brødskiver til gylne",
+      "Stek 150g bacon sprø i panne",
+      "Legg bacon og posjert egg på brødskivene",
+      "Topp med varm hollandaisesaus og server umiddelbart"
     ],
     tips: "Hold hollandaisen varm i vannbad!",
     category: "Frokost"
@@ -795,18 +811,25 @@ export const recipes: Recipe[] = [
     id: 212,
     title: "Spansk Tortilla",
     description: "Tykk potetomelett fra Spania",
-    ingredients: ["egg", "poteter", "løk", "olivenolej", "salt"],
+    ingredients: [
+      { name: "egg", amount: 6, unit: "stk" },
+      { name: "poteter", amount: 600, unit: "g" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "olivenolej", amount: 1, unit: "dl" },
+      { name: "salt", amount: 1, unit: "ts" }
+    ],
     cookingTime: "30 min",
     difficulty: "Middels",
     totalIngredients: 5,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Skjær poteter og løk i tynne skiver",
-      "Stek i olivenolje til myke",
-      "Visp egg og bland med poteter",
-      "Hell i panne og stek på begge sider",
-      "Server varm eller kald",
-      "Kutt i trekanter"
+      "Skjær 600g poteter og 1 løk i tynne skiver",
+      "Stek i 1 dl olivenolje på lav varme til myke (ca 15 min)",
+      "Visp 6 egg med 1 ts salt i en stor bolle",
+      "Bland de kokte potetene og løken inn i eggene",
+      "Hell blandingen tilbake i pannen og stek på lav varme til bunnen er gyllen (8-10 min)",
+      "Vend omeletten med et brett og stek den andre siden (5 min), server varm eller kald i trekanter"
     ],
     tips: "Perfekt som tapas eller piknik-mat!",
     category: "Spansk"
@@ -815,18 +838,26 @@ export const recipes: Recipe[] = [
     id: 213,
     title: "Shakshuka",
     description: "Israelske egg i krydret tomatsaus",
-    ingredients: ["egg", "tomat", "paprika", "løk", "hvitløk", "spiskum"],
+    ingredients: [
+      { name: "egg", amount: 6, unit: "stk" },
+      { name: "hermetiske tomater", amount: 800, unit: "g" },
+      { name: "paprika", amount: 2, unit: "stk" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "hvitløk", amount: 3, unit: "fedd" },
+      { name: "spiskum", amount: 1, unit: "ts" }
+    ],
     cookingTime: "30 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Sautér løk, hvitløk og paprika",
-      "Tilsett hermetiske tomater og krydder",
-      "La småkoke i 15 minutter",
-      "Lag fordypninger og knekk egg oppi",
-      "Dekk til og kok til eggene stivner",
-      "Server med brød"
+      "Sautér 1 hakket løk, 3 pressede fedd hvitløk og 2 hakket paprika i olivenolej i 5 minutter",
+      "Tilsett 800g hermetiske tomater og 1 ts spiskum, krydre med salt og pepper",
+      "La småkoke i 15 minutter til sausen tykner",
+      "Lag 6 fordypninger i sausen og knekk 1 egg i hver",
+      "Dekk til pannen og kok i 5-7 minutter til eggene er stivnet",
+      "Pynt med fersk koriander og server med brød"
     ],
     tips: "Perfekt for brunch!",
     category: "Israelittisk"
@@ -835,18 +866,25 @@ export const recipes: Recipe[] = [
     id: 214,
     title: "Posjerte Egg på Toast",
     description: "Enkel og elegant frokost",
-    ingredients: ["egg", "brød", "eddik", "smør", "salt"],
+    ingredients: [
+      { name: "egg", amount: 4, unit: "stk" },
+      { name: "brød", amount: 4, unit: "skiver" },
+      { name: "eddik", amount: 1, unit: "ss" },
+      { name: "smør", amount: 20, unit: "g" },
+      { name: "salt", amount: 0.5, unit: "ts" }
+    ],
     cookingTime: "10 min",
     difficulty: "Lett",
     totalIngredients: 5,
     servings: 2,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kok vann med litt eddik",
-      "Lag en virvelvind i vannet",
-      "Slipp egget forsiktig oppi",
-      "Kok i 3-4 minutter",
-      "Ta opp med hullslev",
-      "Server på ristet brød"
+      "Kok en stor gryte med vann og tilsett 1 ss eddik",
+      "Lag en forsiktig virvelvind i vannet med en slikkepott",
+      "Slipp 1 egg forsiktig oppi virvelvindet, gjenta med de andre eggene",
+      "Kok i 3-4 minutter til hviten er stivnet men plommen fortsatt er myk",
+      "Ta opp eggene med en hullslev og la de renne av",
+      "Smør 4 brødskiver med 20g smør, rist dem og topp med de posjerte eggene, krydre med 0.5 ts salt og pepper"
     ],
     tips: "Ferske egg gir best resultat!",
     category: "Frokost"
@@ -884,18 +922,26 @@ export const recipes: Recipe[] = [
     id: 215,
     title: "Kylling i Karri",
     description: "Kremet kyllingkarri med kokosmjølk",
-    ingredients: ["kylling", "kokosmjølk", "karripasta", "løk", "paprika", "ingefær"],
+    ingredients: [
+      { name: "kylling", amount: 600, unit: "g bryst" },
+      { name: "kokosmjølk", amount: 400, unit: "ml" },
+      { name: "karripasta", amount: 3, unit: "ss" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "paprika", amount: 1, unit: "stk" },
+      { name: "ingefær", amount: 3, unit: "cm" }
+    ],
     cookingTime: "35 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kutt kylling i biter",
-      "Stek løk og ingefær",
-      "Tilsett karripasta",
-      "Hell i kokosmjølk og kylling",
-      "La småkoke i 20 minutter",
-      "Server med ris"
+      "Kutt 600g kyllingbryst i terninger",
+      "Stek 1 hakket løk og 3 cm hakket ingefær i olje i 3 minutter",
+      "Tilsett 3 ss karripasta og stek i 1 minutt",
+      "Hell i 400ml kokosmjølk og kyllingen",
+      "Tilsett 1 hakket paprika og la småkoke i 20 minutter til kyllingen er gjennomstekt",
+      "Smak til med salt og server med dampet ris og limebåter"
     ],
     tips: "Tilsett lime for friskhet!",
     category: "Asiatisk"
@@ -904,18 +950,26 @@ export const recipes: Recipe[] = [
     id: 216,
     title: "Ovnsbakt Kylling med Grønnsaker",
     description: "Enkel hverdagsmiddag fra ovnen",
-    ingredients: ["kylling", "poteter", "gulrot", "løk", "hvitløk", "rosmarin"],
+    ingredients: [
+      { name: "kylling", amount: 800, unit: "g lår" },
+      { name: "poteter", amount: 600, unit: "g" },
+      { name: "gulrot", amount: 3, unit: "stk" },
+      { name: "løk", amount: 2, unit: "stk" },
+      { name: "hvitløk", amount: 4, unit: "fedd" },
+      { name: "rosmarin", amount: 3, unit: "kvister" }
+    ],
     cookingTime: "60 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Skjær grønnsaker i biter",
-      "Krydre kylling med salt, pepper og rosmarin",
-      "Legg alt på et stekebrett",
-      "Drypp over olje",
-      "Stek på 200°C i 45-50 minutter",
-      "Sjekk at kyllingen er gjennomstekt"
+      "Forvarm ovnen til 200°C og skjær 600g poteter, 3 gulrøtter og 2 løk i biter",
+      "Krydre 800g kyllinglår med salt, pepper og 3 kvister rosmarin",
+      "Legg kyllingen og grønnsakene på et stekebrett med 4 hele fedd hvitløk",
+      "Drypp over 3 ss olivenolej",
+      "Stek i ovnen i 45-50 minutter, vend grønnsakene halvveis",
+      "Sjekk at kyllingen er gjennomstekt med termometer (75°C) før servering"
     ],
     tips: "Vend grønnsakene halvveis!",
     category: "Norsk"
@@ -924,18 +978,26 @@ export const recipes: Recipe[] = [
     id: 217,
     title: "Kyllingpanne med Pasta",
     description: "Rask og enkel pastarett",
-    ingredients: ["kylling", "pasta", "fløte", "parmesan", "hvitløk", "spinat"],
+    ingredients: [
+      { name: "kylling", amount: 500, unit: "g bryst" },
+      { name: "pasta", amount: 400, unit: "g" },
+      { name: "fløte", amount: 3, unit: "dl" },
+      { name: "parmesan", amount: 100, unit: "g" },
+      { name: "hvitløk", amount: 3, unit: "fedd" },
+      { name: "spinat", amount: 200, unit: "g" }
+    ],
     cookingTime: "25 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kok pastaen",
-      "Stek kylling i biter",
-      "Tilsett hvitløk og spinat",
-      "Hell i fløte og parmesan",
-      "Bland inn pastaen",
-      "Server med ekstra parmesan"
+      "Kok 400g pasta etter pakningens anvisning, spar 1 dl pastavann",
+      "Stek 500g kyllingbryst i biter til gylne og gjennomstekte (ca 6 min)",
+      "Tilsett 3 pressede fedd hvitløk og stek i 1 minutt",
+      "Hell i 3 dl fløte, 100g revet parmesan og 200g spinat",
+      "Bland inn den kokte pastaen og litt pastavann om nødvendig",
+      "Smak til med salt og pepper, server med ekstra parmesan"
     ],
     tips: "Bruk pastavann for tynnere saus!",
     category: "Italiensk"
@@ -944,18 +1006,26 @@ export const recipes: Recipe[] = [
     id: 218,
     title: "Kyllingwok med Nudler",
     description: "Asiatisk wok med grønnsaker",
-    ingredients: ["kylling", "nudler", "paprika", "brokkoli", "soyasaus", "ingefær"],
+    ingredients: [
+      { name: "kylling", amount: 500, unit: "g bryst" },
+      { name: "nudler", amount: 300, unit: "g" },
+      { name: "paprika", amount: 2, unit: "stk" },
+      { name: "brokkoli", amount: 300, unit: "g" },
+      { name: "soyasaus", amount: 4, unit: "ss" },
+      { name: "ingefær", amount: 3, unit: "cm" }
+    ],
     cookingTime: "20 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 3,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kok nudlene",
-      "Stek kylling på høy varme",
-      "Tilsett grønnsaker",
-      "Hell i soyasaus og ingefær",
-      "Bland inn nudlene",
-      "Stek i 2 minutter"
+      "Kok 300g nudler etter pakningens anvisning",
+      "Stek 500g kyllingbryst i strimler på høy varme i wok i 4-5 minutter",
+      "Tilsett 2 hakket paprika, 300g brokkolibuketter og 3 cm hakket ingefær",
+      "Stek i 3 minutter til grønnsakene er sprø-møre",
+      "Hell i 4 ss soyasaus og bland inn de kokte nudlene",
+      "Stek alt sammen i 2 minutter på høy varme og server umiddelbart"
     ],
     tips: "Høy varme er nøkkelen!",
     category: "Asiatisk"
@@ -964,18 +1034,26 @@ export const recipes: Recipe[] = [
     id: 219,
     title: "Grillet Kylling med Salat",
     description: "Sunn og enkel sommerrett",
-    ingredients: ["kylling", "salat", "tomat", "agurk", "olivenolej", "sitron"],
+    ingredients: [
+      { name: "kylling", amount: 600, unit: "g bryst" },
+      { name: "salat", amount: 1, unit: "hode" },
+      { name: "tomat", amount: 3, unit: "stk" },
+      { name: "agurk", amount: 1, unit: "stk" },
+      { name: "olivenolej", amount: 5, unit: "ss" },
+      { name: "sitron", amount: 1, unit: "stk" }
+    ],
     cookingTime: "25 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Mariner kylling med olje og sitron",
-      "Grill kyllingen til gjennomstekt",
-      "Kutt salat og grønnsaker",
-      "Lag dressing av olje og sitron",
-      "Skjær kyllingen i skiver",
-      "Bland alt sammen"
+      "Mariner 600g kyllingbryst med 2 ss olivenolej og saft fra 0.5 sitron i 15 minutter",
+      "Grill kyllingen på middels høy varme i 6-7 minutter per side til gjennomstekt",
+      "Kutt 1 hode salat, 3 tomater og 1 agurk i biter",
+      "Lag dressing av 3 ss olivenolej, saft fra 0.5 sitron, salt og pepper",
+      "La kyllingen hvile i 5 minutter, skjær i skiver",
+      "Bland salaten med dressing, topp med kylling og server"
     ],
     tips: "Perfekt sommermat!",
     category: "Salat"
@@ -984,18 +1062,26 @@ export const recipes: Recipe[] = [
     id: 220,
     title: "Kylling Quesadilla",
     description: "Meksikansk tortilla med kylling",
-    ingredients: ["kylling", "tortilla", "ost", "paprika", "løk", "kremer"],
+    ingredients: [
+      { name: "kylling", amount: 300, unit: "g bryst" },
+      { name: "tortilla", amount: 4, unit: "stk" },
+      { name: "ost", amount: 200, unit: "g revet" },
+      { name: "paprika", amount: 1, unit: "stk" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "rømme", amount: 1, unit: "dl" }
+    ],
     cookingTime: "20 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 2,
+    hasDetailedIngredients: true,
     instructions: [
-      "Stek kylling med paprika og løk",
-      "Legg fyll på tortilla",
-      "Strø over ost",
-      "Brett sammen og stek",
-      "Vend når gyllen",
-      "Skjær i biter og server"
+      "Stek 300g kyllingbryst i strimler med 1 hakket paprika og 1 hakket løk i 6-7 minutter",
+      "Legg 2 tortilla i en panne, fordel kyllingblandingen på den ene halvdelen",
+      "Strø over 200g revet ost",
+      "Brett tortillaen sammen og stek på middels varme til osten smelter (3 min per side)",
+      "Gjenta med de to andre tortillaene",
+      "Skjær i biter og server med 1 dl rømme og guacamole"
     ],
     tips: "Server med guacamole!",
     category: "Meksikansk"
@@ -1004,18 +1090,26 @@ export const recipes: Recipe[] = [
     id: 221,
     title: "Kyllingsuppe",
     description: "Varmende suppe med kylling og grønnsaker",
-    ingredients: ["kylling", "gulrot", "selleri", "løk", "kyllingbuljong", "nudler"],
+    ingredients: [
+      { name: "kylling", amount: 600, unit: "g bryst" },
+      { name: "gulrot", amount: 3, unit: "stk" },
+      { name: "selleri", amount: 2, unit: "stilker" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "kyllingbuljong", amount: 1.5, unit: "liter" },
+      { name: "nudler", amount: 200, unit: "g" }
+    ],
     cookingTime: "45 min",
     difficulty: "Lett",
     totalIngredients: 6,
     servings: 6,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kok kylling i buljong",
-      "Ta ut kyllingen og plukk kjøttet",
-      "Tilsett grønnsaker i buljongen",
-      "La koke til møre",
-      "Tilsett kylling og nudler",
-      "Kok 5 minutter til"
+      "Kok 600g kyllingbryst i 1.5 liter kyllingbuljong i 20 minutter",
+      "Ta ut kyllingen og plukk kjøttet i strimler",
+      "Tilsett 3 skåret gulrøtter, 2 hakket selleri og 1 hakket løk i buljongen",
+      "Kok grønnsakene til møre (ca 10 min)",
+      "Tilsett 200g nudler og kok i 8 minutter",
+      "Rør kyllingen tilbake i suppen, krydre med salt og pepper, og server varm"
     ],
     tips: "Perfekt når du er forkjølet!",
     category: "Suppe"
@@ -1260,18 +1354,25 @@ export const recipes: Recipe[] = [
     id: 17,
     title: "Biff Stroganoff",
     description: "Russisk klassiker med mørt kjøtt i sursøt saus",
-    ingredients: ["biff", "champignon", "fløte", "løk", "sennep"],
+    ingredients: [
+      { name: "biff", amount: 600, unit: "g mørbrad" },
+      { name: "champignon", amount: 400, unit: "g" },
+      { name: "fløte", amount: 3, unit: "dl" },
+      { name: "løk", amount: 1, unit: "stk" },
+      { name: "sennep", amount: 2, unit: "ss" }
+    ],
     cookingTime: "30 min",
     difficulty: "Middels",
     totalIngredients: 5,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Skjær biffen i strimler",
-      "Stek kjøttet raskt på høy varme",
-      "Sautér løk og sopp i samme panne",
-      "Tilsett fløte og sennep",
-      "La kjøttet varmes i sausen",
-      "Server med ris eller pasta"
+      "Skjær 600g biffmørbrad i tynne strimler",
+      "Stek kjøttet raskt på høy varme i 2-3 minutter, ta det ut",
+      "Sautér 1 hakket løk og 400g skåret champignon i samme panne i 5 minutter",
+      "Tilsett 3 dl fløte og 2 ss sennep, la småkoke i 5 minutter",
+      "La kjøttet varmes forsiktig i sausen i 2 minutter",
+      "Smak til med salt og pepper, server med ris eller pasta"
     ],
     tips: "Bruk mør biff som indrefilet for best resultat!",
     category: "Russisk"
@@ -1280,18 +1381,25 @@ export const recipes: Recipe[] = [
     id: 18,
     title: "Grønnsakssuppe",
     description: "Sunn og mettende suppe med sesonggrønnsaker",
-    ingredients: ["brokkoli", "gulrot", "selleri", "grønnsaksbuljong", "kremer"],
+    ingredients: [
+      { name: "brokkoli", amount: 300, unit: "g" },
+      { name: "gulrot", amount: 3, unit: "stk" },
+      { name: "selleri", amount: 2, unit: "stilker" },
+      { name: "grønnsaksbuljong", amount: 1, unit: "liter" },
+      { name: "rømme", amount: 1, unit: "dl" }
+    ],
     cookingTime: "25 min",
     difficulty: "Lett",
     totalIngredients: 5,
     servings: 4,
+    hasDetailedIngredients: true,
     instructions: [
-      "Kutt alle grønnsakene i biter",
-      "Sautér grønnsakene i litt olje",
-      "Tilsett grønnsaksbuljong",
-      "La koke til grønnsakene er møre",
-      "Mikse halvparten av suppen",
-      "Rør inn kremer og krydre"
+      "Kutt 300g brokkoli, 3 gulrøtter og 2 selleri i biter",
+      "Sautér grønnsakene i litt olivenolej i 5 minutter",
+      "Tilsett 1 liter grønnsaksbuljong",
+      "La koke i 15 minutter til grønnsakene er møre",
+      "Mikse halvparten av suppen for en kremaktig konsistens",
+      "Rør inn 1 dl rømme og krydre med salt og pepper"
     ],
     tips: "Vari grønnsakene etter sesong for best smak!",
     category: "Vegetarisk"
