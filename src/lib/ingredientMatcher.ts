@@ -360,6 +360,34 @@ export class IngredientMatcher {
         );
       });
     }
+
+    // KRITISK: Filtrer ut oppskrifter med feil proteintype
+    if (availableIngredients.length > 0) {
+      const normalizedAvailable = availableIngredients.map(ing => normalizeIngredient(ing));
+      const availableProteinCategories = new Set(
+        normalizedAvailable
+          .map(ing => this.getMeatCategory(ing))
+          .filter((c): c is string => c !== null)
+      );
+
+      // Hvis brukeren har valgt proteiner, filtrer oppskrifter med andre proteintyper
+      if (availableProteinCategories.size > 0) {
+        filteredRecipes = filteredRecipes.filter(recipe => {
+          const recipeIngredients = this.getRecipeIngredients(recipe);
+          const recipeProteinCategories = recipeIngredients
+            .map(ing => this.getMeatCategory(ing))
+            .filter((c): c is string => c !== null);
+
+          // Hvis oppskriften har proteiner, må minst én matche brukerens proteiner
+          if (recipeProteinCategories.length > 0) {
+            return recipeProteinCategories.some(cat => availableProteinCategories.has(cat));
+          }
+
+          // Oppskrifter uten proteiner er OK
+          return true;
+        });
+      }
+    }
     
     if (availableIngredients.length === 0) {
       // Når ingen ingredienser er valgt, vis en blanding med litt randomisering
