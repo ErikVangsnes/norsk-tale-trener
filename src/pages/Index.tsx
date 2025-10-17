@@ -207,15 +207,15 @@ const Index = () => {
                 <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                   🌟 Dagens oppskrift
                 </h3>
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full overflow-hidden" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
-                  <CardHeader>
-                    <CardTitle className="text-lg">{recipeOfTheDay.title}</CardTitle>
-                    <CardDescription>{recipeOfTheDay.description}</CardDescription>
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">{recipeOfTheDay.title}</CardTitle>
+                    <CardDescription className="text-sm line-clamp-2">{recipeOfTheDay.description}</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-0">
                     <div className="flex gap-2 flex-wrap">
-                      <Badge variant="secondary">{recipeOfTheDay.category}</Badge>
-                      <Badge variant="outline">{recipeOfTheDay.cookingTime}</Badge>
+                      <Badge variant="secondary" className="text-xs">{recipeOfTheDay.category}</Badge>
+                      <Badge variant="outline" className="text-xs">{recipeOfTheDay.cookingTime}</Badge>
                     </div>
                   </CardContent>
                 </Card>
