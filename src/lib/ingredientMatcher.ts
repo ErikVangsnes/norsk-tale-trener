@@ -25,6 +25,18 @@ export interface SearchResult {
 }
 
 export class IngredientMatcher {
+  // Definerer kjøtttyper som ikke kan substituere hverandre
+  private static meatTypes: Record<string, string[]> = {
+    "kylling": ["kylling", "kyllingbryst", "kyllinglår", "kyllingfilet"],
+    "svin": ["svinekjøtt", "bacon", "skinke", "svineribbe", "svinefilet", "karbonadedeig"],
+    "storfe": ["biff", "oksekjøtt", "entrecôte", "mørbrad"],
+    "kjøttdeig": ["kjøttdeig", "hakket kjøtt"],
+    "laks": ["laks", "laksefilet", "røkt laks"],
+    "torsk": ["torsk", "hvit fisk", "sei"],
+    "kveite": ["kveite"],
+    "kalkun": ["kalkun", "kalkunbryst"]
+  };
+
   // Vanlige substitusjoner for ingredienser
   private static substitutions: Record<string, Array<{ substitute: string; confidence: number }>> = {
     "melk": [
@@ -82,6 +94,17 @@ export class IngredientMatcher {
     return [];
   }
 
+  // Hjelpefunksjon for å sjekke om en ingrediens er en kjøtttype
+  private static getMeatCategory(ingredient: string): string | null {
+    const normalized = normalizeIngredient(ingredient);
+    for (const [category, types] of Object.entries(this.meatTypes)) {
+      if (types.some(type => normalized.includes(type) || type.includes(normalized))) {
+        return category;
+      }
+    }
+    return null;
+  }
+
   // Beregn ingredient matching score
   static calculateIngredientMatch(
     availableIngredients: string[],
@@ -96,6 +119,30 @@ export class IngredientMatcher {
     // Sjekk hver ingredient i oppskriften
     for (const recipeIng of recipeIngredients) {
       let found = false;
+      
+      // Spesialhåndtering for kjøtt - sjekk om oppskriften krever en annen kjøtttype
+      const recipeIngMeatCategory = this.getMeatCategory(recipeIng);
+      if (recipeIngMeatCategory) {
+        // Sjekk om brukeren har noen kjøtttype tilgjengelig
+        const availableMeatCategories = normalizedAvailable
+          .map(ing => this.getMeatCategory(ing))
+          .filter(cat => cat !== null);
+        
+        // Hvis oppskriften krever en kjøtttype, men brukeren har en annen, gi ikke match
+        for (const available of normalizedAvailable) {
+          const availableMeatCat = this.getMeatCategory(available);
+          if (availableMeatCat === recipeIngMeatCategory) {
+            matchedIngredients.push(recipeIng);
+            found = true;
+            break;
+          }
+        }
+        
+        if (!found) {
+          missingIngredients.push(recipeIng);
+        }
+        continue; // Gå til neste ingrediens
+      }
       
       // Først, sjekk eksakt match og synonymer
       const synonyms = getAllSynonyms(recipeIng);
