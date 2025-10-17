@@ -234,7 +234,7 @@ export class IngredientMatcher {
       matchScore *= 0.6; // Moderat straff
     }
     
-    // Preferanser basert på tilgjengelig kjøtt (spesielt kjøttdeig)
+    // Preferanser basert på tilgjengelig protein (kjøtt, pølse, osv.)
     const availableMeatCats = new Set(
       normalizedAvailable
         .map(ing => this.getMeatCategory(ing))
@@ -249,7 +249,9 @@ export class IngredientMatcher {
     if (availableMeatCats.size > 0) {
       const hasAnyMeatInRecipe = recipeMeatCats.size > 0;
       const hasGroundBeefAvailable = availableMeatCats.has("kjøttdeig");
+      const hasSausageAvailable = availableMeatCats.has("pølse");
       const matchesGroundBeef = recipeMeatCats.has("kjøttdeig");
+      const matchesSausage = recipeMeatCats.has("pølse");
 
       if (hasGroundBeefAvailable) {
         if (matchesGroundBeef) {
@@ -258,6 +260,14 @@ export class IngredientMatcher {
           matchScore *= 0.5; // Nedprioriter kjøttfrie når bruker har kjøttdeig
         } else {
           matchScore *= 0.9; // Litt nedprioritering for annet kjøtt
+        }
+      } else if (hasSausageAvailable) {
+        if (matchesSausage) {
+          matchScore += 0.3; // VIKTIG: Fremhev pølseoppskrifter når bruker har pølse
+        } else if (!hasAnyMeatInRecipe) {
+          matchScore *= 0.5; // Nedprioriter kjøttfrie når bruker har pølse
+        } else {
+          matchScore *= 0.85; // Nedprioritering for annet kjøtt
         }
       } else {
         // Generell regel: har man kjøtt, prioriter oppskrifter med kjøtt
@@ -318,6 +328,9 @@ export class IngredientMatcher {
       0.2 // Lavere terskel for mer inkluderende søk
     );
     
+    // Gi ekstra bonus for oppskrifter hvor søkeordet er en nøkkelingrediens
+    const queryNormalized = query.toLowerCase().trim();
+    
     // Konverter til SearchResult format med forbedret poenggivning
     const results: SearchResult[] = searchResults.map(result => {
       let matchType: 'exact' | 'fuzzy' | 'ingredient' | 'description' = 'fuzzy';
@@ -342,6 +355,11 @@ export class IngredientMatcher {
       // Gi bonus for match i kategori
       if (result.category.toLowerCase().includes(query.toLowerCase())) {
         relevanceScore += 0.15;
+      }
+      
+      // VIKTIG: Ekstra bonus hvis søkeordet er en hovedingrediens i oppskriftens tittel
+      if (result.title.toLowerCase().includes(queryNormalized)) {
+        relevanceScore += 0.25;
       }
       
       return {
