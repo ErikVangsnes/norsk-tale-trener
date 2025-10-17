@@ -3515,5 +3515,147 @@ export const recipes: Recipe[] = [
     ],
     tips: "Serveres tradisjonelt kald!",
     category: "Ecuadoriansk"
+  },
+  {
+    id: 300,
+    title: "Pølse med Potetmos",
+    description: "Klassisk norsk pølserett med kremet potetmos",
+    ingredients: [
+      { name: "pølse", amount: 8, unit: "stk" },
+      { name: "poteter", amount: 1, unit: "kg" },
+      { name: "melk", amount: 2, unit: "dl" },
+      { name: "smør", amount: 50, unit: "g" },
+      { name: "salt", amount: 1, unit: "ts" },
+      { name: "pepper", amount: 0.5, unit: "ts" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 6,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Kok 1 kg poteter til de er møre",
+      "Mos potetene med 50g smør og 2 dl varm melk",
+      "Smak til med 1 ts salt og 0.5 ts pepper",
+      "Kok eller stek 8 pølser til de er varme",
+      "Server pølsene med potetmoset",
+      "Gjerne med ketchup eller sennep"
+    ],
+    tips: "Potetmoset blir ekstra godt med litt muskatnøtt!",
+    category: "Norsk"
+  },
+  {
+    id: 301,
+    title: "Grillede Pølser med Grønnsaker",
+    description: "Saftige grillede pølser med stekte paprika og løk",
+    ingredients: [
+      { name: "pølse", amount: 8, unit: "stk" },
+      { name: "paprika", amount: 3, unit: "stk" },
+      { name: "løk", amount: 2, unit: "stk" },
+      { name: "olivenolje", amount: 3, unit: "ss" },
+      { name: "salt", amount: 1, unit: "ts" },
+      { name: "pepper", amount: 0.5, unit: "ts" },
+      { name: "brød", amount: 8, unit: "stk pølsebrød" }
+    ],
+    cookingTime: "25 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skjær 3 paprika og 2 løk i strimler",
+      "Stek grønnsakene i 3 ss olivenolje til myke",
+      "Krydre med 1 ts salt og 0.5 ts pepper",
+      "Grill eller stek 8 pølser til gylne",
+      "Varm 8 pølsebrød",
+      "Server pølsene i brød med stekte grønnsaker"
+    ],
+    tips: "Legg til jalapeño for litt styrke!",
+    category: "Rask"
+  },
+  {
+    id: 302,
+    title: "Pølsegryte",
+    description: "Enkel og mettende pølsegryte med poteter og grønnsaker",
+    ingredients: [
+      { name: "pølse", amount: 8, unit: "stk" },
+      { name: "poteter", amount: 800, unit: "g" },
+      { name: "gulrot", amount: 3, unit: "stk" },
+      { name: "løk", amount: 2, unit: "stk" },
+      { name: "hermetiske tomater", amount: 400, unit: "g" },
+      { name: "kraft", amount: 3, unit: "dl" },
+      { name: "paprikapulver", amount: 2, unit: "ts" },
+      { name: "salt", amount: 1, unit: "ts" }
+    ],
+    cookingTime: "40 min",
+    difficulty: "Lett",
+    totalIngredients: 8,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skjær 8 pølser i biter, 800g poteter og 3 gulrøtter i terninger",
+      "Stek 2 finhakkede løk i en gryte",
+      "Tilsett pølsebitene og stek i 2 min",
+      "Legg i poteter, gulrøtter, 400g hermetiske tomater og 3 dl kraft",
+      "Krydre med 2 ts paprikapulver og 1 ts salt",
+      "La småkoke i 25 min til potetene er møre"
+    ],
+    tips: "Perfekt hverdagsmiddag som er ferdig på under 45 min!",
+    category: "Norsk"
+  },
+  {
+    id: 303,
+    title: "Pølse i Svøp",
+    description: "Butterdeigspakker med pølse - perfekt fingermat",
+    ingredients: [
+      { name: "pølse", amount: 8, unit: "stk" },
+      { name: "butterdeig", amount: 1, unit: "pk" },
+      { name: "egg", amount: 1, unit: "stk" },
+      { name: "sesamfrø", amount: 2, unit: "ss" }
+    ],
+    cookingTime: "20 min",
+    difficulty: "Lett",
+    totalIngredients: 4,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Forvarm ovnen til 225°C",
+      "Rull ut 1 pk butterdeig og skjær i 8 strimler",
+      "Vikle deigen rundt 8 pølser",
+      "Pensle med 1 pisket egg og dryss 2 ss sesamfrø over",
+      "Stek på stekebrett i 15-18 min til gylne",
+      "Server varme med ketchup"
+    ],
+    tips: "Barn elsker disse! Lag gjerne ekstra til lunsj neste dag.",
+    category: "Rask"
+  },
+  {
+    id: 304,
+    title: "Pølsepanne",
+    description: "Rask og enkel pølsepanne med poteter",
+    ingredients: [
+      { name: "pølse", amount: 8, unit: "stk" },
+      { name: "poteter", amount: 800, unit: "g" },
+      { name: "løk", amount: 2, unit: "stk" },
+      { name: "paprika", amount: 2, unit: "stk" },
+      { name: "smør", amount: 50, unit: "g" },
+      { name: "salt", amount: 1, unit: "ts" },
+      { name: "pepper", amount: 0.5, unit: "ts" }
+    ],
+    cookingTime: "30 min",
+    difficulty: "Lett",
+    totalIngredients: 7,
+    servings: 4,
+    hasDetailedIngredients: true,
+    instructions: [
+      "Skjær 800g poteter i terninger og kok i 10 min",
+      "Skjær 8 pølser, 2 løk og 2 paprika i biter",
+      "Stek potetene i 50g smør til gylne",
+      "Tilsett løk, paprika og pølser",
+      "Stek videre i 5-7 min",
+      "Krydre med 1 ts salt og 0.5 ts pepper"
+    ],
+    tips: "Alt-i-ett middag som hele familien liker!",
+    category: "Rask"
   }
 ];

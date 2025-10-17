@@ -441,25 +441,37 @@ export class IngredientMatcher {
 
     // Forbedret sorteringsalgoritme - prioriter oppskrifter med høyere matchPercentage
     return matches.sort((a, b) => {
-      // Først: Prioriter oppskrifter med høyere match percentage
-      const percentageDiff = b.matchPercentage - a.matchPercentage;
-      if (Math.abs(percentageDiff) > 20) {
-        return percentageDiff;
-      }
+      // VIKTIGST: Fullstendig match (100%) kommer alltid først
+      if (a.matchPercentage === 100 && b.matchPercentage !== 100) return -1;
+      if (b.matchPercentage === 100 && a.matchPercentage !== 100) return 1;
 
-      // Deretter: bruk matchScore som tar hensyn til bonuser/straffer
+      // SEKUNDÆRT: Høy match (>= 80%) skal prioriteres
+      const aHighMatch = a.matchPercentage >= 80;
+      const bHighMatch = b.matchPercentage >= 80;
+      if (aHighMatch && !bHighMatch) return -1;
+      if (bHighMatch && !aHighMatch) return 1;
+
+      // TERTIÆRT: Mellom oppskrifter med lik kategori (høy vs høy, middels vs middels)
+      // bruk matchScore som tar hensyn til kompleksitet og andre faktorer
       const scoreDiff = b.matchScore - a.matchScore;
-      if (Math.abs(scoreDiff) > 0.2) {
+      if (Math.abs(scoreDiff) > 0.15) {
         return scoreDiff;
       }
-      
-      // Sekundært: legg til litt tilfeldig variasjon for diversitet blant like scorer
-      const randomFactor = (Math.random() - 0.5) * 0.2; // Redusert randomisering
-      
-      // Kompleksitetsbonus for å prioritere interessante oppskrifter
-      const complexityBonus = (a.totalIngredients - b.totalIngredients) * 0.01;
-      
-      return (b.matchScore - a.matchScore) + randomFactor + complexityBonus;
+
+      // KVARTÆRT: Ved veldig lik score, prioriter færre manglende ingredienser
+      const missingDiff = a.missingIngredients.length - b.missingIngredients.length;
+      if (missingDiff !== 0) {
+        return missingDiff;
+      }
+
+      // FEMTE: Prioriter oppskrifter med balansert kompleksitet (7-12 ingredienser)
+      const aBalanced = a.totalIngredients >= 7 && a.totalIngredients <= 12;
+      const bBalanced = b.totalIngredients >= 7 && b.totalIngredients <= 12;
+      if (aBalanced && !bBalanced) return -1;
+      if (bBalanced && !aBalanced) return 1;
+
+      // SISTE: Liten variasjon for diversitet ved helt identiske scorer
+      return (Math.random() - 0.5) * 0.1;
     });
   }
 
