@@ -98,6 +98,12 @@ export class IngredientMatcher {
   // Hjelpefunksjon for å sjekke om en ingrediens er en kjøtttype
   private static getMeatCategory(ingredient: string): string | null {
     const normalized = normalizeIngredient(ingredient);
+    
+    // Spesiell håndtering for pølse - matche alt som inneholder "pølse" eller "pølser"
+    if (normalized.includes("polse") || normalized.includes("polser")) {
+      return "pølse";
+    }
+    
     for (const [category, types] of Object.entries(this.meatTypes)) {
       if (types.some(type => normalized.includes(type) || type.includes(normalized))) {
         return category;
