@@ -179,86 +179,79 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Kompakt */}
+      <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/60" />
         
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <img 
-              src={logo} 
-              alt="KokkeHjelpen" 
-              className="w-20 h-20 drop-shadow-lg"
-            />
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto px-6">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
             Oppskrifter fra ditt kjøleskap
           </h2>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
-            Fortell meg hvilke ingredienser du har, så foreslår jeg deilige oppskrifter du kan lage akkurat nå
+          <p className="text-lg md:text-xl mb-4 drop-shadow-md">
+            Fortell meg hvilke ingredienser du har, så foreslår jeg deilige oppskrifter
           </p>
         </div>
       </section>
 
-      <div className="container mx-auto px-6 py-12 max-w-6xl">
-        {/* Recipe of the Day */}
+      <div className="container mx-auto px-6 py-8 max-w-6xl">
+        {/* Dagens oppskrift og populære - side ved side */}
         {recipeOfTheDay && showCategories && (
-          <section className="mb-12">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl font-bold text-foreground mb-2">
-                Dagens oppskrift 🌟
-              </h2>
-              <p className="text-muted-foreground">Din daglige inspirasjonsrett</p>
-            </div>
-            <Card className="max-w-2xl mx-auto hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
-              <CardHeader>
-                <CardTitle className="text-2xl">{recipeOfTheDay.title}</CardTitle>
-                <CardDescription className="text-base">{recipeOfTheDay.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex gap-2 flex-wrap">
-                  <Badge variant="secondary">{recipeOfTheDay.category}</Badge>
-                  <Badge variant="outline">{recipeOfTheDay.cookingTime}</Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-        )}
+          <section className="mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Recipe of the Day */}
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                  🌟 Dagens oppskrift
+                </h3>
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
+                  <CardHeader>
+                    <CardTitle className="text-lg">{recipeOfTheDay.title}</CardTitle>
+                    <CardDescription>{recipeOfTheDay.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex gap-2 flex-wrap">
+                      <Badge variant="secondary">{recipeOfTheDay.category}</Badge>
+                      <Badge variant="outline">{recipeOfTheDay.cookingTime}</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-        {/* Popular Recipes */}
-        {showCategories && (
-          <section className="mb-12">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl font-bold text-foreground mb-2">
-                Populære oppskrifter
-              </h2>
-              <p className="text-muted-foreground">De mest ettertraktede rettene</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {getPopularRecipes().map(recipe => (
-                <RecipeCard 
-                  key={recipe.id} 
-                  recipe={recipe} 
-                  selectedIngredients={[]}
-                />
-              ))}
+              {/* Popular Recipe Preview */}
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                  🔥 Populært nå
+                </h3>
+                <div className="grid grid-cols-1 gap-4">
+                  {getPopularRecipes().slice(0, 2).map(recipe => (
+                    <Card key={recipe.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/recipe/${recipe.id}`)}>
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-base">{recipe.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="secondary" className="text-xs">{recipe.category}</Badge>
+                          <Badge variant="outline" className="text-xs">{recipe.cookingTime}</Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
         )}
 
         {/* Search and Filter Section */}
-        <section className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Utforsk oppskrifter
+        <section className="mb-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Søk etter oppskrifter
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Søk, filtrer og finn din neste favorittrett
-            </p>
           </div>
           
           <SearchAndFilter 
@@ -274,14 +267,11 @@ const Index = () => {
         </section>
 
         {/* Ingredients Input Section */}
-        <section className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+        <section className="mb-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
               Hvilke ingredienser har du?
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Legg til ingrediensene du har tilgjengelig hjemme
-            </p>
           </div>
           
           <IngredientsInput 
@@ -293,8 +283,8 @@ const Index = () => {
 
         {/* Recipes Section */}
         {(selectedIngredients.length > 0 || favoriteIds.length > 0 || filteredRecipes.length < recipes.length) && (
-          <section className="mb-12">
-            <div className="text-center mb-8">
+          <section className="mb-8">
+            <div className="text-center mb-6">
               <div className="flex items-center justify-center gap-4 mb-4">
                 <Button
                   variant={activeTab === "all" ? "default" : "outline"}
@@ -357,18 +347,15 @@ const Index = () => {
           </section>
         )}
 
-        {/* Categories Section */}
-        {showCategories && selectedIngredients.length === 0 && (
-          <section className="mb-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Utforsk kategorier
+        {/* Categories Section - Skjult som standard, vises kun når ingen filtre */}
+        {showCategories && selectedIngredients.length === 0 && filteredRecipes.length === recipes.length && (
+          <section className="mb-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                Bla gjennom kategorier
               </h2>
-              <p className="text-muted-foreground text-lg">
-                Bla gjennom oppskrifter etter kategori
-              </p>
             </div>
-            {categories.slice(0, 4).map(category => (
+            {categories.slice(0, 3).map(category => (
               <CategorySection key={category} category={category} maxRecipes={3} />
             ))}
           </section>
