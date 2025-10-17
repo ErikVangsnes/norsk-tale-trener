@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      meal_plans: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          meal_type: string
+          notes: string | null
+          recipe_id: number
+          servings: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          meal_type: string
+          notes?: string | null
+          recipe_id: number
+          servings?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          meal_type?: string
+          notes?: string | null
+          recipe_id?: number
+          servings?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       recipe_ratings: {
         Row: {
           comment: string | null

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, ChefHat, Lightbulb, Heart, LogIn, LogOut, User } from "lucide-react";
+import { Search, ChefHat, Lightbulb, Heart, LogIn, LogOut, User, Calendar, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,7 @@ import { IngredientMatcher } from "@/lib/ingredientMatcher";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { CategorySection } from "@/components/CategorySection";
 
 const Index = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -23,8 +24,17 @@ const Index = () => {
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes);
   const [activeTab, setActiveTab] = useState<"all" | "favorites">("all");
   const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [showCategories, setShowCategories] = useState(true);
+  const [recipeOfTheDay, setRecipeOfTheDay] = useState<Recipe | null>(null);
   const { user, loading, signOut } = useAuth();
   const navigate = useNavigate();
+
+  // Velg dagens oppskrift (basert på dato)
+  useEffect(() => {
+    const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+    const recipeIndex = dayOfYear % recipes.length;
+    setRecipeOfTheDay(recipes[recipeIndex]);
+  }, []);
 
   // Load favorites when user changes
   useEffect(() => {
@@ -105,6 +115,18 @@ const Index = () => {
 
   const displayedRecipes = activeTab === "favorites" ? favoriteRecipes : matchingRecipes;
 
+  const handleRandomRecipe = () => {
+    const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
+    navigate(`/recipe/${randomRecipe.id}`);
+  };
+
+  const getPopularRecipes = () => {
+    // Returnerer oppskrifter med høyest ID (nyeste) som "populære"
+    return recipes.slice(-6).reverse();
+  };
+
+  const categories = Array.from(new Set(recipes.map(r => r.category)));
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -123,6 +145,16 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={handleRandomRecipe}>
+                <Shuffle className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Tilfeldig</span>
+              </Button>
+              {user && (
+                <Button variant="outline" size="sm" onClick={() => navigate("/meal-planner")}>
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <span className="hidden sm:inline">Planlegger</span>
+                </Button>
+              )}
               {loading ? (
                 <div className="text-sm text-muted-foreground">Laster...</div>
               ) : user ? (
@@ -173,6 +205,51 @@ const Index = () => {
       </section>
 
       <div className="container mx-auto px-6 py-12 max-w-6xl">
+        {/* Recipe of the Day */}
+        {recipeOfTheDay && showCategories && (
+          <section className="mb-12">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                Dagens oppskrift 🌟
+              </h2>
+              <p className="text-muted-foreground">Din daglige inspirasjonsrett</p>
+            </div>
+            <Card className="max-w-2xl mx-auto hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/recipe/${recipeOfTheDay.id}`)}>
+              <CardHeader>
+                <CardTitle className="text-2xl">{recipeOfTheDay.title}</CardTitle>
+                <CardDescription className="text-base">{recipeOfTheDay.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-2 flex-wrap">
+                  <Badge variant="secondary">{recipeOfTheDay.category}</Badge>
+                  <Badge variant="outline">{recipeOfTheDay.cookingTime}</Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+
+        {/* Popular Recipes */}
+        {showCategories && (
+          <section className="mb-12">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                Populære oppskrifter
+              </h2>
+              <p className="text-muted-foreground">De mest ettertraktede rettene</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {getPopularRecipes().map(recipe => (
+                <RecipeCard 
+                  key={recipe.id} 
+                  recipe={recipe} 
+                  selectedIngredients={[]}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Search and Filter Section */}
         <section className="mb-12">
           <div className="text-center mb-8">
@@ -186,7 +263,10 @@ const Index = () => {
           
           <SearchAndFilter 
             recipes={recipes}
-            onFilteredRecipes={setFilteredRecipes}
+            onFilteredRecipes={(filtered) => {
+              setFilteredRecipes(filtered);
+              setShowCategories(filtered.length === recipes.length);
+            }}
             availableIngredients={selectedIngredients}
             excludedIngredients={excludedIngredients}
             onExcludedIngredientsChange={setExcludedIngredients}
@@ -274,6 +354,23 @@ const Index = () => {
                 </div>
               )}
             </div>
+          </section>
+        )}
+
+        {/* Categories Section */}
+        {showCategories && selectedIngredients.length === 0 && (
+          <section className="mb-12">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                Utforsk kategorier
+              </h2>
+              <p className="text-muted-foreground text-lg">
+                Bla gjennom oppskrifter etter kategori
+              </p>
+            </div>
+            {categories.slice(0, 4).map(category => (
+              <CategorySection key={category} category={category} maxRecipes={3} />
+            ))}
           </section>
         )}
 
