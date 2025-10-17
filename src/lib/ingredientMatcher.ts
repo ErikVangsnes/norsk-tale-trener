@@ -389,8 +389,8 @@ export class IngredientMatcher {
             return recipeProteinCategories.some(cat => availableProteinCategories.has(cat));
           }
 
-          // Oppskrifter uten proteiner er OK
-          return true;
+          // Hvis brukeren har valgt proteiner, vis IKKE oppskrifter uten proteiner
+          return false;
         });
       }
     }
